@@ -34,11 +34,12 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     color: 'var(--white)',
-    'background-color': '#ff494922',
+    'background-color': 'transparent!important',
     'backdrop-filter': 'blur(2px)',
     // borderBottom: `1px solid ${theme.palette.divider}`,
     padding: '0 10px',
     marginBottom: '3rem',
+    position: 'sticky',
   },
   drawer: {
     width: 240,
@@ -93,7 +94,7 @@ const Nav = () => {
   };
 
   return (
-    <AppBar position="static" elevation={0} className={classes.appBar}>
+    <AppBar position="sticky" elevation={0} className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
         {matches ? (
           <>
