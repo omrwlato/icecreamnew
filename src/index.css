@@ -3,10 +3,10 @@
 }
 
 :root {
-    --black: #16191E;
-    --white: #E6E9EE;
-    --accent: #FF4949;
-    --accent-light: #ff6464;
+  --black: #16191e;
+  --white: #e6e9ee;
+  --accent: #ff4949;
+  --accent-light: #ff6464;
 }
 
 body,
@@ -39,14 +39,14 @@ body {
 }
 .MuiPaper-elevation1 {
   box-shadow: none !important;
-  background-color: #ffffff22 !important;
+  background-color: #ffffff22;
   backdrop-filter: blur(5px);
   border-radius: 10px !important;
   border: 1px solid var(--white);
 }
 
 .MuiCard-root {
-  background-color: #ffffff22 !important;
+  background-color: #ffffff22;
   backdrop-filter: blur(5px);
   border-radius: 10px !important;
 }
@@ -56,14 +56,13 @@ body {
 }
 
 body {
-  position: absolute;
+  position: relative;
   content: '';
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
 }
-
 
 h1,
 h2,
@@ -83,13 +82,13 @@ footer .a:hover {
 }
 
 .MuiButton-contained {
-    color: var(--black) !important;
-    background-color: var(--white) !important;
+  color: var(--black) !important;
+  background-color: var(--white);
 }
 
 .MuiButton-containedPrimary {
-    color: var(--white) !important;
-    background-color: var(--accent) !important;
+  color: var(--white) !important;
+  background-color: var(--accent);
 }
 
 code {
@@ -105,6 +104,6 @@ code {
   text-transform: none !important;
 }
 .wallet-button:hover {
-  background-color: black !important;
+  background-color: black;
   color: #757ce8 !important;
 }

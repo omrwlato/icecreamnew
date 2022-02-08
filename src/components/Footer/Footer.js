@@ -9,8 +9,6 @@ import YoutubeImage from '../../assets/img/youtube.svg';
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    position: 'absolute',
-    bottom: '0',
     paddingTop: '15px',
     paddingBottom: '15px',
     width: '100%',
@@ -27,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     height: '24px',
     display: 'inline',
     marginLeft: '20px',
-    filter: 'sepia(1) brightness(2) hue-rotate(314deg) saturate(7.5)'
+    filter: 'sepia(1) brightness(2) hue-rotate(314deg) saturate(7.5)',
   },
 
   img: {
@@ -44,25 +42,15 @@ const Footer = () => {
         <Grid container>
           <Grid item xs={6}>
             <Typography variant="body2" color="textPrimary" align="left">
-              {'Copyright © 3omb Finance '}
+              {'Copyright © Gem Finance '}
               {new Date().getFullYear()}
             </Typography>
           </Grid>
           <Grid item xs={6} style={{ textAlign: 'right' }}>
-            <a
-              href="https://twitter.com/_2omb"
-              rel="noopener noreferrer"
-              target="_blank"
-              className={classes.link}
-            >
+            <a href="https://twitter.com/_2omb" rel="noopener noreferrer" target="_blank" className={classes.link}>
               <img alt="twitter" src={TwitterImage} className={classes.img} />
             </a>
-            <a
-              href="https://github.com/2omb"
-              rel="noopener noreferrer"
-              target="_blank"
-              className={classes.link}
-            >
+            <a href="https://github.com/2omb" rel="noopener noreferrer" target="_blank" className={classes.link}>
               <img alt="github" src={GithubImage} className={classes.img} />
             </a>
             <a href="https://bit.ly/3AUcaBI" rel="noopener noreferrer" target="_blank" className={classes.link}>
