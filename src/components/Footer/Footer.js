@@ -64,7 +64,7 @@ const Footer = () => {
             >
               <img alt="youtube" src={YoutubeImage} className={classes.img} />
             </a>
-            <a href="https://discord.gg/pPpc9p5NS8" rel="noopener noreferrer" target="_blank" className={classes.link}>
+            <a href="https://discord.gg/2omb" rel="noopener noreferrer" target="_blank" className={classes.link}>
               <img alt="discord" src={DiscordImage} className={classes.img} />
             </a>
           </Grid>
