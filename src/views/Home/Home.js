@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import Page from '../../components/Page';
 import HomeImage from '../../assets/img/home.png';
 import CashImage from '../../assets/img/3OMB.svg';
@@ -19,7 +19,6 @@ import useTotalValueLocked from '../../hooks/useTotalValueLocked';
 import useFantomPrice from '../../hooks/useFantomPrice';
 import { tomb as tombTesting, tShare as tShareTesting } from '../../tomb-finance/deployments/deployments.testing.json';
 import { tomb as tombProd, tShare as tShareProd } from '../../tomb-finance/deployments/deployments.mainnet.json';
-
 import useTotalTreasuryBalance from '../../hooks/useTotalTreasuryBalance.js';
 
 import { Box, Button, Card, CardContent, Grid, Paper, Typography } from '@material-ui/core';
@@ -68,6 +67,7 @@ const Home = () => {
   const tombFinance = useTombFinance();
   const { price: ftmPrice, marketCap: ftmMarketCap, priceChange: ftmPriceChange } = useFantomPrice();
   const { balance: rebatesTVL } = useTotalTreasuryBalance();
+  const { balance, balance_2shares_wftm, balance_3omb_wftm, balance_3shares_wftm, balance_3omb, balance_3shares, balance_2shares } = useTotalTreasuryBalance();
   const totalTVL = TVL + rebatesTVL;
 
   let tomb;
@@ -151,6 +151,61 @@ const Home = () => {
     />,
   );
 
+  const handleMouseOverFudge = () => {
+    setIsHoveringFudge(true);
+  };
+
+  const handleMouseOutFudge = () => {
+    setIsHoveringFudge(false);
+  };
+
+
+  const handleMouseOverStraw = () => {
+    setIsHoveringStraw(true);
+  };
+
+  const handleMouseOutStraw = () => {
+    setIsHoveringStraw(false);
+  };
+
+  const handleMouseOverCaraml = () => {
+    setIsHoveringCaraml(true);
+  };
+
+  const handleMouseOutCaraml = () => {
+    setIsHoveringCaraml(false);
+  };
+
+  const HoverableFudge = ({ handleMouseOverFudge, handleMouseOutFudge }) => {
+    return (
+      <div onMouseOver={handleMouseOverFudge} onMouseOut={handleMouseOutFudge}>
+        <h2 >Fudge</h2>
+      </div>
+    );
+  };
+
+  const HoverableStraw = ({ handleMouseOverStraw, handleMouseOutStraw }) => {
+    return (
+      <div onMouseOver={handleMouseOverStraw} onMouseOut={handleMouseOutStraw}>
+        <h2 >STRAW</h2>
+      </div>
+    );
+  };
+
+  const HoverableCaraml = ({ handleMouseOverCaraml, handleMouseOutCaraml }) => {
+    return (
+      <div onMouseOver={handleMouseOverCaraml} onMouseOut={handleMouseOutCaraml}>
+        <h2 >CARAML</h2>
+      </div>
+    );
+  };
+
+  const [isHoveringFudge, setIsHoveringFudge] = useState(false);
+  const [isHoveringStraw, setIsHoveringStraw] = useState(false);
+  const [isHoveringCaraml, setIsHoveringCaraml] = useState(false);
+
+
+
   return (
     <Page>
       <BackgroundImage />
@@ -166,7 +221,7 @@ const Home = () => {
             <Paper style={{ backgroundColor: 'transparent', boxShadow: 'none', border: 'none' }}>
               <Box p={4} display="flex" justifyContent="center" alignItems="center">
                 <Typography variant="h3" fontWeight="bold" align="center">
-                  Farm GSHARE and earn rewards in our algorithmic stablecoin ecosystem
+                  Get your spoons ready for the second scoop of the sweetest protocol on Avalanche
                 </Typography>
               </Box>
             </Paper>
@@ -196,8 +251,8 @@ const Home = () => {
           <Box mt={3}>
             <Card style={{ backgroundColor: 'none', boxShadow: 'none', border: 'none' }}>
               <CardContent align="center">
-                <h4>Total Value Locked</h4>
-                <CountUp style={{ fontSize: '25px' }} end={totalTVL} separator="," prefix="$" />
+                <h3>Total Value Locked</h3>
+                <CountUp style={{ fontSize: '40px' }} end={totalTVL} separator="," prefix="$" />
               </CardContent>
             </Card>
           </Box>
@@ -291,7 +346,8 @@ const Home = () => {
         <Grid item xs={12} sm={4}>
           <Card style={{ backgroundColor: 'transparent', boxShadow: 'none', border: '1px solid var(--white)' }}>
             <CardContent align="center" style={{ position: 'relative' }}>
-              <h2>GEM</h2>
+              <HoverableFudge handleMouseOverFudge={handleMouseOverFudge} handleMouseOutFudge={handleMouseOutFudge} />
+              {isHoveringFudge && <h3>Governance Token</h3>}
               {/* <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TOMB');
@@ -322,6 +378,15 @@ const Home = () => {
                 Circulating Supply: {tombCirculatingSupply} <br />
                 Total Supply: {tombTotalSupply}
               </span>
+              <Box>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ marginTop: '20px' }}
+                >
+                  Buy Now
+                </Button>
+              </Box>
             </CardContent>
           </Card>
         </Grid>
@@ -330,7 +395,8 @@ const Home = () => {
         <Grid item xs={12} sm={4}>
           <Card style={{ backgroundColor: 'transparent', boxShadow: 'none', border: '1px solid var(--white)' }}>
             <CardContent align="center" style={{ position: 'relative' }}>
-              <h2>GSHARES</h2>
+              <HoverableStraw handleMouseOverStraw={handleMouseOverStraw} handleMouseOutStraw={handleMouseOutStraw} />
+              {isHoveringStraw && <h3>Share Token</h3>}
               {/* <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TSHARE');
@@ -359,6 +425,15 @@ const Home = () => {
                 Circulating Supply: {tShareCirculatingSupply} <br />
                 Total Supply: {tShareTotalSupply}
               </span>
+              <Box>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ marginTop: '20px' }}
+                >
+                  Buy Now
+                </Button>
+              </Box>
             </CardContent>
           </Card>
         </Grid>
@@ -367,7 +442,8 @@ const Home = () => {
         <Grid item xs={12} sm={4}>
           <Card style={{ backgroundColor: 'transparent', boxShadow: 'none', border: '1px solid var(--white)' }}>
             <CardContent align="center" style={{ position: 'relative' }}>
-              <h2>GBOND</h2>
+              <HoverableCaraml handleMouseOverCaraml={handleMouseOverCaraml} handleMouseOutCaraml={handleMouseOutCaraml} />
+              {isHoveringCaraml && <h3>Bond Token</h3>}
               {/* <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TBOND');
@@ -396,6 +472,15 @@ const Home = () => {
                 Circulating Supply: {tBondCirculatingSupply} <br />
                 Total Supply: {tBondTotalSupply}
               </span>
+              <Box>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ marginTop: '20px' }}
+                >
+                  Buy Now
+                </Button>
+              </Box>
             </CardContent>
           </Card>
         </Grid>
@@ -462,6 +547,77 @@ const Home = () => {
           </Card>
         </Grid> */}
       </Grid>
+
+      <Box mt={2} style={{ marginTop: '50px' }}>
+        <Typography align="center" variant="h4" gutterBottom style={{ marginBottom: '50px' }}>
+          Protocol Owned Liquidity
+        </Typography>
+        <Grid container justify="center" align="center" spacing={3}>
+          <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
+            <Card style={{ height: "auto" }}>
+              <CardContent align="center">
+                <Typography variant="h5">
+                  3OMB-WFTM LP:
+                </Typography>
+                <CountUp style={{ fontSize: '25px' }} end={balance_3omb_wftm} separator="," prefix="$" />
+              </CardContent>
+              <CardContent align="center">
+                <Typography variant="h5">
+                  3SHARES-WFTM LP:
+                </Typography>
+                <CountUp style={{ fontSize: '25px' }} end={balance_3shares_wftm} separator="," prefix="$" />
+              </CardContent>
+              <CardContent align="center">
+                <Typography variant="h5">
+                  2SHARES-WFTM LP:
+                </Typography>
+                <CountUp style={{ fontSize: '25px' }} end={balance_2shares_wftm} separator="," prefix="$" />
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
+            <Card style={{ height: "auto" }}>
+              <CardContent align="center">
+                <Typography variant="h5">
+                  3OMB:
+                </Typography>
+                <CountUp style={{ fontSize: '25px' }} end={balance_3omb} separator="," prefix="$" />
+              </CardContent>
+              <CardContent align="center">
+                <Typography variant="h5">
+                  3SHARES:
+                </Typography>
+                <CountUp style={{ fontSize: '25px' }} end={balance_3shares} separator="," prefix="$" />
+              </CardContent>
+              <CardContent align="center">
+                <Typography variant="h5">
+                  2SHARES:
+                </Typography>
+                <CountUp style={{ fontSize: '25px' }} end={balance_2shares} separator="," prefix="$" />
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} md={4} lg={4} justify="center" className={classes.gridItem}>
+            <Card justify="center" style={{ height: "auto" }} style={{ marginBottom: '10px' }} >
+              <CardContent align="center">
+                <Typography variant="h5">
+                  Total Value Burned:
+                </Typography>
+                <CountUp style={{ fontSize: '25px' }} end={balance_3omb} separator="," prefix="$" />
+              </CardContent>
+            </Card>
+            <Card style={{ height: "auto" }}>
+              <CardContent align="center">
+                <Typography variant="h5">
+                  Total Treasury Balance:
+                </Typography>
+                <CountUp style={{ fontSize: '25px' }} end={balance} separator="," prefix="$" />
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      </Box>
+
     </Page>
   );
 };

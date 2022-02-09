@@ -35,7 +35,7 @@ body {
 .MuiTypography-body1,
 .MuiPaper-root,
 .MuiPaper-root h2 {
-  color: var(--white) !important;
+  color: var(--black) !important;
 }
 .MuiPaper-elevation1 {
   box-shadow: none !important;

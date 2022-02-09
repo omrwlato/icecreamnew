@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1, 2),
     textDecoration: 'none',
     '&:hover': {
-      textDecoration: 'none',
+      color: '#571EB1'
     },
   },
   brandLink: {
@@ -101,7 +101,7 @@ const Nav = () => {
             <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
               {/* <a className={ classes.brandLink } href="/">2omb Finance</a> */}
               <Link to="/" color="inherit" className={classes.brandLink}>
-                Gem Finance
+                Sundae Finance
               </Link>
             </Typography>
             <Box mr={5}>
@@ -109,19 +109,16 @@ const Nav = () => {
                 Home
               </Link>
               <Link color="textPrimary" to="/farms" className={classes.link}>
-                3Farms
+                Farm
               </Link>
               <Link color="textPrimary" to="/boardroom" className={classes.link}>
-                3Room
+                Boardroom
               </Link>
               <Link color="textPrimary" to="/bonds" className={classes.link}>
-                3Bonds
+                Bonds
               </Link>
               <Link color="textPrimary" to="/rebates" className={classes.link}>
-                3DAO
-              </Link>
-              <Link color="textPrimary" to="/treasury" className={classes.link}>
-                Treasury
+                DAO
               </Link>
               {/* <Link color="textPrimary" to="/treasury" className={classes.link}>
                 Treasury
@@ -142,13 +139,13 @@ const Nav = () => {
                 Vaults
               </a>
               <a href="https://snapshot.org/#/forgiving.forg.eth" target="_blank" className={classes.link}>
-                Governance
+                Social Club
               </a>
               <a href="https://gedeon-crypto.gitbook.io/3omb.finance/" target="_blank" className={classes.link}>
                 Docs
               </a>
-              <a href="https://2omb.finance" target="_blank" className={classes.link}>
-                2omb
+              <a href="https://icecreamfinance.app" target="_blank" className={classes.link}>
+                IceCream
               </a>
             </Box>
             <AccountButton text="Connect" />

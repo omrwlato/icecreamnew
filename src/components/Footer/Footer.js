@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
   img: {
     width: '24px',
     height: '24px',
+    color: 'var(--white)',
   },
 }));
 
@@ -42,7 +43,7 @@ const Footer = () => {
         <Grid container>
           <Grid item xs={6}>
             <Typography variant="body2" color="textPrimary" align="left">
-              {'Copyright © Gem Finance '}
+              {'Copyright © IceCream x Sundae Finance '}
               {new Date().getFullYear()}
             </Typography>
           </Grid>
