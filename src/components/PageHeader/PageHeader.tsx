@@ -38,7 +38,7 @@ const StyledTitle = styled.h1`
 `;
 
 const StyledSubtitle = styled.h3`
-  color: ${(props) => props.theme.color.grey[400]};
+  color: ${(props) => props.theme.color.black[400]};
   font-size: 18px;
   font-weight: 400;
   margin: 0;

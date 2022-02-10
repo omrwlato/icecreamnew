@@ -67,7 +67,15 @@ const Home = () => {
   const tombFinance = useTombFinance();
   const { price: ftmPrice, marketCap: ftmMarketCap, priceChange: ftmPriceChange } = useFantomPrice();
   const { balance: rebatesTVL } = useTotalTreasuryBalance();
-  const { balance, balance_2shares_wftm, balance_3omb_wftm, balance_3shares_wftm, balance_3omb, balance_3shares, balance_2shares } = useTotalTreasuryBalance();
+  const {
+    balance,
+    balance_2shares_wftm,
+    balance_3omb_wftm,
+    balance_3shares_wftm,
+    balance_3omb,
+    balance_3shares,
+    balance_2shares,
+  } = useTotalTreasuryBalance();
   const totalTVL = TVL + rebatesTVL;
 
   let tomb;
@@ -159,7 +167,6 @@ const Home = () => {
     setIsHoveringFudge(false);
   };
 
-
   const handleMouseOverStraw = () => {
     setIsHoveringStraw(true);
   };
@@ -179,7 +186,7 @@ const Home = () => {
   const HoverableFudge = ({ handleMouseOverFudge, handleMouseOutFudge }) => {
     return (
       <div onMouseOver={handleMouseOverFudge} onMouseOut={handleMouseOutFudge}>
-        <h2 >Fudge</h2>
+        <h2>Fudge</h2>
       </div>
     );
   };
@@ -187,7 +194,7 @@ const Home = () => {
   const HoverableStraw = ({ handleMouseOverStraw, handleMouseOutStraw }) => {
     return (
       <div onMouseOver={handleMouseOverStraw} onMouseOut={handleMouseOutStraw}>
-        <h2 >STRAW</h2>
+        <h2>STRAW</h2>
       </div>
     );
   };
@@ -195,7 +202,7 @@ const Home = () => {
   const HoverableCaraml = ({ handleMouseOverCaraml, handleMouseOutCaraml }) => {
     return (
       <div onMouseOver={handleMouseOverCaraml} onMouseOut={handleMouseOutCaraml}>
-        <h2 >CARAML</h2>
+        <h2>CARAML</h2>
       </div>
     );
   };
@@ -203,8 +210,6 @@ const Home = () => {
   const [isHoveringFudge, setIsHoveringFudge] = useState(false);
   const [isHoveringStraw, setIsHoveringStraw] = useState(false);
   const [isHoveringCaraml, setIsHoveringCaraml] = useState(false);
-
-
 
   return (
     <Page>
@@ -379,11 +384,7 @@ const Home = () => {
                 Total Supply: {tombTotalSupply}
               </span>
               <Box>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  style={{ marginTop: '20px' }}
-                >
+                <Button variant="contained" color="primary" style={{ marginTop: '20px' }}>
                   Buy Now
                 </Button>
               </Box>
@@ -426,11 +427,7 @@ const Home = () => {
                 Total Supply: {tShareTotalSupply}
               </span>
               <Box>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  style={{ marginTop: '20px' }}
-                >
+                <Button variant="contained" color="primary" style={{ marginTop: '20px' }}>
                   Buy Now
                 </Button>
               </Box>
@@ -442,7 +439,10 @@ const Home = () => {
         <Grid item xs={12} sm={4}>
           <Card style={{ backgroundColor: 'transparent', boxShadow: 'none', border: '1px solid var(--white)' }}>
             <CardContent align="center" style={{ position: 'relative' }}>
-              <HoverableCaraml handleMouseOverCaraml={handleMouseOverCaraml} handleMouseOutCaraml={handleMouseOutCaraml} />
+              <HoverableCaraml
+                handleMouseOverCaraml={handleMouseOverCaraml}
+                handleMouseOutCaraml={handleMouseOutCaraml}
+              />
               {isHoveringCaraml && <h3>Bond Token</h3>}
               {/* <Button
                 onClick={() => {
@@ -473,11 +473,7 @@ const Home = () => {
                 Total Supply: {tBondTotalSupply}
               </span>
               <Box>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  style={{ marginTop: '20px' }}
-                >
+                <Button variant="contained" color="primary" style={{ marginTop: '20px' }}>
                   Buy Now
                 </Button>
               </Box>
@@ -554,70 +550,53 @@ const Home = () => {
         </Typography>
         <Grid container justify="center" align="center" spacing={3}>
           <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
-            <Card style={{ height: "auto" }}>
+            <Card style={{ height: 'auto' }}>
               <CardContent align="center">
-                <Typography variant="h5">
-                  3OMB-WFTM LP:
-                </Typography>
+                <Typography variant="h5">3OMB-WFTM LP:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_3omb_wftm} separator="," prefix="$" />
               </CardContent>
               <CardContent align="center">
-                <Typography variant="h5">
-                  3SHARES-WFTM LP:
-                </Typography>
+                <Typography variant="h5">3SHARES-WFTM LP:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_3shares_wftm} separator="," prefix="$" />
               </CardContent>
               <CardContent align="center">
-                <Typography variant="h5">
-                  2SHARES-WFTM LP:
-                </Typography>
+                <Typography variant="h5">2SHARES-WFTM LP:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_2shares_wftm} separator="," prefix="$" />
               </CardContent>
             </Card>
           </Grid>
           <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
-            <Card style={{ height: "auto" }}>
+            <Card style={{ height: 'auto' }}>
               <CardContent align="center">
-                <Typography variant="h5">
-                  3OMB:
-                </Typography>
+                <Typography variant="h5">3OMB:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_3omb} separator="," prefix="$" />
               </CardContent>
               <CardContent align="center">
-                <Typography variant="h5">
-                  3SHARES:
-                </Typography>
+                <Typography variant="h5">3SHARES:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_3shares} separator="," prefix="$" />
               </CardContent>
               <CardContent align="center">
-                <Typography variant="h5">
-                  2SHARES:
-                </Typography>
+                <Typography variant="h5">2SHARES:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_2shares} separator="," prefix="$" />
               </CardContent>
             </Card>
           </Grid>
           <Grid item xs={12} md={4} lg={4} justify="center" className={classes.gridItem}>
-            <Card justify="center" style={{ height: "auto" }} style={{ marginBottom: '10px' }} >
+            <Card justify="center" style={{ height: 'auto' }} style={{ marginBottom: '10px' }}>
               <CardContent align="center">
-                <Typography variant="h5">
-                  Total Value Burned:
-                </Typography>
+                <Typography variant="h5">Total Value Burned:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_3omb} separator="," prefix="$" />
               </CardContent>
             </Card>
-            <Card style={{ height: "auto" }}>
+            <Card style={{ height: 'auto' }}>
               <CardContent align="center">
-                <Typography variant="h5">
-                  Total Treasury Balance:
-                </Typography>
+                <Typography variant="h5">Total Treasury Balance:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance} separator="," prefix="$" />
               </CardContent>
             </Card>
           </Grid>
         </Grid>
       </Box>
-
     </Page>
   );
 };

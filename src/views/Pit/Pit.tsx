@@ -20,7 +20,6 @@ import { getDisplayBalance } from '../../utils/formatBalance';
 import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../tomb-finance/constants';
 import { Typography } from '@material-ui/core';
 
-
 const BackgroundImage = createGlobalStyle`
   body {
     background-color: var(--black);
@@ -72,7 +71,7 @@ const Pit: React.FC = () => {
         {!!account ? (
           <>
             <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-              3Bonds
+              CARAML
             </Typography>
             <Route exact path={path}>
               <PageHeader icon={'🏦'} subtitle="Earn premiums upon redemption" />
@@ -87,8 +86,8 @@ const Pit: React.FC = () => {
                   toTokenName="3BOND"
                   priceDesc={
                     !isBondPurchasable
-                      ? '3OMB is over peg'
-                      : getDisplayBalance(bondsPurchasable, 18, 4) + ' 3BOND available for purchase'
+                      ? 'CARAML is over peg'
+                      : getDisplayBalance(bondsPurchasable, 18, 4) + ' CARAML available for purchase'
                   }
                   onExchange={handleBuyBonds}
                   disabled={!bondStat || isBondRedeemable}
@@ -114,10 +113,10 @@ const Pit: React.FC = () => {
                   fromTokenName="3BOND"
                   toToken={tombFinance.TOMB}
                   toTokenName="3OMB"
-                  priceDesc={`${getDisplayBalance(bondBalance)} 3BOND Available in wallet`}
+                  priceDesc={`${getDisplayBalance(bondBalance)} CARAML Available in wallet`}
                   onExchange={handleRedeemBonds}
                   disabled={!bondStat || bondBalance.eq(0) || !isBondRedeemable}
-                  disabledDescription={!isBondRedeemable ? `Enabled when 3OMB > ${BOND_REDEEM_PRICE}FTM` : null}
+                  disabledDescription={!isBondRedeemable ? `Enabled when CARAML > ${BOND_REDEEM_PRICE}FTM` : null}
                 />
               </StyledCardWrapper>
             </StyledBond>
