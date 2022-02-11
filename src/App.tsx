@@ -17,6 +17,7 @@ import Loader from './components/Loader';
 import Popups from './components/Popups';
 import Regulations from './views/Regulations/Regulations';
 import { RefreshContextProvider } from './contexts/RefreshContext';
+import Particles from 'react-tsparticles';//'react-particles-js';
 
 const Home = lazy(() => import('./views/Home'));
 const Farms = lazy(() => import('./views/Cemetery'));
@@ -81,6 +82,74 @@ const App: React.FC = () => {
           </Switch>
         </Suspense>
       </Router>
+      <Particles id="tsparticles"
+        options={{
+          background: {
+            image: 'public/background1.jpg'
+          },
+          fpsLimit: 120,
+          interactivity: {
+            events: {
+              onClick: {
+                enable: true,
+                mode: "push",
+              },
+              onHover: {
+                enable: true,
+                mode: "repulse",
+              },
+              resize: true,
+            },
+            modes: {
+              bubble: {
+                distance: 400,
+                duration: 2,
+                opacity: 0.8,
+                size: 40,
+              },
+              push: {
+                quantity: 4,
+              },
+              repulse: {
+                distance: 200,
+                duration: 0.4,
+              },
+            },
+          },
+          particles: {
+            color: {
+              value: "#ffffff",
+            },
+
+            move: {
+              direction: "none",
+              enable: true,
+              outMode: "bounce",
+              random: false,
+              speed: 3,
+              straight: false,
+            },
+            number: {
+              density: {
+                enable: true,
+                area: 800,
+              },
+              value: 80,
+            },
+            opacity: {
+              value: 0.5,
+            },
+            shape: {
+              type: "circle",
+            },
+            size: {
+              random: true,
+              value: 7,
+            },
+          },
+          detectRetina: true,
+        }}
+      />
     </Providers>
   );
 };

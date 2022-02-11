@@ -96,7 +96,7 @@ const Cemetery = () => {
                   </Grid>
                 </div>
               </Box> */}
-              
+
               <Box mt={2}>
                 <Grid container justify="center" spacing={3}>
                   <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
@@ -113,9 +113,9 @@ const Cemetery = () => {
               </Box>
 
               <Box mt={2} style={{ marginTop: '100px' }}>
-              <Typography color="textPrimary" align="center" variant="h4" gutterBottom style={{ marginBottom: '50px' }}>
-                Protocol Owned Liquidity
-              </Typography>
+                <Typography color="textPrimary" align="center" variant="h4" gutterBottom style={{ marginBottom: '50px' }}>
+                  Protocol Owned Liquidity
+                </Typography>
                 <Grid container justify="center" spacing={3}>
                   <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
                     <Card style={{ height: "auto" }}>
@@ -175,7 +175,7 @@ const Cemetery = () => {
 
 
 
-              
+
 
             </Container>
           ) : (
