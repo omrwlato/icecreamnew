@@ -46,42 +46,6 @@ const App: React.FC = () => {
 
   return (
     <Providers>
-      <Router>
-        <Suspense fallback={<Loader />}>
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/farms">
-              <Farms />
-            </Route>
-            <Route path="/boardroom">
-              <Boardroom />
-            </Route>
-            <Route path="/rebates">
-              <Rebates />
-            </Route>
-            <Route path="/bonds">
-              <Bonds />
-            </Route>
-            <Route path="/treasury">
-              <Treasury />
-            </Route>
-            {/* <Route path="/sbs">
-              <SBS />
-            </Route>
-            <Route path="/regulations">
-              <Regulations />
-            </Route>
-            <Route path="/liquidity">
-              <Liquidity />
-            </Route> */}
-            <Route path="*">
-              <NoMatch />
-            </Route>
-          </Switch>
-        </Suspense>
-      </Router>
       <Particles id="tsparticles"
         options={{
           background: {
@@ -150,6 +114,42 @@ const App: React.FC = () => {
           detectRetina: true,
         }}
       />
+      <Router>
+        <Suspense fallback={<Loader />}>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/farms">
+              <Farms />
+            </Route>
+            <Route path="/boardroom">
+              <Boardroom />
+            </Route>
+            <Route path="/rebates">
+              <Rebates />
+            </Route>
+            <Route path="/bonds">
+              <Bonds />
+            </Route>
+            <Route path="/treasury">
+              <Treasury />
+            </Route>
+            {/* <Route path="/sbs">
+              <SBS />
+            </Route>
+            <Route path="/regulations">
+              <Regulations />
+            </Route>
+            <Route path="/liquidity">
+              <Liquidity />
+            </Route> */}
+            <Route path="*">
+              <NoMatch />
+            </Route>
+          </Switch>
+        </Suspense>
+      </Router>
     </Providers>
   );
 };
