@@ -52,8 +52,8 @@ const useStyles = makeStyles((theme) => ({
   button: {
     [theme.breakpoints.down('415')]: {
       marginTop: '10px',
-    },
-  },
+    }
+  }
 }));
 
 const Home = () => {
@@ -186,7 +186,7 @@ const Home = () => {
   const HoverableFudge = ({ handleMouseOverFudge, handleMouseOutFudge }) => {
     return (
       <div onMouseOver={handleMouseOverFudge} onMouseOut={handleMouseOutFudge}>
-        <h2>Fudge</h2>
+        <h2>FUDGE</h2>
       </div>
     );
   };
@@ -349,7 +349,7 @@ const Home = () => {
 
         {/* Governance Coin */}
         <Grid item xs={12} sm={4}>
-          <Card style={{ backgroundColor: 'transparent', boxShadow: 'none', border: '1px solid var(--white)' }}>
+          <Card style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
             <CardContent align="center" style={{ position: 'relative' }}>
               <HoverableFudge handleMouseOverFudge={handleMouseOverFudge} handleMouseOutFudge={handleMouseOutFudge} />
               {isHoveringFudge && <h3>Governance Token</h3>}
@@ -371,7 +371,7 @@ const Home = () => {
               </Box>
               Current Price
               <Box>
-                <span style={{ fontSize: '30px' }}>{tombPriceInFTM ? tombPriceInFTM : '-.----'} FTM</span>
+                <span style={{ fontSize: '30px' }}>{tombPriceInFTM ? tombPriceInFTM : '-.----'} AVAX</span>
               </Box>
               <Box>
                 <span style={{ fontSize: '16px', alignContent: 'flex-start' }}>
@@ -394,7 +394,7 @@ const Home = () => {
 
         {/* GSHARE */}
         <Grid item xs={12} sm={4}>
-          <Card style={{ backgroundColor: 'transparent', boxShadow: 'none', border: '1px solid var(--white)' }}>
+          <Card style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
             <CardContent align="center" style={{ position: 'relative' }}>
               <HoverableStraw handleMouseOverStraw={handleMouseOverStraw} handleMouseOutStraw={handleMouseOutStraw} />
               {isHoveringStraw && <h3>Share Token</h3>}
@@ -437,7 +437,7 @@ const Home = () => {
 
         {/* GBOND */}
         <Grid item xs={12} sm={4}>
-          <Card style={{ backgroundColor: 'transparent', boxShadow: 'none', border: '1px solid var(--white)' }}>
+          <Card style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
             <CardContent align="center" style={{ position: 'relative' }}>
               <HoverableCaraml
                 handleMouseOverCaraml={handleMouseOverCaraml}
@@ -550,7 +550,7 @@ const Home = () => {
         </Typography>
         <Grid container justify="center" align="center" spacing={3}>
           <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
-            <Card style={{ height: 'auto' }}>
+            <Card style={{ height: 'auto', backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
               <CardContent align="center">
                 <Typography variant="h5">CREAM-AVAX LP:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_3omb_wftm} separator="," prefix="$" />
@@ -566,7 +566,7 @@ const Home = () => {
             </Card>
           </Grid>
           <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
-            <Card style={{ height: 'auto' }}>
+            <Card style={{ height: 'auto', backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
               <CardContent align="center">
                 <Typography variant="h5">FUDGE:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_3omb} separator="," prefix="$" />
@@ -582,13 +582,13 @@ const Home = () => {
             </Card>
           </Grid>
           <Grid item xs={12} md={4} lg={4} justify="center" className={classes.gridItem}>
-            <Card justify="center" style={{ height: 'auto' }} style={{ marginBottom: '10px' }}>
+            <Card justify="center" style={{ height: 'auto' }} style={{ marginBottom: '10px', backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
               <CardContent align="center">
                 <Typography variant="h5">Total Value Burned:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_3omb} separator="," prefix="$" />
               </CardContent>
             </Card>
-            <Card style={{ height: 'auto' }}>
+            <Card style={{ height: 'auto', backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
               <CardContent align="center">
                 <Typography variant="h5">Total Treasury Balance:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance} separator="," prefix="$" />
