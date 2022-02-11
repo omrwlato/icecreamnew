@@ -416,7 +416,7 @@ const Home = () => {
               </Box>
               Current Price
               <Box>
-                <span style={{ fontSize: '30px' }}>{tSharePriceInFTM ? tSharePriceInFTM : '-.----'} FTM</span>
+                <span style={{ fontSize: '30px' }}>{tSharePriceInFTM ? tSharePriceInFTM : '-.----'} AVAX</span>
               </Box>
               <Box>
                 <span style={{ fontSize: '16px' }}>${tSharePriceInDollars ? tSharePriceInDollars : '-.--'}</span>
@@ -462,7 +462,7 @@ const Home = () => {
               </Box>
               Current Price
               <Box>
-                <span style={{ fontSize: '30px' }}>{tBondPriceInFTM ? tBondPriceInFTM : '-.----'} FTM</span>
+                <span style={{ fontSize: '30px' }}>{tBondPriceInFTM ? tBondPriceInFTM : '-.----'} AVAX</span>
               </Box>
               <Box>
                 <span style={{ fontSize: '16px' }}>${tBondPriceInDollars ? tBondPriceInDollars : '-.--'}</span>
@@ -552,15 +552,15 @@ const Home = () => {
           <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
             <Card style={{ height: 'auto' }}>
               <CardContent align="center">
-                <Typography variant="h5">3OMB-WFTM LP:</Typography>
+                <Typography variant="h5">CREAM-AVAX LP:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_3omb_wftm} separator="," prefix="$" />
               </CardContent>
               <CardContent align="center">
-                <Typography variant="h5">3SHARES-WFTM LP:</Typography>
+                <Typography variant="h5">CSHARE-AVAX LP:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_3shares_wftm} separator="," prefix="$" />
               </CardContent>
               <CardContent align="center">
-                <Typography variant="h5">2SHARES-WFTM LP:</Typography>
+                <Typography variant="h5">CREAM-CSHARE LP:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_2shares_wftm} separator="," prefix="$" />
               </CardContent>
             </Card>
@@ -568,15 +568,15 @@ const Home = () => {
           <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
             <Card style={{ height: 'auto' }}>
               <CardContent align="center">
-                <Typography variant="h5">3OMB:</Typography>
+                <Typography variant="h5">FUDGE:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_3omb} separator="," prefix="$" />
               </CardContent>
               <CardContent align="center">
-                <Typography variant="h5">3SHARES:</Typography>
+                <Typography variant="h5">STRAW:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_3shares} separator="," prefix="$" />
               </CardContent>
               <CardContent align="center">
-                <Typography variant="h5">2SHARES:</Typography>
+                <Typography variant="h5">CARAML:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_2shares} separator="," prefix="$" />
               </CardContent>
             </Card>
