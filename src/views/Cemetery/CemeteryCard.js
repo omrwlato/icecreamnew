@@ -7,14 +7,11 @@ import TokenSymbol from '../../components/TokenSymbol';
 const CemeteryCard = ({ bank }) => {
   return (
     <Grid item xs={12} md={4} lg={4}>
-      <Card variant="outlined" style={{ border: '1px solid var(--white)' }}>
+      <Card variant="outlined" style={{ border: '1px solid var(--white)', backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none' }} >
         <CardContent>
           <Box style={{ position: 'relative' }}>
             <Box
               style={{
-                position: 'absolute',
-                right: '0px',
-                top: '-5px',
                 height: '48px',
                 width: '48px',
                 borderRadius: '40px',
@@ -39,10 +36,10 @@ const CemeteryCard = ({ bank }) => {
           </Box>
         </CardContent>
         <CardActions style={{ justifyContent: 'flex-end' }}>
-        <Button color="primary" size="small" variant="contained" target="_blank" href={`${bank.site}`}>
-          ↗
-        </Button>
-        <Button color="primary" size="small" variant="contained" target="_blank" href={`${bank.buyLink}`}>
+          <Button color="primary" size="small" variant="contained" target="_blank" href={`${bank.site}`}>
+            ↗
+          </Button>
+          <Button color="primary" size="small" variant="contained" target="_blank" href={`${bank.buyLink}`}>
             Buy
           </Button>
           <Button color="primary" size="small" variant="contained" component={Link} to={`/farms/${bank.contract}`}>
@@ -50,7 +47,7 @@ const CemeteryCard = ({ bank }) => {
           </Button>
         </CardActions>
       </Card>
-    </Grid>
+    </Grid >
   );
 };
 
