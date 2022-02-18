@@ -76,7 +76,9 @@ const Stake: React.FC = () => {
 
   return (
     <Box>
-      <Card style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
+      <Card
+        style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}
+      >
         <CardContent>
           <StyledCardContentInner>
             <StyledCardHeader>
