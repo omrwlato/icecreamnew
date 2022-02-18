@@ -135,13 +135,13 @@ const Nav = () => {
               <Link color="textPrimary" to="/regulations" className={classes.link}>
                 Regulations
               </Link> */}
-              <a href="https://beluga.fi" target="_blank" className={classes.link}>
+              <a href="https://yieldwolf.finance/avalanche/sundaefinance" target="_blank" className={classes.link}>
                 Vaults
               </a>
-              <a href="https://snapshot.org/#/forgiving.forg.eth" target="_blank" className={classes.link}>
+              <a href="" target="_blank" className={classes.link}>
                 Social Club
               </a>
-              <a href="https://gedeon-crypto.gitbook.io/3omb.finance/" target="_blank" className={classes.link}>
+              <a href="" target="_blank" className={classes.link}>
                 Docs
               </a>
               <a href="https://icecreamfinance.app" target="_blank" className={classes.link}>
