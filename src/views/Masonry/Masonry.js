@@ -84,7 +84,14 @@ const Masonry = () => {
           <Box mt={5}>
             <Grid container justify="center" spacing={3}>
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                <Card className={classes.gridItem} style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
+                <Card
+                  className={classes.gridItem}
+                  style={{
+                    backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                    boxShadow: 'none',
+                    border: '1px solid var(--white)',
+                  }}
+                >
                   <CardContent>
                     <Typography style={{ textAlign: 'center' }}>Next Epoch</Typography>
                     <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={to} description="Next Epoch" />
@@ -92,7 +99,14 @@ const Masonry = () => {
                 </Card>
               </Grid>
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                <Card className={classes.gridItem} style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
+                <Card
+                  className={classes.gridItem}
+                  style={{
+                    backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                    boxShadow: 'none',
+                    border: '1px solid var(--white)',
+                  }}
+                >
                   <CardContent align="center">
                     <Typography>Current Epoch</Typography>
                     <Typography>{Number(currentEpoch)}</Typography>
@@ -100,7 +114,14 @@ const Masonry = () => {
                 </Card>
               </Grid>
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                <Card className={classes.gridItem} style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
+                <Card
+                  className={classes.gridItem}
+                  style={{
+                    backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                    boxShadow: 'none',
+                    border: '1px solid var(--white)',
+                  }}
+                >
                   <CardContent align="center">
                     <Typography>
                       FUDGE Price<small> (TWAP)</small>
@@ -110,7 +131,14 @@ const Masonry = () => {
                 </Card>
               </Grid>
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                <Card className={classes.gridItem} style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
+                <Card
+                  className={classes.gridItem}
+                  style={{
+                    backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                    boxShadow: 'none',
+                    border: '1px solid var(--white)',
+                  }}
+                >
                   <CardContent align="center">
                     <Typography>APR</Typography>
                     <Typography>{masonryAPR.toFixed(2)}%</Typography>
@@ -118,7 +146,14 @@ const Masonry = () => {
                 </Card>
               </Grid>
               <Grid item xs={12} md={2} lg={2}>
-                <Card className={classes.gridItem} style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
+                <Card
+                  className={classes.gridItem}
+                  style={{
+                    backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                    boxShadow: 'none',
+                    border: '1px solid var(--white)',
+                  }}
+                >
                   <CardContent align="center">
                     <Typography>STRAWs Staked</Typography>
                     <Typography>{getDisplayBalance(totalStaked)}</Typography>
@@ -128,7 +163,7 @@ const Masonry = () => {
             </Grid>
 
             <Grid container justify="center">
-              <Box mt={3} style={{ width: '525px' }}>
+              <Box mt={3} style={{ width: '525px' }} border={1} borderColor="white" bgcolor="#f2cee6">
                 <Alert variant="transparent" severity="info">
                   Staked STRAWs can only be withdrawn after 3 epochs since deposit.
                 </Alert>
@@ -180,7 +215,7 @@ const Masonry = () => {
           </Grid> */}
           </Box>
 
-          <Box mt={5} >
+          <Box mt={5}>
             <Grid container justify="center" spacing={3} mt={10}>
               <Button
                 disabled={stakedBalance.eq(0) || (!canWithdraw && !canClaimReward)}
