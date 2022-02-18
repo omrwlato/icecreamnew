@@ -101,7 +101,8 @@ const Nav = () => {
             <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
               {/* <a className={ classes.brandLink } href="/">2omb Finance</a> */}
               <Link to="/" color="inherit" className={classes.brandLink}>
-              <img alt="sundae.finance" src={sundaeLogo} height="100px" width='100px' />
+                Sundae Finance
+             {/*  <img alt="sundae.finance" src={sundaeLogo} height="100px" width='100px' /> */}
               </Link>
             </Typography>
             <Box mr={5}>
@@ -161,11 +162,14 @@ const Nav = () => {
             >
               <MenuIcon />
             </IconButton>
-            <img
+            <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
+              Sundae Finance
+            </Typography>
+{/*             <img
               alt="sundae.finance"
               src={sundaeLogo}
               style={{height: '40px', marginTop: '-10px', marginLeft: '10px', marginRight: '15px'}}
-            />
+            /> */}
             <AccountButton text="Connect" />
             <Drawer
               className={classes.drawer}
