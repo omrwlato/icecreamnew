@@ -108,7 +108,7 @@ const Cemetery = () => {
                         <Typography variant="h5">
                           FUDGE Price <small>(TWAP)</small>
                         </Typography>
-                        <Typography variant="h6">{rebateStats.tombPrice.toFixed(3)} FTM</Typography>
+                        <Typography variant="h6">{rebateStats.tombPrice.toFixed(3)} DAI</Typography>
                       </CardContent>
                     </Card>
                   </Grid>
