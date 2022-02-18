@@ -163,11 +163,10 @@ const Masonry = () => {
             </Grid>
 
             <Grid container justify="center">
-              <Box mt={3} style={{ width: '525px' }} border='none' bgcolor="#f2cee6">
-                <Alert variant="transparent" severity="info" style={{ backgroundColor: '#757CE8' }}>
-                  Staked STRAWs can only be withdrawn after 3 epochs since deposit.
-                </Alert>
-              </Box>
+              <Alert variant="filled" severity="info" style={{ marginTop: '50px', backgroundColor: "#757CE8" }}>
+                Staked STRAWs can only be withdrawn after 6 epochs since deposit.
+              </Alert>
+
             </Grid>
 
             <Box mt={4}>

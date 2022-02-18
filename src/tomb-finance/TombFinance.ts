@@ -33,7 +33,7 @@ export class TombFinance {
   TBOND: ERC20;
   WAVAX: ERC20;
   FTM: ERC20;
-  DAI:ERC20
+  DAI: ERC20;
 
   constructor(cfg: Configuration) {
     const { deployments, externalTokens } = cfg;
@@ -103,14 +103,14 @@ export class TombFinance {
     const tombRewardPoolSupply = await this.TOMB.balanceOf(TombFtmRewardPool.address);
     const tombRewardPoolSupply2 = await this.TOMB.balanceOf(TombFtmLpTombRewardPool.address);
     // const tombRewardPoolSupplyOld = await this.TOMB.balanceOf(TombFtmLpTombRewardPoolOld.address);
-    const tombCirculatingSupply = supply
-      .sub(tombRewardPoolSupply)
-      .sub(tombRewardPoolSupply2)
+    const tombCirculatingSupply = supply.sub(tombRewardPoolSupply).sub(tombRewardPoolSupply2);
     // .sub(tombRewardPoolSupplyOld);
     const priceInFTM = await this.getTokenPriceFromPancakeswap(this.TOMB);
-    console.log("price in ftm:", priceInFTM)
+    console.log('price in ftm:', priceInFTM);
     const priceOfOneFTM = await this.getWFTMPriceFromPancakeswap();
     const priceOfTombInDollars = (Number(priceInFTM) * Number(priceOfOneFTM)).toFixed(2);
+    console.log(priceInFTM, 'priceInFTM');
+    console.log(priceOfOneFTM, 'priceOfoneftm');
 
     return {
       tokenInFtm: priceInFTM,
@@ -235,7 +235,7 @@ export class TombFinance {
     const depositToken = bank.depositToken;
     const poolContract = this.contracts[bank.contract];
     const depositTokenPrice = await this.getDepositTokenPriceInDollars(bank.depositTokenName, depositToken);
-    console.log("deposit token price:", depositTokenPrice)
+    console.log('deposit token price:', depositTokenPrice);
     const stakeInPool = await depositToken.balanceOf(bank.address);
     const TVL = Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal));
     const stat = bank.earnTokenName === 'FUDGE' ? await this.getTombStat() : await this.getShareStat();
@@ -315,8 +315,7 @@ export class TombFinance {
       return rewardPerSecond.mul(15000).div(60000);
     } else if (depositTokenName === 'FUDGE-DAI LP') {
       return rewardPerSecond.mul(15000).div(60000);
-    }
-    else {
+    } else {
       return rewardPerSecond.div(24);
     }
   }
@@ -335,23 +334,38 @@ export class TombFinance {
     if (tokenName === 'WAVAX') {
       tokenPrice = priceOfOneFtmInDollars;
     } else {
-      console.log("token name:", tokenName)
+      console.log('token name:', tokenName);
       if (tokenName === 'FUDGE-DAI LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.TOMB, true, false);
       } else if (tokenName === 'STRAW-DAI LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.TSHARE, false, false);
-      } else if (tokenName === "CSHARE-AVAX LP") {
-        tokenPrice = await this.getLPTokenPrice(token, new ERC20("0x155f794b56353533E0AfBF76e1B1FC57DFAd5Bd7", this.provider, "CSHARE"), false, true);
-      } else if (tokenName === "CREAM-AVAX LP") {
-        console.log("getting the LP token price here")
-        tokenPrice = await this.getLPTokenPrice(token, new ERC20("0xAE21d31a6494829a9E4B2B291F4984AAE8121757", this.provider, "CREAM"), true, true);
-        console.log("my token price:", tokenPrice)
-      } else if (tokenName === "CREAM-CSHARE LP") {
-        console.log("getting the LP token price here")
-        tokenPrice = await this.getLPTokenPrice(token, new ERC20("0x155f794b56353533E0AfBF76e1B1FC57DFAd5Bd7", this.provider, "CSHARE"), true, true);
-        console.log("my token price:", tokenPrice)
+      } else if (tokenName === 'CSHARE-AVAX LP') {
+        tokenPrice = await this.getLPTokenPrice(
+          token,
+          new ERC20('0x155f794b56353533E0AfBF76e1B1FC57DFAd5Bd7', this.provider, 'CSHARE'),
+          false,
+          true,
+        );
+      } else if (tokenName === 'CREAM-AVAX LP') {
+        console.log('getting the LP token price here');
+        tokenPrice = await this.getLPTokenPrice(
+          token,
+          new ERC20('0xAE21d31a6494829a9E4B2B291F4984AAE8121757', this.provider, 'CREAM'),
+          true,
+          true,
+        );
+        console.log('my token price:', tokenPrice);
+      } else if (tokenName === 'CREAM-CSHARE LP') {
+        console.log('getting the LP token price here');
+        tokenPrice = await this.getLPTokenPrice(
+          token,
+          new ERC20('0x155f794b56353533E0AfBF76e1B1FC57DFAd5Bd7', this.provider, 'CSHARE'),
+          true,
+          true,
+        );
+        console.log('my token price:', tokenPrice);
       } else if (tokenName === 'DAI') {
-        tokenPrice = '1'
+        tokenPrice = '1';
       } else {
         tokenPrice = await this.getTokenPriceFromPancakeswap(token);
         tokenPrice = (Number(tokenPrice) * Number(priceOfOneFtmInDollars)).toString();
@@ -426,7 +440,14 @@ export class TombFinance {
     const totalSupply = getFullDisplayBalance(await lpToken.totalSupply(), lpToken.decimal);
     //Get amount of tokenA
     const tokenSupply = getFullDisplayBalance(await token.balanceOf(lpToken.address), token.decimal);
-    const stat = isFake === true ? isTomb === true ? await this.getTombStatFake() : await this.getShareStatFake() : isTomb === true ? await this.getTombStat() : await this.getShareStat();
+    const stat =
+      isFake === true
+        ? isTomb === true
+          ? await this.getTombStatFake()
+          : await this.getShareStatFake()
+        : isTomb === true
+        ? await this.getTombStat()
+        : await this.getShareStat();
     const priceOfToken = stat.priceInDollars;
     const tokenInLP = Number(tokenSupply) / Number(totalSupply);
     const tokenPrice = (Number(priceOfToken) * tokenInLP * 2) //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total
@@ -435,13 +456,17 @@ export class TombFinance {
   }
 
   async getTombStatFake() {
-    const price = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=icecream-finance&vs_currencies=usd").then(res => res.json())
-    return { priceInDollars: price["icecream-finance"].usd }
+    const price = await fetch(
+      'https://api.coingecko.com/api/v3/simple/price?ids=icecream-finance&vs_currencies=usd',
+    ).then((res) => res.json());
+    return { priceInDollars: price['icecream-finance'].usd };
   }
 
   async getShareStatFake() {
-    const price = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=cream-shares&vs_currencies=usd").then(res => res.json())
-    return { priceInDollars: price["cream-shares"].usd }
+    const price = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=cream-shares&vs_currencies=usd').then(
+      (res) => res.json(),
+    );
+    return { priceInDollars: price['cream-shares'].usd };
   }
 
   async earnedFromBank(
@@ -535,12 +560,12 @@ export class TombFinance {
     const { chainId } = this.config;
     const { DAI } = this.config.externalTokens;
 
-    const wftm = new Token(chainId, DAI[0], DAI[1], "DAI");
+    const wftm = new Token(chainId, DAI[0], DAI[1], 'DAI');
     const token = new Token(chainId, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
     try {
       const wftmToToken = await Fetcher.fetchPairData(wftm, token, this.provider);
-      console.log(wftmToToken.priceOf(wftm).toFixed(2))
-      console.log(wftmToToken.priceOf(token).toFixed(2))
+      console.log(wftmToToken.priceOf(wftm).toFixed(2));
+      console.log(wftmToToken.priceOf(token).toFixed(2));
       const priceInBUSD = new Route([wftmToToken], token);
 
       return priceInBUSD.midPrice.toFixed(4);
@@ -578,7 +603,8 @@ export class TombFinance {
     if (!ready) return;
     const { WFTM, FUSDT } = this.externalTokens;
     try {
-      const fusdt_wftm_lp_pair = this.externalTokens['USDT-FTM-LP'];
+      const fusdt_wftm_lp_pair = this.externalTokens['USDT-FTM LP'];
+      console.log(this.externalTokens, 'fusdt');
       let ftm_amount_BN = await WFTM.balanceOf(fusdt_wftm_lp_pair.address);
       let ftm_amount = Number(getFullDisplayBalance(ftm_amount_BN, WFTM.decimal));
       let fusdt_amount_BN = await FUSDT.balanceOf(fusdt_wftm_lp_pair.address);
@@ -799,7 +825,12 @@ export class TombFinance {
     let overrides = {
       value: parseUnits(ftmAmount, 18),
     };
-    return await TaxOffice.addLiquidityETHTaxFree(tombAmount, tombAmount.mul(992).div(1000), parseUnits(ftmAmount, 18).mul(992).div(1000), overrides);
+    return await TaxOffice.addLiquidityETHTaxFree(
+      tombAmount,
+      tombAmount.mul(992).div(1000),
+      parseUnits(ftmAmount, 18).mul(992).div(1000),
+      overrides,
+    );
   }
 
   async quoteFromSpooky(tokenAmount: string, tokenName: string): Promise<string> {

@@ -104,6 +104,8 @@ const Home = () => {
     () => (tombStats ? Number(tombStats.priceInDollars).toFixed(2) : null),
     [tombStats],
   );
+  console.log(tombStats, 'TombStats');
+  console.log(tombPriceInDollars, 'TombPriceInDollars');
   const tombPriceInFTM = useMemo(() => (tombStats ? Number(tombStats.tokenInFtm).toFixed(4) : null), [tombStats]);
   const tombCirculatingSupply = useMemo(() => (tombStats ? String(tombStats.circulatingSupply) : null), [tombStats]);
   const tombTotalSupply = useMemo(() => (tombStats ? String(tombStats.totalSupply) : null), [tombStats]);
@@ -166,29 +168,29 @@ const Home = () => {
     />,
   );
 
-  const handleMouseOverFudge = () => {
-    setIsHoveringFudge(true);
-  };
+  // const handleMouseOverFudge = () => {
+  //   setIsHoveringFudge(true);
+  // };
 
-  const handleMouseOutFudge = () => {
-    setIsHoveringFudge(false);
-  };
+  // const handleMouseOutFudge = () => {
+  //   setIsHoveringFudge(false);
+  // };
 
-  const handleMouseOverStraw = () => {
-    setIsHoveringStraw(true);
-  };
+  // const handleMouseOverStraw = () => {
+  //   setIsHoveringStraw(true);
+  // };
 
-  const handleMouseOutStraw = () => {
-    setIsHoveringStraw(false);
-  };
+  // const handleMouseOutStraw = () => {
+  //   setIsHoveringStraw(false);
+  // };
 
-  const handleMouseOverCaraml = () => {
-    setIsHoveringCaraml(true);
-  };
+  // const handleMouseOverCaraml = () => {
+  //   setIsHoveringCaraml(true);
+  // };
 
-  const handleMouseOutCaraml = () => {
-    setIsHoveringCaraml(false);
-  };
+  // const handleMouseOutCaraml = () => {
+  //   setIsHoveringCaraml(false);
+  // };
 
   const [isHoveringFudge, setIsHoveringFudge] = useState(false);
   const [isHoveringStraw, setIsHoveringStraw] = useState(false);
@@ -334,8 +336,8 @@ const Home = () => {
         <Grid item xs={12} sm={4}>
           <Card
             style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}
-            onMouseOver={handleMouseOverFudge}
-            onMouseOut={handleMouseOutFudge}
+            // onMouseOver={handleMouseOverFudge}
+            // onMouseOut={handleMouseOutFudge}
           >
             <CardContent align="center" style={{ position: 'relative' }}>
               <div>
@@ -362,13 +364,14 @@ const Home = () => {
               </Box>
               Current Price
               <Box>
-                <span style={{ fontSize: '30px' }}>{tombPriceInFTM ? tombPriceInFTM : '-.----'} AVAX</span>
+                <span style={{ fontSize: '30px' }}>${tombPriceInDollars ? tombPriceInDollars : '-.--'} </span>
+                {/* <span style={{ fontSize: '30px' }}>{tombPriceInFTM ? tombPriceInFTM : '-.----'} </span> */}
               </Box>
-              <Box>
+              {/* <Box>
                 <span style={{ fontSize: '16px', alignContent: 'flex-start' }}>
                   ${tombPriceInDollars ? tombPriceInDollars : '-.--'}
                 </span>
-              </Box>
+              </Box> */}
               <span style={{ fontSize: '12px' }}>
                 Market Cap: ${(tombCirculatingSupply * tombPriceInDollars).toFixed(2)} <br />
                 Circulating Supply: {tombCirculatingSupply} <br />
@@ -387,8 +390,8 @@ const Home = () => {
         <Grid item xs={12} sm={4}>
           <Card
             style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}
-            onMouseOver={handleMouseOverStraw}
-            onMouseOut={handleMouseOutStraw}
+            // onMouseOver={handleMouseOverStraw}
+            // onMouseOut={handleMouseOutStraw}
           >
             <CardContent align="center" style={{ position: 'relative' }}>
               <div>
@@ -415,11 +418,12 @@ const Home = () => {
               </Box>
               Current Price
               <Box>
-                <span style={{ fontSize: '30px' }}>{tSharePriceInFTM ? tSharePriceInFTM : '-.----'} AVAX</span>
+                <span style={{ fontSize: '30px' }}>${tSharePriceInDollars ? tSharePriceInDollars : '-.--'}</span>
+                {/* <span style={{ fontSize: '30px' }}>{tSharePriceInFTM ? tSharePriceInFTM : '-.----'} </span> */}
               </Box>
-              <Box>
+              {/* <Box>
                 <span style={{ fontSize: '16px' }}>${tSharePriceInDollars ? tSharePriceInDollars : '-.--'}</span>
-              </Box>
+              </Box> */}
               <span style={{ fontSize: '12px' }}>
                 Market Cap: ${(tShareCirculatingSupply * tSharePriceInDollars).toFixed(2)} <br />
                 Circulating Supply: {tShareCirculatingSupply} <br />
@@ -438,8 +442,8 @@ const Home = () => {
         <Grid item xs={12} sm={4}>
           <Card
             style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}
-            onMouseOver={handleMouseOverCaraml}
-            onMouseOut={handleMouseOutCaraml}
+            // onMouseOver={handleMouseOverCaraml}
+            // onMouseOut={handleMouseOutCaraml}
           >
             <CardContent align="center" style={{ position: 'relative' }}>
               <div>
@@ -466,11 +470,12 @@ const Home = () => {
               </Box>
               Current Price
               <Box>
-                <span style={{ fontSize: '30px' }}>{tBondPriceInFTM ? tBondPriceInFTM : '-.----'} AVAX</span>
+                <span style={{ fontSize: '30px' }}>${tBondPriceInDollars ? tBondPriceInDollars : '-.--'}</span>
+                {/* <span style={{ fontSize: '30px' }}>{tBondPriceInFTM ? tBondPriceInFTM : '-.----'} </span> */}
               </Box>
-              <Box>
+              {/* <Box>
                 <span style={{ fontSize: '16px' }}>${tBondPriceInDollars ? tBondPriceInDollars : '-.--'}</span>
-              </Box>
+              </Box> */}
               <span style={{ fontSize: '12px' }}>
                 Market Cap: ${(tBondCirculatingSupply * tBondPriceInDollars).toFixed(2)} <br />
                 Circulating Supply: {tBondCirculatingSupply} <br />
