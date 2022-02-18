@@ -62,6 +62,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const buyfudgeAddress = 'https://traderjoexyz.com/trade?outputCurrency=0xD9FF12172803c072a36785DeFea1Aa981A6A0C18#/';
+const buystrawAddress = 'https://traderjoexyz.com/trade?outputCurrency=0xf8D0C6c3ddC03F43A0687847f2b34bfd6941C2A2#/';
+
 const Home = () => {
   const rebateStats = useRebateTreasury();
   const classes = useStyles();
@@ -376,7 +379,8 @@ const Home = () => {
                 Total Supply: {tombTotalSupply}
               </span>
               <Box>
-                <Button variant="contained" color="primary" style={{ marginTop: '20px' }}>
+                <Button variant="contained" color="primary" style={{ marginTop: '20px' }} target="_blank" href={buyfudgeAddress}
+                 >
                   Buy Now
                 </Button>
               </Box>
@@ -428,7 +432,7 @@ const Home = () => {
                 Total Supply: {tShareTotalSupply}
               </span>
               <Box>
-                <Button variant="contained" color="primary" style={{ marginTop: '20px' }}>
+              <Button variant="contained" color="primary" style={{ marginTop: '20px' }} target="_blank" href={buystrawAddress}>
                   Buy Now
                 </Button>
               </Box>
@@ -480,8 +484,8 @@ const Home = () => {
                 Total Supply: {tBondTotalSupply}
               </span>
               <Box>
-                <Button variant="contained" color="primary" style={{ marginTop: '20px' }}>
-                  Buy Now
+                <Button variant="contained" color="primary" style={{ marginTop: '20px' }}href="/bonds">
+                  View BONDS
                 </Button>
               </Box>
             </CardContent>
