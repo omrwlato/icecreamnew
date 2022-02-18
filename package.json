@@ -1,7 +1,7 @@
 {
-  "name": "cream-ui",
+  "name": "sundae-ui",
   "version": "1.0.0",
-  "homepage": "https://icecreamfinance.app",
+  "homepage": "https://sundaefinance.app",
   "license": "MIT",
   "dependencies": {
     "@davatar/react": "^1.8.1",

@@ -48,24 +48,24 @@ const Footer = () => {
             </Typography>
           </Grid>
           <Grid item xs={6} style={{ textAlign: 'right' }}>
-            <a href="https://twitter.com/_2omb" rel="noopener noreferrer" target="_blank" className={classes.link}>
+            <a href="https://twitter.com/icecreamfinance" rel="noopener noreferrer" target="_blank" className={classes.link}>
               <img alt="twitter" src={TwitterImage} className={classes.img} />
             </a>
-            <a href="https://github.com/2omb" rel="noopener noreferrer" target="_blank" className={classes.link}>
+            <a href="https://github.com/icecreamfinancial" rel="noopener noreferrer" target="_blank" className={classes.link}>
               <img alt="github" src={GithubImage} className={classes.img} />
             </a>
-            <a href="https://bit.ly/3AUcaBI" rel="noopener noreferrer" target="_blank" className={classes.link}>
+            <a href="https://t.me/icecreamfinance" rel="noopener noreferrer" target="_blank" className={classes.link}>
               <img alt="telegram" src={TelegramImage} className={classes.img} />
             </a>
-            <a
+{/*             <a
               href="https://www.youtube.com/results?search_query=2omb+finance"
               rel="noopener noreferrer"
               target="_blank"
               className={classes.link}
             >
               <img alt="youtube" src={YoutubeImage} className={classes.img} />
-            </a>
-            <a href="https://discord.gg/2omb" rel="noopener noreferrer" target="_blank" className={classes.link}>
+            </a> */}
+            <a href="https://discord.gg/icecream" rel="noopener noreferrer" target="_blank" className={classes.link}>
               <img alt="discord" src={DiscordImage} className={classes.img} />
             </a>
           </Grid>
