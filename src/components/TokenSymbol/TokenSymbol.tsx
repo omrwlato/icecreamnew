@@ -12,11 +12,12 @@ import twoombLogo from '../../assets/img/cream.png';
 import TwoombLPLogo from '../../assets/img/cream-wavax.png';
 import TwosharesLPLogo from '../../assets/img/cshare-avax.png';
 import TwoombTwosharesLPLogo from '../../assets/img/creamcshare.png';
-
+import wavaxLogo from '../../assets/img/wavax.png';
 import tombFtmLpLogo from '../../assets/img/fudge-dai.png';
 import tshareFtmLpLogo from '../../assets/img/straw-dai.png';
 import ThreeombLPLogo from '../../assets/img/fudge-dai.png';
 import ThreesharesLPLogo from '../../assets/img/straw-dai.png';
+import fsLogo from '../../assets/img/fudge-straw.png';
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
@@ -39,7 +40,8 @@ const logosBySymbol: { [title: string]: string } = {
   'TSHARE-FTM-LP': tshareFtmLpLogo,
   'FUDGE': tombLogo,
   'CARAML': tBondLogo,
-
+  'WAVAX': wavaxLogo,
+  'FUDGE-STRAW':fsLogo
 };
 
 type LogoProps = {
