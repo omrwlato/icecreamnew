@@ -81,12 +81,12 @@ const Pit: React.FC = () => {
                 <ExchangeCard
                   action="Purchase"
                   fromToken={tombFinance.TOMB}
-                  fromTokenName="3OMB"
+                  fromTokenName="FUDGE"
                   toToken={tombFinance.TBOND}
-                  toTokenName="3BOND"
+                  toTokenName="CARAML"
                   priceDesc={
                     !isBondPurchasable
-                      ? 'CARAML is over peg'
+                      ? 'FUDGE is over peg'
                       : getDisplayBalance(bondsPurchasable, 18, 4) + ' CARAML available for purchase'
                   }
                   onExchange={handleBuyBonds}
@@ -95,14 +95,14 @@ const Pit: React.FC = () => {
               </StyledCardWrapper>
               <StyledStatsWrapper>
                 <ExchangeStat
-                  tokenName="3OMB"
+                  tokenName="FUDGE"
                   description="Last-Hour TWAP Price"
                   price={getDisplayBalance(cashPrice, 18, 4)}
                 />
                 <Spacer size="md" />
                 <ExchangeStat
-                  tokenName="3BOND"
-                  description="Current Price: (3OMB)^2"
+                  tokenName="CARAML"
+                  description="Current Price: (FUDGE)^2"
                   price={Number(bondStat?.tokenInFtm).toFixed(2) || '-'}
                 />
               </StyledStatsWrapper>
@@ -110,13 +110,13 @@ const Pit: React.FC = () => {
                 <ExchangeCard
                   action="Redeem"
                   fromToken={tombFinance.TBOND}
-                  fromTokenName="3BOND"
+                  fromTokenName="CARAML"
                   toToken={tombFinance.TOMB}
-                  toTokenName="3OMB"
+                  toTokenName="FUDGE"
                   priceDesc={`${getDisplayBalance(bondBalance)} CARAML Available in wallet`}
                   onExchange={handleRedeemBonds}
                   disabled={!bondStat || bondBalance.eq(0) || !isBondRedeemable}
-                  disabledDescription={!isBondRedeemable ? `Enabled when CARAML > ${BOND_REDEEM_PRICE}FTM` : null}
+                  disabledDescription={!isBondRedeemable ? `Enabled when CARAML > ${BOND_REDEEM_PRICE}DAI` : null}
                 />
               </StyledCardWrapper>
             </StyledBond>

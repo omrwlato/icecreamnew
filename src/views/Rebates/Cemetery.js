@@ -55,7 +55,7 @@ const Cemetery = () => {
 
   const rebateStats = useRebateTreasury()
   console.log(rebateStats)
-  const [claimable3omb, setClaimable3omb] = useState(0);
+  const [claimablefudge, setClaimablefudge] = useState(0);
   const [vested, setVested] = useState(0)
 
   useEffect(() => {
@@ -71,7 +71,7 @@ const Cemetery = () => {
 
     const claimable = await rebateStats.RebateTreasury.methods.claimableTomb(address).call()
     const vesting = await rebateStats.RebateTreasury.methods.vesting(address).call()
-    setClaimable3omb(+web3.utils.fromWei(claimable))
+    setClaimablefudge(+web3.utils.fromWei(claimable))
     setVested(+web3.utils.fromWei(BN(vesting.amount).sub(BN(vesting.claimed))))
   }
 
@@ -98,7 +98,7 @@ const Cemetery = () => {
           {!!account ? (
             <>
               <Typography color="textPrimary" align="center" variant="h3" gutterBottom style={{ marginBottom: '40px' }}>
-                3DAO - Rebates
+                DAO - BONDS
               </Typography>
               <Box mt={2}>
                 <Grid container justify="center" spacing={3}>
@@ -106,7 +106,7 @@ const Cemetery = () => {
                     <Card className={classes.gridItem} style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
                       <CardContent align="center">
                         <Typography variant="h5">
-                          3OMB Price <small>(TWAP)</small>
+                          FUDGE Price <small>(TWAP)</small>
                         </Typography>
                         <Typography variant="h6">{rebateStats.tombPrice.toFixed(3)} FTM</Typography>
                       </CardContent>
@@ -144,10 +144,10 @@ const Cemetery = () => {
                     <Card style={{ height: "auto" }} style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
                       <CardContent align="center">
                         <Typography variant="h5">
-                          3OMB Vesting
+                          FUDGE Vesting
                         </Typography>
                         <Typography variant="h6">{vested.toFixed(4)} Total Vested</Typography>
-                        <Typography variant="h6">{claimable3omb.toFixed(4)} Claimable</Typography>
+                        <Typography variant="h6">{claimablefudge.toFixed(4)} Claimable</Typography>
                         <Button color="primary" size="small" variant="contained" onClick={claimTomb} style={{ marginTop: "8px" }}>
                           CLAIM
                         </Button>

@@ -28,8 +28,8 @@ const Harvest: React.FC<HarvestProps> = ({ bank }) => {
   const tombStats = useTombStats();
   const tShareStats = useShareStats();
 
-  const tokenName = bank.earnTokenName === '3SHARES' ? '3SHARES' : '3OMB';
-  const tokenStats = bank.earnTokenName === '3SHARES' ? tShareStats : tombStats;
+  const tokenName = bank.earnTokenName === 'STRAW' ? 'STRAW' : 'FUDGE';
+  const tokenStats = bank.earnTokenName === 'STRAW' ? tShareStats : tombStats;
   const tokenPriceInDollars = useMemo(
     () => (tokenStats ? Number(tokenStats.priceInDollars).toFixed(2) : null),
     [tokenStats],
