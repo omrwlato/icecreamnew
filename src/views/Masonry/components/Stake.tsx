@@ -76,7 +76,9 @@ const Stake: React.FC = () => {
 
   return (
     <Box>
-      <Card style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
+      <Card
+        style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}
+      >
         <CardContent>
           <StyledCardContentInner>
             <StyledCardHeader>
@@ -85,7 +87,7 @@ const Stake: React.FC = () => {
               </CardIcon>
               <Value value={getDisplayBalance(stakedBalance)} />
               <Label text={`≈ $${tokenPriceInDollars}`} color="#5f51c2" />
-              <Label text={'3SHARES Staked'} color="#5f51c2" />
+              <Label text={'STRAW Staked'} color="#5f51c2" />
             </StyledCardHeader>
             <StyledCardActions>
               {approveStatus !== ApprovalState.APPROVED ? (
