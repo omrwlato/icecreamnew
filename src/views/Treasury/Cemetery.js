@@ -19,19 +19,19 @@ import useBanks from '../../hooks/useBanks';
 
 const assetList = [
   {
-    depositTokenName: '2SHARES',
+    depositTokenName: 'CSHARES',
   },
   {
-    depositTokenName: '2SHARES-WFTM LP',
+    depositTokenName: 'CSHARE-WAVAX LP',
   },
   {
-    depositTokenName: '3OMB-WFTM LP',
+    depositTokenName: 'FUDGE-DAI LP',
   },
   {
-    depositTokenName: '3SHARES',
+    depositTokenName: 'STRAW',
   },
   {
-    depositTokenName: '3SHARES-WFTM LP',
+    depositTokenName: 'STRAW-DAI LP',
   },
 ]
 
@@ -96,7 +96,7 @@ const Cemetery = () => {
                   </Grid>
                 </div>
               </Box> */}
-              
+
               <Box mt={2}>
                 <Grid container justify="center" spacing={3}>
                   <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
@@ -113,27 +113,27 @@ const Cemetery = () => {
               </Box>
 
               <Box mt={2} style={{ marginTop: '100px' }}>
-              <Typography color="textPrimary" align="center" variant="h4" gutterBottom style={{ marginBottom: '50px' }}>
-                Protocol Owned Liquidity
-              </Typography>
+                <Typography color="textPrimary" align="center" variant="h4" gutterBottom style={{ marginBottom: '50px' }}>
+                  Protocol Owned Liquidity
+                </Typography>
                 <Grid container justify="center" spacing={3}>
                   <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
                     <Card style={{ height: "auto" }}>
                       <CardContent align="center">
                         <Typography variant="h5">
-                          3OMB-WFTM LP:
+                          FUDGE-DAI LP:
                         </Typography>
                         <CountUp style={{ fontSize: '25px' }} end={balance_3omb_wftm} separator="," prefix="$" />
                       </CardContent>
                       <CardContent align="center">
                         <Typography variant="h5">
-                          3SHARES-WFTM LP:
+                          STRAW-DAI LP:
                         </Typography>
                         <CountUp style={{ fontSize: '25px' }} end={balance_3shares_wftm} separator="," prefix="$" />
                       </CardContent>
                       <CardContent align="center">
                         <Typography variant="h5">
-                          2SHARES-WFTM LP:
+                          CSHARE-AVAX LP:
                         </Typography>
                         <CountUp style={{ fontSize: '25px' }} end={balance_2shares_wftm} separator="," prefix="$" />
                       </CardContent>
@@ -143,19 +143,19 @@ const Cemetery = () => {
                     <Card style={{ height: "auto" }}>
                       <CardContent align="center">
                         <Typography variant="h5">
-                          3OMB:
+                          FUDGE:
                         </Typography>
                         <CountUp style={{ fontSize: '25px' }} end={balance_3omb} separator="," prefix="$" />
                       </CardContent>
                       <CardContent align="center">
                         <Typography variant="h5">
-                          3SHARES:
+                          STRAW:
                         </Typography>
                         <CountUp style={{ fontSize: '25px' }} end={balance_3shares} separator="," prefix="$" />
                       </CardContent>
                       <CardContent align="center">
                         <Typography variant="h5">
-                          2SHARES:
+                          CSHARE:
                         </Typography>
                         <CountUp style={{ fontSize: '25px' }} end={balance_2shares} separator="," prefix="$" />
                       </CardContent>
@@ -175,7 +175,7 @@ const Cemetery = () => {
 
 
 
-              
+
 
             </Container>
           ) : (

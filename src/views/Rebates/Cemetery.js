@@ -55,12 +55,12 @@ const Cemetery = () => {
 
   const rebateStats = useRebateTreasury()
   console.log(rebateStats)
-  const [claimable3omb, setClaimable3omb] = useState(0);
-  const [ vested, setVested ] = useState(0)
+  const [claimablefudge, setClaimablefudge] = useState(0);
+  const [vested, setVested] = useState(0)
 
   useEffect(() => {
     updateVesting()
-    const interval = setInterval(updateVesting, 5000) 
+    const interval = setInterval(updateVesting, 5000)
     return () => clearInterval(interval)
   }, [])
 
@@ -71,9 +71,9 @@ const Cemetery = () => {
 
     const claimable = await rebateStats.RebateTreasury.methods.claimableTomb(address).call()
     const vesting = await rebateStats.RebateTreasury.methods.vesting(address).call()
-    setClaimable3omb(+web3.utils.fromWei(claimable))
+    setClaimablefudge(+web3.utils.fromWei(claimable))
     setVested(+web3.utils.fromWei(BN(vesting.amount).sub(BN(vesting.claimed))))
-}
+  }
 
   async function claimTomb() {
     console.log("claiming the tomb")
@@ -98,22 +98,22 @@ const Cemetery = () => {
           {!!account ? (
             <>
               <Typography color="textPrimary" align="center" variant="h3" gutterBottom style={{ marginBottom: '40px' }}>
-                3DAO - Rebates
+                DAO - BONDS
               </Typography>
               <Box mt={2}>
                 <Grid container justify="center" spacing={3}>
                   <Grid item xs={12} md={3} lg={3} className={classes.gridItem}>
-                    <Card className={classes.gridItem}>
+                    <Card className={classes.gridItem} style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
                       <CardContent align="center">
                         <Typography variant="h5">
-                          3OMB Price <small>(TWAP)</small>
+                          FUDGE Price <small>(TWAP)</small>
                         </Typography>
-                        <Typography variant="h6">{rebateStats.tombPrice.toFixed(3)} FTM</Typography>
+                        <Typography variant="h6">{rebateStats.tombPrice.toFixed(3)} DAI</Typography>
                       </CardContent>
                     </Card>
                   </Grid>
-                  <Grid item xs={12} md={3} lg={3} className={classes.gridItem}>
-                    <Card className={classes.gridItem}>
+                  <Grid item xs={12} md={3} lg={3} className={classes.gridItem} >
+                    <Card className={classes.gridItem} style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
                       <CardContent align="center">
                         <Typography variant="h5">
                           Bond Premium
@@ -125,29 +125,29 @@ const Cemetery = () => {
                 </Grid>
               </Box>
               <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 0).length === 0}>
-                  <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '35px', marginBottom: '30px' }}>
-                    Bondable Assets
-                  </Typography>
-                  <Grid container spacing={3}>
-                    {activeBanks
-                      .filter((bank) => bank.sectionInUI === 3)
-                      .map((bank) => (
-                        <React.Fragment key={bank.name}>
-                          <CemeteryCard bank={bank} />
-                        </React.Fragment>
-                      ))}
-                  </Grid>
+                <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '35px', marginBottom: '30px' }}>
+                  Bondable Assets
+                </Typography>
+                <Grid container spacing={3}>
+                  {activeBanks
+                    .filter((bank) => bank.sectionInUI === 3)
+                    .map((bank) => (
+                      <React.Fragment key={bank.name}>
+                        <CemeteryCard bank={bank} />
+                      </React.Fragment>
+                    ))}
+                </Grid>
               </div>
               <Box mt={2}>
-                <Grid container justify="center" spacing={3}>
+                <Grid container justify="center" spacing={3} style={{ marginTop: '20px' }}>
                   <Grid item xs={12} md={3} lg={3} className={classes.gridItem}>
-                    <Card style={{ height: "auto" }}>
+                    <Card style={{ height: "auto" }} style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
                       <CardContent align="center">
                         <Typography variant="h5">
-                          3OMB Vesting
+                          FUDGE Vesting
                         </Typography>
                         <Typography variant="h6">{vested.toFixed(4)} Total Vested</Typography>
-                        <Typography variant="h6">{claimable3omb.toFixed(4)} Claimable</Typography>
+                        <Typography variant="h6">{claimablefudge.toFixed(4)} Claimable</Typography>
                         <Button color="primary" size="small" variant="contained" onClick={claimTomb} style={{ marginTop: "8px" }}>
                           CLAIM
                         </Button>

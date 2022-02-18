@@ -23,7 +23,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AccountButton from './AccountButton';
-
+import sundaeLogo from '../../assets/img/sundaelogo.png';
 const useStyles = makeStyles((theme) => ({
   '@global': {
     ul: {
@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1, 2),
     textDecoration: 'none',
     '&:hover': {
-      textDecoration: 'none',
+      color: '#571EB1',
     },
   },
   brandLink: {
@@ -99,30 +99,26 @@ const Nav = () => {
         {matches ? (
           <>
             <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-              {/* <a className={ classes.brandLink } href="/">2omb Finance</a> */}
-              <Link to="/" color="inherit" className={classes.brandLink}>
-                Gem Finance
-              </Link>
+            <Link to="/" color="inherit" className={classes.brandLink}>
+               <img alt="sundae.finance" src={sundaeLogo} height="90px" width='200px' /> 
+               </Link>
             </Typography>
             <Box mr={5}>
               <Link color="color" to="/" className={classes.link}>
                 Home
               </Link>
               <Link color="textPrimary" to="/farms" className={classes.link}>
-                3Farms
+                Farm
               </Link>
               <Link color="textPrimary" to="/boardroom" className={classes.link}>
-                3Room
+                Boardroom
               </Link>
               <Link color="textPrimary" to="/bonds" className={classes.link}>
-                3Bonds
+                Bonds
               </Link>
-              <Link color="textPrimary" to="/rebates" className={classes.link}>
-                3DAO
-              </Link>
-              <Link color="textPrimary" to="/treasury" className={classes.link}>
-                Treasury
-              </Link>
+              {/* <Link color="textPrimary" to="/rebates" className={classes.link}>
+                DAO
+              </Link> */}
               {/* <Link color="textPrimary" to="/treasury" className={classes.link}>
                 Treasury
               </Link>
@@ -138,17 +134,17 @@ const Nav = () => {
               <Link color="textPrimary" to="/regulations" className={classes.link}>
                 Regulations
               </Link> */}
-              <a href="https://beluga.fi" target="_blank" className={classes.link}>
+              <a href="https://yieldwolf.finance/avalanche/sundaefinance" target="_blank" className={classes.link}>
                 Vaults
               </a>
-              <a href="https://snapshot.org/#/forgiving.forg.eth" target="_blank" className={classes.link}>
-                Governance
+              <a href="" target="_blank" className={classes.link}>
+                Social Club
               </a>
-              <a href="https://gedeon-crypto.gitbook.io/3omb.finance/" target="_blank" className={classes.link}>
+              <a href="" target="_blank" className={classes.link}>
                 Docs
               </a>
-              <a href="https://2omb.finance" target="_blank" className={classes.link}>
-                2omb
+              <a href="https://icecreamfinance.app" target="_blank" className={classes.link}>
+                IceCream
               </a>
             </Box>
             <AccountButton text="Connect" />
@@ -164,10 +160,15 @@ const Nav = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
-              3omb Finance
+            <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
+              Sundae Finance
             </Typography>
-
+{/*             <img
+              alt="sundae.finance"
+              src={sundaeLogo}
+              style={{height: '40px', marginTop: '-10px', marginLeft: '10px', marginRight: '15px'}}
+            /> */}
+            <AccountButton text="Connect" />
             <Drawer
               className={classes.drawer}
               onEscapeKeyDown={handleDrawerClose}
@@ -187,27 +188,21 @@ const Nav = () => {
               <Divider />
               <List>
                 <ListItemLink primary="Home" to="/" />
-                <ListItemLink primary="3Farms" to="/farms" />
-                <ListItemLink primary="3Room" to="/boardroom" />
-                <ListItemLink primary="3Bonds" to="/bonds" />
-                <ListItemLink primary="3DAO" to="/rebates" />
-                <ListItemLink primary="Treasury" to="/treasury" />
-                {/* <ListItemLink primary="Masonry" to="/masonry" />
-                <ListItemLink primary="Pit" to="/pit" />
-                <ListItemLink primary="SBS" to="/sbs" />
-                <ListItemLink primary="Liquidity" to="/liquidity" />
-                <ListItemLink primary="Regulations" to="/regulations" /> */}
-                <ListItem button component="a" href="https://beluga.fi">
+                <ListItemLink primary="Farm" to="/farms" />
+                <ListItemLink primary="Boardroom" to="/boardroom" />
+                <ListItemLink primary="Bonds" to="/bonds" />
+                <ListItemLink primary="Dao" to="/rebates" />
+                <ListItem button component="a" href="https://yieldwolf.finance/avalanche/sundaefinance">
                   <ListItemText>Vaults</ListItemText>
                 </ListItem>
-                <ListItem button component="a" href="https://snapshot.org/#/forgiving.forg.eth">
-                  <ListItemText>Governance</ListItemText>
+                <ListItem button component="a" href="">
+                  <ListItemText>Social Club</ListItemText>
                 </ListItem>
-                <ListItem button component="a" href="https://gedeon-crypto.gitbook.io/3omb.finance/">
+                <ListItem button component="a" href="">
                   <ListItemText>Docs</ListItemText>
                 </ListItem>
-                <ListItem button component="a" href="https://2omb.finance">
-                  <ListItemText>2omb</ListItemText>
+                <ListItem button component="a" href="https://icecreamfinance.app">
+                  <ListItemText>IceCream</ListItemText>
                 </ListItem>
                 <ListItem style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <AccountButton text="Connect" />

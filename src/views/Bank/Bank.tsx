@@ -24,6 +24,11 @@ const useStyles = makeStyles((theme) => ({
       height: '90px',
     },
   },
+  card: {
+    backgroundColor: 'rgba(229, 152, 155, 0.1)',
+    boxShadow: 'none',
+    border: '1px solid var(--white)'
+  }
 }));
 
 const Bank: React.FC = () => {
@@ -45,7 +50,7 @@ const Bank: React.FC = () => {
       <Box>
         <Grid container justify="center" spacing={3} style={{ marginBottom: '50px' }}>
           <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-            <Card className={classes.gridItem}>
+            <Card className={classes.gridItem} style={{ border: '1px solid var(--white)', backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none' }}>
               <CardContent style={{ textAlign: 'center', boxShadow: 'none !important' }}>
                 <Typography>APR</Typography>
                 <Typography>{bank.closedForStaking ? '0.00' : statsOnPool?.yearlyAPR}%</Typography>
@@ -53,7 +58,7 @@ const Bank: React.FC = () => {
             </Card>
           </Grid>
           <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-            <Card className={classes.gridItem}>
+            <Card className={classes.gridItem} style={{ border: '1px solid var(--white)', backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none' }}>
               <CardContent style={{ textAlign: 'center' }}>
                 <Typography>Daily APR</Typography>
                 <Typography>{bank.closedForStaking ? '0.00' : statsOnPool?.dailyAPR}%</Typography>
@@ -61,7 +66,7 @@ const Bank: React.FC = () => {
             </Card>
           </Grid>
           <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-            <Card className={classes.gridItem}>
+            <Card className={classes.gridItem} style={{ border: '1px solid var(--white)', backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none' }}>
               <CardContent style={{ textAlign: 'center' }}>
                 <Typography>TVL</Typography>
                 <Typography>${statsOnPool?.TVL}</Typography>
@@ -105,18 +110,24 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
 
   let pairName: string;
   let uniswapUrl: string;
-  if (bank.depositTokenName.includes('3OMB')) {
-    pairName = '3OMB-WFTM pair';
-    uniswapUrl = 'https://spookyswap.finance/add/FTM/' + tombAddr;
+  if (bank.depositTokenName === ('FUDGE-DAI')) {
+    pairName = 'FUDGE-DAI pair';
+    uniswapUrl = 'https://traderjoexyz.com/pool/0xd586E7F844cEa2F87f50152665BCbc2C279D8d70/' + tombAddr;
+  } else if (bank.depositTokenName === ('FUDGE-STRAW')) {
+    pairName = 'FUDGE-STRAW pair';
+    uniswapUrl = 'https://traderjoexyz.com/pool/' + tshareAddr + tombAddr;
+  } else if (bank.depositTokenName === ('FUDGE')) {
+    pairName = 'FUDGE stake';
+    uniswapUrl = 'https://traderjoexyz.com/pool/' + tombAddr;
   } else {
-    pairName = '3SHARE-WFTM pair';
-    uniswapUrl = 'https://spookyswap.finance/add/FTM/' + tshareAddr;
+    pairName = 'STRAW-DAI pair';
+    uniswapUrl = 'https://traderjoexyz.com/pool/0xd586E7F844cEa2F87f50152665BCbc2C279D8d70/' + tshareAddr;
   }
   return (
     <Card>
       <CardContent>
         <StyledLink href={uniswapUrl} target="_blank">
-          {`👻 Provide liquidity for ${pairName} now on SpookySwap 👻`}
+          {`🍨 Provide liquidity for ${pairName} now on TraderJoe 🍨`}
         </StyledLink>
       </CardContent>
     </Card>

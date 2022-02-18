@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import Page from '../../components/Page';
 import HomeImage from '../../assets/img/home.png';
 import CashImage from '../../assets/img/3OMB.svg';
@@ -19,8 +19,8 @@ import useTotalValueLocked from '../../hooks/useTotalValueLocked';
 import useFantomPrice from '../../hooks/useFantomPrice';
 import { tomb as tombTesting, tShare as tShareTesting } from '../../tomb-finance/deployments/deployments.testing.json';
 import { tomb as tombProd, tShare as tShareProd } from '../../tomb-finance/deployments/deployments.mainnet.json';
-
 import useTotalTreasuryBalance from '../../hooks/useTotalTreasuryBalance.js';
+import useRebateTreasury from '../../hooks/useRebateTreasury';
 
 import { Box, Button, Card, CardContent, Grid, Paper, Typography } from '@material-ui/core';
 import ZapModal from '../Bank/components/ZapModal';
@@ -55,9 +55,18 @@ const useStyles = makeStyles((theme) => ({
       marginTop: '10px',
     },
   },
+  card: {
+    backgroundColor: 'rgba(229, 152, 155, 0.1)',
+    boxShadow: 'none',
+    border: '1px solid var(--white)',
+  },
 }));
 
+const buyfudgeAddress = 'https://traderjoexyz.com/trade?outputCurrency=0xD9FF12172803c072a36785DeFea1Aa981A6A0C18#/';
+const buystrawAddress = 'https://traderjoexyz.com/trade?outputCurrency=0xf8D0C6c3ddC03F43A0687847f2b34bfd6941C2A2#/';
+
 const Home = () => {
+  const rebateStats = useRebateTreasury();
   const classes = useStyles();
   const TVL = useTotalValueLocked();
   const tombFtmLpStats = useLpStats('TOMB-FTM-LP');
@@ -68,6 +77,15 @@ const Home = () => {
   const tombFinance = useTombFinance();
   const { price: ftmPrice, marketCap: ftmMarketCap, priceChange: ftmPriceChange } = useFantomPrice();
   const { balance: rebatesTVL } = useTotalTreasuryBalance();
+  const {
+    balance,
+    balance_2shares_wftm,
+    balance_3omb_wftm,
+    balance_3shares_wftm,
+    balance_3omb,
+    balance_3shares,
+    balance_2shares,
+  } = useTotalTreasuryBalance();
   const totalTVL = TVL + rebatesTVL;
 
   let tomb;
@@ -80,8 +98,8 @@ const Home = () => {
     tShare = tShareProd;
   }
 
-  const buyTombAddress = 'https://spookyswap.finance/swap?outputCurrency=' + tomb.address;
-  const buyTShareAddress = 'https://spookyswap.finance/swap?outputCurrency=' + tShare.address;
+  const buyTombAddress = 'https://traderjoexyz.com/trade/' + tomb.address;
+  const buyTShareAddress = 'https://traderjoexyz.com/trade/' + tShare.address;
 
   const tombLPStats = useMemo(() => (tombFtmLpStats ? tombFtmLpStats : null), [tombFtmLpStats]);
   const tshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
@@ -151,6 +169,34 @@ const Home = () => {
     />,
   );
 
+  // const handleMouseOverFudge = () => {
+  //   setIsHoveringFudge(true);
+  // };
+
+  // const handleMouseOutFudge = () => {
+  //   setIsHoveringFudge(false);
+  // };
+
+  // const handleMouseOverStraw = () => {
+  //   setIsHoveringStraw(true);
+  // };
+
+  // const handleMouseOutStraw = () => {
+  //   setIsHoveringStraw(false);
+  // };
+
+  // const handleMouseOverCaraml = () => {
+  //   setIsHoveringCaraml(true);
+  // };
+
+  // const handleMouseOutCaraml = () => {
+  //   setIsHoveringCaraml(false);
+  // };
+
+  // const [isHoveringFudge, setIsHoveringFudge] = useState(false);
+  // const [isHoveringStraw, setIsHoveringStraw] = useState(false);
+  // const [isHoveringCaraml, setIsHoveringCaraml] = useState(false);
+
   return (
     <Page>
       <BackgroundImage />
@@ -166,7 +212,7 @@ const Home = () => {
             <Paper style={{ backgroundColor: 'transparent', boxShadow: 'none', border: 'none' }}>
               <Box p={4} display="flex" justifyContent="center" alignItems="center">
                 <Typography variant="h3" fontWeight="bold" align="center">
-                  Farm GSHARE and earn rewards in our algorithmic stablecoin ecosystem
+                  Get your spoons ready for the second scoop of the sweetest protocol on Avalanche
                 </Typography>
               </Box>
             </Paper>
@@ -196,8 +242,8 @@ const Home = () => {
           <Box mt={3}>
             <Card style={{ backgroundColor: 'none', boxShadow: 'none', border: 'none' }}>
               <CardContent align="center">
-                <h4>Total Value Locked</h4>
-                <CountUp style={{ fontSize: '25px' }} end={totalTVL} separator="," prefix="$" />
+                <h3>Total Value Locked</h3>
+                <CountUp style={{ fontSize: '40px' }} end={TVL} separator="," prefix="$" />
               </CardContent>
             </Card>
           </Box>
@@ -289,9 +335,18 @@ const Home = () => {
 
         {/* Governance Coin */}
         <Grid item xs={12} sm={4}>
-          <Card style={{ backgroundColor: 'transparent', boxShadow: 'none', border: '1px solid var(--white)' }}>
+          <Card
+            style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}
+            // onMouseOver={handleMouseOverFudge}
+            // onMouseOut={handleMouseOutFudge}
+          >
             <CardContent align="center" style={{ position: 'relative' }}>
-              <h2>GEM</h2>
+              <div>
+                <h2>FUDGE</h2>
+              </div>
+              <div>
+                <h3>Governance Token</h3>
+              </div>
               {/* <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TOMB');
@@ -310,27 +365,43 @@ const Home = () => {
               </Box>
               Current Price
               <Box>
-                <span style={{ fontSize: '30px' }}>{tombPriceInFTM ? tombPriceInFTM : '-.----'} FTM</span>
+                <span style={{ fontSize: '30px' }}>${tombPriceInDollars ? tombPriceInDollars : '-.--'} </span>
+                {/* <span style={{ fontSize: '30px' }}>{tombPriceInFTM ? tombPriceInFTM : '-.----'} </span> */}
               </Box>
-              <Box>
+              {/* <Box>
                 <span style={{ fontSize: '16px', alignContent: 'flex-start' }}>
                   ${tombPriceInDollars ? tombPriceInDollars : '-.--'}
                 </span>
-              </Box>
+              </Box> */}
               <span style={{ fontSize: '12px' }}>
                 Market Cap: ${(tombCirculatingSupply * tombPriceInDollars).toFixed(2)} <br />
                 Circulating Supply: {tombCirculatingSupply} <br />
                 Total Supply: {tombTotalSupply}
               </span>
+              <Box>
+                <Button variant="contained" color="primary" style={{ marginTop: '20px' }} target="_blank" href={buyfudgeAddress}
+                 >
+                  Buy Now
+                </Button>
+              </Box>
             </CardContent>
           </Card>
         </Grid>
 
         {/* GSHARE */}
         <Grid item xs={12} sm={4}>
-          <Card style={{ backgroundColor: 'transparent', boxShadow: 'none', border: '1px solid var(--white)' }}>
+          <Card
+            style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}
+            // onMouseOver={handleMouseOverStraw}
+            // onMouseOut={handleMouseOutStraw}
+          >
             <CardContent align="center" style={{ position: 'relative' }}>
-              <h2>GSHARES</h2>
+              <div>
+                <h2>STRAW</h2>
+              </div>
+              <div>
+                <h3>Share Token</h3>
+              </div>
               {/* <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TSHARE');
@@ -349,25 +420,40 @@ const Home = () => {
               </Box>
               Current Price
               <Box>
-                <span style={{ fontSize: '30px' }}>{tSharePriceInFTM ? tSharePriceInFTM : '-.----'} FTM</span>
+                <span style={{ fontSize: '30px' }}>${tSharePriceInDollars ? tSharePriceInDollars : '-.--'}</span>
+                {/* <span style={{ fontSize: '30px' }}>{tSharePriceInFTM ? tSharePriceInFTM : '-.----'} </span> */}
               </Box>
-              <Box>
+              {/* <Box>
                 <span style={{ fontSize: '16px' }}>${tSharePriceInDollars ? tSharePriceInDollars : '-.--'}</span>
-              </Box>
+              </Box> */}
               <span style={{ fontSize: '12px' }}>
                 Market Cap: ${(tShareCirculatingSupply * tSharePriceInDollars).toFixed(2)} <br />
                 Circulating Supply: {tShareCirculatingSupply} <br />
                 Total Supply: {tShareTotalSupply}
               </span>
+              <Box>
+              <Button variant="contained" color="primary" style={{ marginTop: '20px' }} target="_blank" href={buystrawAddress}>
+                  Buy Now
+                </Button>
+              </Box>
             </CardContent>
           </Card>
         </Grid>
 
         {/* GBOND */}
         <Grid item xs={12} sm={4}>
-          <Card style={{ backgroundColor: 'transparent', boxShadow: 'none', border: '1px solid var(--white)' }}>
+          <Card
+            style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}
+            // onMouseOver={handleMouseOverCaraml}
+            // onMouseOut={handleMouseOutCaraml}
+          >
             <CardContent align="center" style={{ position: 'relative' }}>
-              <h2>GBOND</h2>
+              <div>
+                <h2>CARAML</h2>
+              </div>
+              <div>
+                <h3>Bond Token</h3>
+              </div>
               {/* <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TBOND');
@@ -386,16 +472,22 @@ const Home = () => {
               </Box>
               Current Price
               <Box>
-                <span style={{ fontSize: '30px' }}>{tBondPriceInFTM ? tBondPriceInFTM : '-.----'} FTM</span>
+                <span style={{ fontSize: '30px' }}>${tBondPriceInDollars ? tBondPriceInDollars : '-.--'}</span>
+                {/* <span style={{ fontSize: '30px' }}>{tBondPriceInFTM ? tBondPriceInFTM : '-.----'} </span> */}
               </Box>
-              <Box>
+              {/* <Box>
                 <span style={{ fontSize: '16px' }}>${tBondPriceInDollars ? tBondPriceInDollars : '-.--'}</span>
-              </Box>
+              </Box> */}
               <span style={{ fontSize: '12px' }}>
                 Market Cap: ${(tBondCirculatingSupply * tBondPriceInDollars).toFixed(2)} <br />
                 Circulating Supply: {tBondCirculatingSupply} <br />
                 Total Supply: {tBondTotalSupply}
               </span>
+              <Box>
+                <Button variant="contained" color="primary" style={{ marginTop: '20px' }}href="/bonds">
+                  View BONDS
+                </Button>
+              </Box>
             </CardContent>
           </Card>
         </Grid>
@@ -462,6 +554,104 @@ const Home = () => {
           </Card>
         </Grid> */}
       </Grid>
+
+      <Box mt={2} style={{ marginTop: '50px' }}>
+        <Typography align="center" variant="h4" gutterBottom style={{ marginBottom: '50px' }}>
+          Protocol Owned Liquidity
+        </Typography>
+        <Grid container justify="center" align="center" spacing={3}>
+          <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
+            <Card
+              style={{
+                height: '100%',
+                backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                boxShadow: 'none',
+                border: '1px solid var(--white)',
+              }}
+            >
+              <CardContent align="center">
+                <Typography variant="h5">CREAM-AVAX LP:</Typography>
+                <CountUp style={{ fontSize: '25px' }} end={balance_3omb_wftm} separator="," prefix="$" />
+              </CardContent>
+              <CardContent align="center">
+                <Typography variant="h5">CSHARE-AVAX LP:</Typography>
+                <CountUp style={{ fontSize: '25px' }} end={balance_3shares_wftm} separator="," prefix="$" />
+              </CardContent>
+              <CardContent align="center">
+                <Typography variant="h5">CREAM-CSHARE LP:</Typography>
+                <CountUp style={{ fontSize: '25px' }} end={balance_2shares_wftm} separator="," prefix="$" />
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
+            <Card
+              style={{
+                height: '100%',
+                backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                boxShadow: 'none',
+                border: '1px solid var(--white)',
+              }}
+            >
+              <CardContent align="center">
+                <Typography variant="h5">FUDGE:</Typography>
+                <CountUp style={{ fontSize: '25px' }} end={balance_3omb} separator="," prefix="$" />
+              </CardContent>
+              <CardContent align="center">
+                <Typography variant="h5">STRAW:</Typography>
+                <CountUp style={{ fontSize: '25px' }} end={balance_3shares} separator="," prefix="$" />
+              </CardContent>
+              <CardContent align="center">
+                <Typography variant="h5">CARAML:</Typography>
+                <CountUp style={{ fontSize: '25px' }} end={balance_2shares} separator="," prefix="$" />
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} md={4} lg={4} justify="center" className={classes.gridItem}>
+            <Card
+              style={{
+                height: 'auto',
+                marginBottom: '10px',
+                backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                boxShadow: 'none',
+                border: '1px solid var(--white)',
+              }}
+            >
+              <CardContent align="center">
+                <Typography variant="h5">TWAP:</Typography>
+                <Typography style={{ fontSize: '25px' }}>{rebateStats.tombPrice.toFixed(4)} DAI</Typography>
+              </CardContent>
+            </Card>
+            <Card
+              justify="center"
+              style={{ height: '100%' }}
+              style={{
+                marginBottom: '10px',
+                backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                boxShadow: 'none',
+                border: '1px solid var(--white)',
+              }}
+            >
+              <CardContent align="center">
+                <Typography variant="h5">Total Value Burned:</Typography>
+                <CountUp style={{ fontSize: '25px' }} end={balance_3omb} separator="," prefix="$" />
+              </CardContent>
+            </Card>
+            <Card
+              style={{
+                height: 'auto',
+                backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                boxShadow: 'none',
+                border: '1px solid var(--white)',
+              }}
+            >
+              <CardContent align="center">
+                <Typography variant="h5">Total Treasury Balance:</Typography>
+                <CountUp style={{ fontSize: '25px' }} end={balance} separator="," prefix="$" />
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      </Box>
     </Page>
   );
 };

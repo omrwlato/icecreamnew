@@ -6,7 +6,7 @@ import Spacer from '../../components/Spacer';
 import Harvest from './components/Harvest';
 import Stake from './components/Stake';
 import { makeStyles } from '@material-ui/core/styles';
-import useRebateTreasury from "../../hooks/useRebateTreasury"
+import useRebateTreasury from '../../hooks/useRebateTreasury';
 
 import { Box, Card, CardContent, Button, Typography, Grid } from '@material-ui/core';
 
@@ -71,7 +71,7 @@ const Masonry = () => {
   const canWithdraw = useWithdrawCheck();
   const scalingFactor = useMemo(() => (cashStat ? Number(cashStat.priceInDollars).toFixed(4) : null), [cashStat]);
   const { to } = useTreasuryAllocationTimes();
-  const rebateStats = useRebateTreasury()
+  const rebateStats = useRebateTreasury();
 
   return (
     <Page>
@@ -79,12 +79,19 @@ const Masonry = () => {
       {!!account ? (
         <>
           <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-            3Room
+            Boardroom
           </Typography>
           <Box mt={5}>
             <Grid container justify="center" spacing={3}>
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                <Card className={classes.gridItem}>
+                <Card
+                  className={classes.gridItem}
+                  style={{
+                    backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                    boxShadow: 'none',
+                    border: '1px solid var(--white)',
+                  }}
+                >
                   <CardContent>
                     <Typography style={{ textAlign: 'center' }}>Next Epoch</Typography>
                     <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={to} description="Next Epoch" />
@@ -92,7 +99,14 @@ const Masonry = () => {
                 </Card>
               </Grid>
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                <Card className={classes.gridItem}>
+                <Card
+                  className={classes.gridItem}
+                  style={{
+                    backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                    boxShadow: 'none',
+                    border: '1px solid var(--white)',
+                  }}
+                >
                   <CardContent align="center">
                     <Typography>Current Epoch</Typography>
                     <Typography>{Number(currentEpoch)}</Typography>
@@ -100,17 +114,31 @@ const Masonry = () => {
                 </Card>
               </Grid>
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                <Card className={classes.gridItem}>
+                <Card
+                  className={classes.gridItem}
+                  style={{
+                    backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                    boxShadow: 'none',
+                    border: '1px solid var(--white)',
+                  }}
+                >
                   <CardContent align="center">
                     <Typography>
-                      3OMB Price<small> (TWAP)</small>
+                      FUDGE Price<small> (TWAP)</small>
                     </Typography>
-                    <Typography>{rebateStats.tombPrice.toFixed(4)} FTM</Typography>
+                    <Typography>{rebateStats.tombPrice.toFixed(4)} DAI</Typography>
                   </CardContent>
                 </Card>
               </Grid>
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                <Card className={classes.gridItem}>
+                <Card
+                  className={classes.gridItem}
+                  style={{
+                    backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                    boxShadow: 'none',
+                    border: '1px solid var(--white)',
+                  }}
+                >
                   <CardContent align="center">
                     <Typography>APR</Typography>
                     <Typography>{masonryAPR.toFixed(2)}%</Typography>
@@ -118,9 +146,16 @@ const Masonry = () => {
                 </Card>
               </Grid>
               <Grid item xs={12} md={2} lg={2}>
-                <Card className={classes.gridItem}>
+                <Card
+                  className={classes.gridItem}
+                  style={{
+                    backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                    boxShadow: 'none',
+                    border: '1px solid var(--white)',
+                  }}
+                >
                   <CardContent align="center">
-                    <Typography>3SHARES Staked</Typography>
+                    <Typography>STRAWs Staked</Typography>
                     <Typography>{getDisplayBalance(totalStaked)}</Typography>
                   </CardContent>
                 </Card>
@@ -128,11 +163,10 @@ const Masonry = () => {
             </Grid>
 
             <Grid container justify="center">
-              <Box mt={3} style={{ width: '525px' }}>
-                <Alert variant="transparent" severity="info">
-                  Staked 3SHARES can only be withdrawn after 3 epochs since deposit.
-                </Alert>
-              </Box>
+              <Alert variant="filled" severity="info" style={{ marginTop: '50px', backgroundColor: "#757CE8" }}>
+                Staked STRAWs can only be withdrawn after 6 epochs since deposit.
+              </Alert>
+
             </Grid>
 
             <Box mt={4}>

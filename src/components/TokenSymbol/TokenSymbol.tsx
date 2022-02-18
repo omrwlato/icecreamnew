@@ -1,61 +1,50 @@
 import React from 'react';
 
 //Graveyard ecosystem logos
-import tombLogo from '../../assets/img/3OMB.svg';
-import tShareLogo from '../../assets/img/3SHARES.svg';
-import tombLogoPNG from '../../assets/img/3OMB.png';
-import tShareLogoPNG from '../../assets/img/3SHARES.png';
-import tBondLogo from '../../assets/img/3BOND-01.png';
-
-import tombFtmLpLogo from '../../assets/img/tomb_ftm_lp.png';
-import tshareFtmLpLogo from '../../assets/img/tshare_ftm_lp.png';
-
-import wftmLogo from '../../assets/img/fantom-ftm-logo.png';
-import booLogo from '../../assets/img/spooky.png';
-import belugaLogo from '../../assets/img/BELUGA.png';
-import twoshareLogo from '../../assets/img/t_2SHARE-01.png';
-import twoombLogo from '../../assets/img/t_2OMB-01.png';
-import zooLogo from '../../assets/img/zoo_logo.svg';
-import shibaLogo from '../../assets/img/shiba_logo.svg';
-import bifiLogo from '../../assets/img/COW.svg';
-import mimLogo from '../../assets/img/mimlogopng.png';
-import bloomLogo from '../../assets/img/BLOOM.jpg';
-import TwoombLPLogo from '../../assets/img/2OMB-WFTM.png';
-import TwosharesLPLogo from '../../assets/img/2SHARES-WFTM.png';
-import TwoombTwosharesLPLogo from '../../assets/img/2OMB-2SHARES.png';
-
-import ThreeombLPLogo from '../../assets/img/3OMB-WFTM.png';
-import ThreesharesLPLogo from '../../assets/img/3SHARES-WFTM.png';
+import tombLogo from '../../assets/img/fudge.png';
+import tShareLogo from '../../assets/img/straw.png';
+import tBondLogo from '../../assets/img/caraml.png'; // home page up
+import tombLogoPNG from '../../assets/img/fudge.png';
+import tShareLogoPNG from '../../assets/img/straw.png';
+import wftmLogo from '../../assets/img/dai.png';
+import twoshareLogo from '../../assets/img/cshare.png';
+import twoombLogo from '../../assets/img/cream.png';
+import TwoombLPLogo from '../../assets/img/cream-wavax.png';
+import TwosharesLPLogo from '../../assets/img/cshare-avax.png';
+import TwoombTwosharesLPLogo from '../../assets/img/creamcshare.png';
+import wavaxLogo from '../../assets/img/wavax.png';
+import tombFtmLpLogo from '../../assets/img/fudge-dai.png';
+import tshareFtmLpLogo from '../../assets/img/straw-dai.png';
+import ThreeombLPLogo from '../../assets/img/fudge-dai.png';
+import ThreesharesLPLogo from '../../assets/img/straw-dai.png';
+import fsLogo from '../../assets/img/fudge-straw.png';
+import faLogo from '../../assets/img/fudge-avax.png';
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
   //=====================
-  TOMB: tombLogo,
   TOMBPNG: tombLogoPNG,
   TSHAREPNG: tShareLogoPNG,
-  TSHARE: tShareLogo,
-  TBOND: tBondLogo,
   WFTM: wftmLogo,
-  BOO: booLogo,
-  SHIBA: shibaLogo,
-  ZOO: zooLogo,
-  BELUGA: belugaLogo,
-  BIFI: bifiLogo,
-  MIM: mimLogo,
-  BLOOM: bloomLogo,
-  '2OMB-WFTM LP': TwoombLPLogo,
-  '2SHARES-WFTM LP': TwosharesLPLogo,
-  '2OMB-2SHARES LP': TwoombTwosharesLPLogo,
-
-  '3OMB-WFTM LP': ThreeombLPLogo,
-  '3SHARES-WFTM LP': ThreesharesLPLogo,
-
-
-  'wFTM': wftmLogo,
-  '2OMB': twoombLogo,
-  '2SHARES': twoshareLogo,
+  'CREAM-AVAX LP': TwoombLPLogo,
+  'CSHARE-AVAX LP': TwosharesLPLogo,
+  'CREAM-CSHARE LP': TwoombTwosharesLPLogo,
+  'CREAM': twoombLogo,
+  'CSHARE': twoshareLogo,
+  'TOMB': tombLogo,
+  'TSHARE': tShareLogo,
+  'TBOND': tBondLogo,
+  'FUDGE-DAI LP': ThreeombLPLogo,
+  'STRAW-DAI LP': ThreesharesLPLogo,
+  'DAI': wftmLogo,
   'TOMB-FTM-LP': tombFtmLpLogo,
   'TSHARE-FTM-LP': tshareFtmLpLogo,
+  'FUDGE': tombLogo,
+  'CARAML': tBondLogo,
+  'STRAW': tShareLogo,
+  'WAVAX': wavaxLogo,
+  'FUDGE-STRAW LP':fsLogo,
+  'FUDGE-AVAX LP':faLogo
 };
 
 type LogoProps = {
@@ -63,12 +52,22 @@ type LogoProps = {
   size?: number;
 };
 
-const TokenSymbol: React.FC<LogoProps> = ({ symbol, size = 64 }) => {
+const TokenSymbol: React.FC<LogoProps> = ({symbol}) => {
   if (!logosBySymbol[symbol]) {
-    return <img src={logosBySymbol['TOMB']} alt={`${symbol} Logo`} width={size} height={size} />
-    // throw new Error(`Invalid Token Logo symbol: ${symbol}`);
+    throw new Error(`Invalid Token Logo symbol: ${symbol}`);
   }
-  return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={size} height={size} />;
+  if(symbol === 'TOMB' || symbol === 'TSHARE' || symbol === 'TBOND'  || symbol === 'FUDGE-DAI' || symbol === 'FUDGE-AVAX'){
+    return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={110} height={110} />;
+  } else if( symbol === 'CREAM-CSHARE-LP'){
+    return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={150} height={90} />;
+  }/* else if( symbol === 'CREAM'){
+    return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={100} height={89} />;
+  } */else if( symbol === 'WAVAX'){
+    return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={65} height={65} />;
+  }else{
+    return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={100} height={100} />;
+  }
+    
 };
 
 export default TokenSymbol;
