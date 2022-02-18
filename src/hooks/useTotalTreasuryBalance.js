@@ -4,10 +4,10 @@ import { web3ProviderFrom } from "../tomb-finance/ether-utils"
 import { getBalance } from "../utils/formatBalance"
 import axios from 'axios'
 
-const web3 = new Web3("https://rpcapi.fantom.network/")
+const web3 = new Web3("https://api.avax.network/ext/bc/C/rpc")
 
 const ERC20ABI = [{ "constant": true, "inputs": [], "name": "name", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_spender", "type": "address" }, { "name": "_value", "type": "uint256" } ], "name": "approve", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "totalSupply", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_from", "type": "address" }, { "name": "_to", "type": "address" }, { "name": "_value", "type": "uint256" } ], "name": "transferFrom", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "decimals", "outputs": [ { "name": "", "type": "uint8" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "_owner", "type": "address" } ], "name": "balanceOf", "outputs": [ { "name": "balance", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "symbol", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [ { "name": "_to", "type": "address" }, { "name": "_value", "type": "uint256" } ], "name": "transfer", "outputs": [ { "name": "", "type": "bool" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [ { "name": "_owner", "type": "address" }, { "name": "_spender", "type": "address" } ], "name": "allowance", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "payable": true, "stateMutability": "payable", "type": "fallback" }, { "anonymous": false, "inputs": [ { "indexed": true, "name": "owner", "type": "address" }, { "indexed": true, "name": "spender", "type": "address" }, { "indexed": false, "name": "value", "type": "uint256" } ], "name": "Approval", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "name": "from", "type": "address" }, { "indexed": true, "name": "to", "type": "address" }, { "indexed": false, "name": "value", "type": "uint256" } ], "name": "Transfer", "type": "event" } ]
-const treasuryAddress = "0x8f555E00ea0FAc871b3Aa70C015915dB094E7f88"
+const treasuryAddress = "0xd36d480D56CA62767F367ECAfa07e33bccc22286"
 
 // const assetList = [
 //     "0xc54A1684fD1bef1f077a336E6be4Bd9a3096a6Ca", // 2shares
@@ -37,8 +37,8 @@ const treasuryAddress = "0x8f555E00ea0FAc871b3Aa70C015915dB094E7f88"
 // }
 
 function useTotalTreasuryBalance() {
-    const ThreeShares = new web3.eth.Contract(ERC20ABI, '0x6437ADAC543583C4b31Bf0323A0870430F5CC2e7')
-    const WFTM = new web3.eth.Contract(ERC20ABI, '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83')
+    const ThreeShares = new web3.eth.Contract(ERC20ABI, '0xf8D0C6c3ddC03F43A0687847f2b34bfd6941C2A2')
+    const WFTM = new web3.eth.Contract(ERC20ABI, '0xd586e7f844cea2f87f50152665bcbc2c279d8d70')
     const [balance, setBalance] = useState(0)
     const [balance_2shares_wftm, setBalance_2shares_wftm] = useState(0)
     const [balance_3omb_wftm, setBalance_3omb_wftm] = useState(0)

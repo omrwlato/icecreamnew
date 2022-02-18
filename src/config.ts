@@ -165,7 +165,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     site: 'https://fantom.foundation',
     buyLink: 'https://ecoswap.exchange',
     sort: 7,
-    closedForStaking: true,
+    closedForStaking: false,
   },
   TombMimRewardPool: {
     name: 'Earn FUDGE by staking WAVAX',
@@ -179,7 +179,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     site: 'https://abracadabra.money/',
     buyLink: 'https://ftm.curve.fi/factory/7',
     sort: 8,
-    closedForStaking: true,
+    closedForStaking: false,
   },
   // TombBloomRewardPool: {
   //   name: 'Earn 3OMB by staking BLOOM',

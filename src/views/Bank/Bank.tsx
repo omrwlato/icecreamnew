@@ -110,18 +110,24 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
 
   let pairName: string;
   let uniswapUrl: string;
-  if (bank.depositTokenName.includes('3OMB')) {
-    pairName = '3OMB-WFTM pair';
-    uniswapUrl = 'https://spookyswap.finance/add/FTM/' + tombAddr;
+  if (bank.depositTokenName === ('FUDGE-DAI')) {
+    pairName = 'FUDGE-DAI pair';
+    uniswapUrl = 'https://traderjoexyz.com/pool/0xd586E7F844cEa2F87f50152665BCbc2C279D8d70/' + tombAddr;
+  }else if (bank.depositTokenName === ('FUDGE-STRAW')){
+    pairName = 'FUDGE-STRAW pair';
+    uniswapUrl = 'https://traderjoexyz.com/pool/' + tshareAddr + tombAddr;
+  }else if (bank.depositTokenName === ('FUDGE')){
+    pairName = 'FUDGE stake';
+    uniswapUrl = 'https://traderjoexyz.com/pool/' + tombAddr;
   } else {
-    pairName = '3SHARE-WFTM pair';
-    uniswapUrl = 'https://spookyswap.finance/add/FTM/' + tshareAddr;
+    pairName = 'STRAW-DAI pair';
+    uniswapUrl = 'https://traderjoexyz.com/pool/0xd586E7F844cEa2F87f50152665BCbc2C279D8d70/' + tshareAddr;
   }
   return (
     <Card>
       <CardContent>
         <StyledLink href={uniswapUrl} target="_blank">
-          {`👻 Provide liquidity for ${pairName} now on SpookySwap 👻`}
+          {`🍨 Provide liquidity for ${pairName} now on TraderJoe 🍨`}
         </StyledLink>
       </CardContent>
     </Card>
