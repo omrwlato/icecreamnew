@@ -17,7 +17,7 @@ import Loader from './components/Loader';
 import Popups from './components/Popups';
 import Regulations from './views/Regulations/Regulations';
 import { RefreshContextProvider } from './contexts/RefreshContext';
-import Particles from 'react-tsparticles';//'react-particles-js';
+import Particles from 'react-tsparticles'; //'react-particles-js';
 
 const Home = lazy(() => import('./views/Home'));
 const Farms = lazy(() => import('./views/Cemetery'));
@@ -46,21 +46,22 @@ const App: React.FC = () => {
 
   return (
     <Providers>
-      <Particles id="tsparticles"
+      <Particles
+        id="tsparticles"
         options={{
           background: {
-            image: 'public/background1.jpg'
+            image: 'public/background1.jpg',
           },
           fpsLimit: 120,
           interactivity: {
             events: {
               onClick: {
                 enable: true,
-                mode: "push",
+                mode: 'push',
               },
               onHover: {
                 enable: true,
-                mode: "repulse",
+                mode: 'repulse',
               },
               resize: true,
             },
@@ -82,13 +83,13 @@ const App: React.FC = () => {
           },
           particles: {
             color: {
-              value: "#ffffff",
+              value: '#ffffff',
             },
 
             move: {
-              direction: "none",
+              direction: 'none',
               enable: true,
-              outMode: "bounce",
+              outMode: 'bounce',
               random: false,
               speed: 3,
               straight: false,
@@ -104,7 +105,7 @@ const App: React.FC = () => {
               value: 0.5,
             },
             shape: {
-              type: "circle",
+              type: 'circle',
             },
             size: {
               random: true,
@@ -126,9 +127,9 @@ const App: React.FC = () => {
             <Route path="/boardroom">
               <Boardroom />
             </Route>
-            <Route path="/rebates">
+            {/* <Route path="/rebates">
               <Rebates />
-            </Route>
+            </Route> */}
             <Route path="/bonds">
               <Bonds />
             </Route>
