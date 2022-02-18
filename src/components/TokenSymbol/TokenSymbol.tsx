@@ -56,13 +56,13 @@ const TokenSymbol: React.FC<LogoProps> = ({symbol}) => {
   if (!logosBySymbol[symbol]) {
     throw new Error(`Invalid Token Logo symbol: ${symbol}`);
   }
-  if(symbol === 'TOMB' || symbol === 'TSHARE' || symbol === 'TBOND' ){
+  if(symbol === 'TOMB' || symbol === 'TSHARE' || symbol === 'TBOND'  || symbol === 'FUDGE-DAI' || symbol === 'FUDGE-AVAX'){
     return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={110} height={110} />;
   } else if( symbol === 'CREAM-CSHARE-LP'){
     return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={150} height={90} />;
-  }else if( symbol === 'CREAM'){
+  }/* else if( symbol === 'CREAM'){
     return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={100} height={89} />;
-  }else if( symbol === 'WAVAX'){
+  } */else if( symbol === 'WAVAX'){
     return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={65} height={65} />;
   }else{
     return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={100} height={100} />;
