@@ -85,7 +85,9 @@ const Cemetery = () => {
                 {/* UNCOMMENT THIS AFTER GP ENDS  */}
 
                 <Alert variant="filled" severity="info" style={{ marginTop: '50px', backgroundColor: '#757CE8' }}>
+
                   Genesis pools will be live Feb 19 @2PM PST, please be aware of the 1% deposit tax.
+
                 </Alert>
 
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 0).length === 0}>
