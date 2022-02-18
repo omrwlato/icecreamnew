@@ -162,7 +162,7 @@ const Nav = () => {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-              3omb Finance
+              Sundae Finance
             </Typography>
 
             <Drawer
@@ -184,27 +184,21 @@ const Nav = () => {
               <Divider />
               <List>
                 <ListItemLink primary="Home" to="/" />
-                <ListItemLink primary="3Farms" to="/farms" />
-                <ListItemLink primary="3Room" to="/boardroom" />
-                <ListItemLink primary="3Bonds" to="/bonds" />
-                <ListItemLink primary="3DAO" to="/rebates" />
-                <ListItemLink primary="Treasury" to="/treasury" />
-                {/* <ListItemLink primary="Masonry" to="/masonry" />
-                <ListItemLink primary="Pit" to="/pit" />
-                <ListItemLink primary="SBS" to="/sbs" />
-                <ListItemLink primary="Liquidity" to="/liquidity" />
-                <ListItemLink primary="Regulations" to="/regulations" /> */}
-                <ListItem button component="a" href="https://beluga.fi">
+                <ListItemLink primary="Farm" to="/farms" />
+                <ListItemLink primary="Boardroom" to="/boardroom" />
+                <ListItemLink primary="Bonds" to="/bonds" />
+                <ListItemLink primary="Dao" to="/rebates" />
+                <ListItem button component="a" href="https://yieldwolf.finance/avalanche/sundaefinance">
                   <ListItemText>Vaults</ListItemText>
                 </ListItem>
-                <ListItem button component="a" href="https://snapshot.org/#/forgiving.forg.eth">
-                  <ListItemText>Governance</ListItemText>
+                <ListItem button component="a" href="">
+                  <ListItemText>Social Club</ListItemText>
                 </ListItem>
-                <ListItem button component="a" href="https://gedeon-crypto.gitbook.io/3omb.finance/">
+                <ListItem button component="a" href="">
                   <ListItemText>Docs</ListItemText>
                 </ListItem>
-                <ListItem button component="a" href="https://2omb.finance">
-                  <ListItemText>2omb</ListItemText>
+                <ListItem button component="a" href="https://icecreamfinance.app">
+                  <ListItemText>IceCream</ListItemText>
                 </ListItem>
                 <ListItem style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <AccountButton text="Connect" />
