@@ -62,14 +62,14 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
     />,
   );
   return (
-    <Card>
+    <Card style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
       <CardContent>
         <StyledCardContentInner>
           <StyledCardTitle>{`${action} ${toTokenName}`}</StyledCardTitle>
           <StyledExchanger>
             <StyledToken>
               <StyledCardIcon style={{ background: 'transparent' }}>
-                <TokenSymbol symbol={fromToken.symbol} size={54}/>
+                <TokenSymbol symbol={fromToken.symbol} size={54} />
               </StyledCardIcon>
               <Label text={fromTokenName} variant="normal" />
             </StyledToken>

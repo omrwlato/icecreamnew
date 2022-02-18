@@ -56,11 +56,11 @@ const Cemetery = () => {
   const rebateStats = useRebateTreasury()
   console.log(rebateStats)
   const [claimable3omb, setClaimable3omb] = useState(0);
-  const [ vested, setVested ] = useState(0)
+  const [vested, setVested] = useState(0)
 
   useEffect(() => {
     updateVesting()
-    const interval = setInterval(updateVesting, 5000) 
+    const interval = setInterval(updateVesting, 5000)
     return () => clearInterval(interval)
   }, [])
 
@@ -73,7 +73,7 @@ const Cemetery = () => {
     const vesting = await rebateStats.RebateTreasury.methods.vesting(address).call()
     setClaimable3omb(+web3.utils.fromWei(claimable))
     setVested(+web3.utils.fromWei(BN(vesting.amount).sub(BN(vesting.claimed))))
-}
+  }
 
   async function claimTomb() {
     console.log("claiming the tomb")
@@ -103,7 +103,7 @@ const Cemetery = () => {
               <Box mt={2}>
                 <Grid container justify="center" spacing={3}>
                   <Grid item xs={12} md={3} lg={3} className={classes.gridItem}>
-                    <Card className={classes.gridItem}>
+                    <Card className={classes.gridItem} style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
                       <CardContent align="center">
                         <Typography variant="h5">
                           3OMB Price <small>(TWAP)</small>
@@ -112,8 +112,8 @@ const Cemetery = () => {
                       </CardContent>
                     </Card>
                   </Grid>
-                  <Grid item xs={12} md={3} lg={3} className={classes.gridItem}>
-                    <Card className={classes.gridItem}>
+                  <Grid item xs={12} md={3} lg={3} className={classes.gridItem} >
+                    <Card className={classes.gridItem} style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
                       <CardContent align="center">
                         <Typography variant="h5">
                           Bond Premium
@@ -125,23 +125,23 @@ const Cemetery = () => {
                 </Grid>
               </Box>
               <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 0).length === 0}>
-                  <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '35px', marginBottom: '30px' }}>
-                    Bondable Assets
-                  </Typography>
-                  <Grid container spacing={3}>
-                    {activeBanks
-                      .filter((bank) => bank.sectionInUI === 3)
-                      .map((bank) => (
-                        <React.Fragment key={bank.name}>
-                          <CemeteryCard bank={bank} />
-                        </React.Fragment>
-                      ))}
-                  </Grid>
+                <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '35px', marginBottom: '30px' }}>
+                  Bondable Assets
+                </Typography>
+                <Grid container spacing={3}>
+                  {activeBanks
+                    .filter((bank) => bank.sectionInUI === 3)
+                    .map((bank) => (
+                      <React.Fragment key={bank.name}>
+                        <CemeteryCard bank={bank} />
+                      </React.Fragment>
+                    ))}
+                </Grid>
               </div>
               <Box mt={2}>
-                <Grid container justify="center" spacing={3}>
+                <Grid container justify="center" spacing={3} style={{ marginTop: '20px' }}>
                   <Grid item xs={12} md={3} lg={3} className={classes.gridItem}>
-                    <Card style={{ height: "auto" }}>
+                    <Card style={{ height: "auto" }} style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
                       <CardContent align="center">
                         <Typography variant="h5">
                           3OMB Vesting
