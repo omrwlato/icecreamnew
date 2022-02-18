@@ -54,7 +54,7 @@ export class TombFinance {
     this.DAI = this.externalTokens['DAI'];
 
     // Uniswap V2 Pair
-    //this.TOMBWFTM_LP = new Contract(externalTokens['FUDGE-DAI LP'][0], IUniswapV2PairABI, provider);
+    this.TOMBWFTM_LP = new Contract(externalTokens['FUDGE-DAI LP'][0], IUniswapV2PairABI, provider);
 
     this.config = cfg;
     this.provider = provider;
