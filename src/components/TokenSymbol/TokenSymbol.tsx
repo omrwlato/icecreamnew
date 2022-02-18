@@ -41,7 +41,7 @@ const logosBySymbol: { [title: string]: string } = {
   'FUDGE': tombLogo,
   'CARAML': tBondLogo,
   'WAVAX': wavaxLogo,
-  'FUDGE-STRAW':fsLogo
+  'FUDGE-STRAW LP':fsLogo
 };
 
 type LogoProps = {
