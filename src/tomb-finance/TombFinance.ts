@@ -31,8 +31,9 @@ export class TombFinance {
   TOMB: ERC20;
   TSHARE: ERC20;
   TBOND: ERC20;
+  WAVAX: ERC20;
   FTM: ERC20;
-  DAI: ERC20;
+  DAI:ERC20
 
   constructor(cfg: Configuration) {
     const { deployments, externalTokens } = cfg;
@@ -50,8 +51,9 @@ export class TombFinance {
     this.TOMB = new ERC20(deployments.tomb.address, provider, 'FUDGE');
     this.TSHARE = new ERC20(deployments.tShare.address, provider, 'STRAW');
     this.TBOND = new ERC20(deployments.tBond.address, provider, 'CARAML');
-    this.FTM = this.externalTokens['DAI'];
+    this.WAVAX = this.externalTokens['WAVAX'];
     this.DAI = this.externalTokens['DAI'];
+    this.FTM = this.externalTokens['WFTM'];
 
     // Uniswap V2 Pair
     this.TOMBWFTM_LP = new Contract(externalTokens['FUDGE-DAI LP'][0], IUniswapV2PairABI, provider);

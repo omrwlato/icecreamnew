@@ -309,7 +309,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   },
 
 
-  Tomb2SHARESRebates: {
+ /*  Tomb2SHARESRebates: {
     name: 'Bond 2SHARES, earn 3OMB',
     poolId: 0,
     sectionInUI: 3,
@@ -364,7 +364,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     site: '',
     sort: 3,
     closedForStaking: false,
-  },
+  }, */
   //Tomb3SHARESFTMRebates: {
   // name: 'Bond 3SHARES-WFTM LP, earn 3OMB',
   // poolId: 4,
