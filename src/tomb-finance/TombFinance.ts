@@ -106,11 +106,8 @@ export class TombFinance {
     const tombCirculatingSupply = supply.sub(tombRewardPoolSupply);
     // .sub(tombRewardPoolSupplyOld);
     const priceInFTM = await this.getTokenPriceFromPancakeswap(this.TOMB);
-    console.log('price in ftm:', priceInFTM);
     const priceOfOneFTM = await this.getWFTMPriceFromPancakeswap();
     const priceOfTombInDollars = (Number(priceInFTM) * Number(priceOfOneFTM)).toFixed(2);
-    console.log(priceInFTM, 'priceInFTM');
-    console.log(priceOfOneFTM, 'priceOfoneftm');
 
     return {
       tokenInFtm: priceInFTM,
@@ -235,7 +232,6 @@ export class TombFinance {
     const depositToken = bank.depositToken;
     const poolContract = this.contracts[bank.contract];
     const depositTokenPrice = await this.getDepositTokenPriceInDollars(bank.depositTokenName, depositToken);
-    console.log('deposit token price:', depositTokenPrice);
     const stakeInPool = await depositToken.balanceOf(bank.address);
     const TVL = Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal));
     const stat = bank.earnTokenName === 'FUDGE' ? await this.getTombStat() : await this.getShareStat();
@@ -336,7 +332,6 @@ export class TombFinance {
     if (tokenName === 'WAVAX') {
       tokenPrice = priceOfOneFtmInDollars;
     } else {
-      console.log('token name:', tokenName);
       if (tokenName === 'FUDGE-DAI LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.TOMB, true, false);
       } else if (tokenName === 'STRAW-DAI LP') {
@@ -349,23 +344,19 @@ export class TombFinance {
           true,
         );
       } else if (tokenName === 'CREAM-AVAX LP') {
-        console.log('getting the LP token price here');
         tokenPrice = await this.getLPTokenPrice(
           token,
           new ERC20('0xAE21d31a6494829a9E4B2B291F4984AAE8121757', this.provider, 'CREAM'),
           true,
           true,
         );
-        console.log('my token price:', tokenPrice);
       } else if (tokenName === 'CREAM-CSHARE LP') {
-        console.log('getting the LP token price here');
         tokenPrice = await this.getLPTokenPrice(
           token,
           new ERC20('0x155f794b56353533E0AfBF76e1B1FC57DFAd5Bd7', this.provider, 'CSHARE'),
           true,
           true,
         );
-        console.log('my token price:', tokenPrice);
       } else if (tokenName === 'DAI') {
         tokenPrice = '1';
       } else {
@@ -566,8 +557,6 @@ export class TombFinance {
     const token = new Token(chainId, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
     try {
       const wftmToToken = await Fetcher.fetchPairData(wftm, token, this.provider);
-      console.log(wftmToToken.priceOf(wftm).toFixed(2));
-      console.log(wftmToToken.priceOf(token).toFixed(2));
       const priceInBUSD = new Route([wftmToToken], token);
 
       return priceInBUSD.midPrice.toFixed(4);
@@ -606,7 +595,6 @@ export class TombFinance {
     const { WFTM, FUSDT } = this.externalTokens;
     try {
       const fusdt_wftm_lp_pair = this.externalTokens['USDT-FTM LP'];
-      console.log(this.externalTokens, 'fusdt');
       let ftm_amount_BN = await WFTM.balanceOf(fusdt_wftm_lp_pair.address);
       let ftm_amount = Number(getFullDisplayBalance(ftm_amount_BN, WFTM.decimal));
       let fusdt_amount_BN = await FUSDT.balanceOf(fusdt_wftm_lp_pair.address);
