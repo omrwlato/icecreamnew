@@ -349,9 +349,11 @@ const Home = () => {
 
         {/* Governance Coin */}
         <Grid item xs={12} sm={4}>
-          <Card style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
+          <Card onMouseOver={handleMouseOverFudge} onMouseOut={handleMouseOutFudge}>
             <CardContent align="center" style={{ position: 'relative' }}>
-              <HoverableFudge handleMouseOverFudge={handleMouseOverFudge} handleMouseOutFudge={handleMouseOutFudge} />
+              <div>
+                <h2>FUDGE</h2>
+              </div>
               {isHoveringFudge && <h3>Governance Token</h3>}
               {/* <Button
                 onClick={() => {
@@ -394,9 +396,11 @@ const Home = () => {
 
         {/* GSHARE */}
         <Grid item xs={12} sm={4}>
-          <Card style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
+          <Card style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }} onMouseOver={handleMouseOverStraw} onMouseOut={handleMouseOutStraw}>
             <CardContent align="center" style={{ position: 'relative' }}>
-              <HoverableStraw handleMouseOverStraw={handleMouseOverStraw} handleMouseOutStraw={handleMouseOutStraw} />
+              <div>
+                <h2>STRAW</h2>
+              </div>
               {isHoveringStraw && <h3>Share Token</h3>}
               {/* <Button
                 onClick={() => {
@@ -437,12 +441,11 @@ const Home = () => {
 
         {/* GBOND */}
         <Grid item xs={12} sm={4}>
-          <Card style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
+          <Card style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }} onMouseOver={handleMouseOverCaraml} onMouseOut={handleMouseOutCaraml}>
             <CardContent align="center" style={{ position: 'relative' }}>
-              <HoverableCaraml
-                handleMouseOverCaraml={handleMouseOverCaraml}
-                handleMouseOutCaraml={handleMouseOutCaraml}
-              />
+              <div>
+                <h2>CARAML</h2>
+              </div>
               {isHoveringCaraml && <h3>Bond Token</h3>}
               {/* <Button
                 onClick={() => {
