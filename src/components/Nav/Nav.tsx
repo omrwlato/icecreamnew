@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1, 2),
     textDecoration: 'none',
     '&:hover': {
-      color: '#571EB1'
+      color: '#571EB1',
     },
   },
   brandLink: {
@@ -117,9 +117,9 @@ const Nav = () => {
               <Link color="textPrimary" to="/bonds" className={classes.link}>
                 Bonds
               </Link>
-              <Link color="textPrimary" to="/rebates" className={classes.link}>
+              {/* <Link color="textPrimary" to="/rebates" className={classes.link}>
                 DAO
-              </Link>
+              </Link> */}
               {/* <Link color="textPrimary" to="/treasury" className={classes.link}>
                 Treasury
               </Link>
