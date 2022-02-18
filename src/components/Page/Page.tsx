@@ -9,13 +9,11 @@ import Nav from '../Nav';
 const Page: React.FC = ({ children }) => {
   useEagerConnect();
   return (
-    <div>
-      <div style={{ minHeight: '100vh' }}>
-        <Nav />
-        <Container maxWidth="lg" style={{ paddingBottom: '5rem' }}>
-          {children}
-        </Container>
-      </div>
+    <div style={{ position: 'relative', minHeight: '100vh' }}>
+      <Nav />
+      <Container maxWidth="lg" style={{ paddingBottom: '5rem' }}>
+        {children}
+      </Container>
       <Footer />
     </div>
   );
