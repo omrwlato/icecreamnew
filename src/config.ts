@@ -68,7 +68,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     site: 'https://2omb.finance',
     buyLink: 'https://traderjoexyz.com/trade?outputCurrency=0x155f794b56353533E0AfBF76e1B1FC57DFAd5Bd7#/',
     sort: 0,
-    closedForStaking: true,
+    closedForStaking: false,
   },
   Tomb2sharesWftmLPRewardPool: {
     name: 'Earn FUDGE by staking CSHARE-AVAX LP',
@@ -82,7 +82,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     site: 'https://2omb.finance',
     buyLink: 'https://traderjoexyz.com/pool/AVAX/0x155f794b56353533E0AfBF76e1B1FC57DFAd5Bd7#/',
     sort: 1,
-    closedForStaking: true,
+    closedForStaking: false,
   },
 /*   FUDGEDAILPRewardPool: {
     name: 'Earn FUDGE by staking FUDGE-DAI LP',
@@ -111,7 +111,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     site: 'https://2omb.finance',
     buyLink: 'https://traderjoexyz.com/pool/AVAX/0xAE21d31a6494829a9E4B2B291F4984AAE8121757#/',
     sort: 3,
-    closedForStaking: true,
+    closedForStaking: false,
   },
   Tomb2ombRewardPool: {
     name: 'Earn FUDGE by staking CREAM',
@@ -125,7 +125,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     site: 'https://2omb.finance',
     buyLink: 'https://traderjoexyz.com/trade?outputCurrency=0xAE21d31a6494829a9E4B2B291F4984AAE8121757#/',
     sort: 4,
-    closedForStaking: true,
+    closedForStaking: false,
   },
   TombBelugaRewardPool: {
     name: 'Earn FUDGE by staking FUDGE-AVAX',
@@ -139,7 +139,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     site: 'https://beluga.fi',
     buyLink: 'https://traderjoexyz.com/pool/AVAX/0xD9FF12172803c072a36785DeFea1Aa981A6A0C18#/',
     sort: 5,
-    closedForStaking: true,
+    closedForStaking: false,
   },
   TombBifiRewardPool: {
     name: 'Earn FUDGE by staking FUDGE-DAI LP',
@@ -153,7 +153,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     site: 'https://app.beefy.finance/#/fantom',
     buyLink: 'https://traderjoexyz.com/pool/0xd586E7F844cEa2F87f50152665BCbc2C279D8d70/0xD9FF12172803c072a36785DeFea1Aa981A6A0C18',
     sort: 6,
-    closedForStaking: true,
+    closedForStaking: false,
   },
   TombWrappedFtmRewardPool: {
     name: 'Earn FUDGE by staking DAI',
