@@ -53,6 +53,11 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('415')]: {
       marginTop: '10px',
     }
+  },
+  card: {
+    backgroundColor: 'rgba(229, 152, 155, 0.1)',
+    boxShadow: 'none',
+    border: '1px solid var(--white)'
   }
 }));
 
@@ -183,28 +188,10 @@ const Home = () => {
     setIsHoveringCaraml(false);
   };
 
-  const HoverableFudge = ({ handleMouseOverFudge, handleMouseOutFudge }) => {
-    return (
-      <div onMouseOver={handleMouseOverFudge} onMouseOut={handleMouseOutFudge}>
-        <h2>FUDGE</h2>
-      </div>
-    );
-  };
-
-  const HoverableStraw = ({ handleMouseOverStraw, handleMouseOutStraw }) => {
-    return (
-      <div onMouseOver={handleMouseOverStraw} onMouseOut={handleMouseOutStraw}>
-        <h2>STRAW</h2>
-      </div>
-    );
-  };
-
-  const HoverableCaraml = ({ handleMouseOverCaraml, handleMouseOutCaraml }) => {
-    return (
-      <div onMouseOver={handleMouseOverCaraml} onMouseOut={handleMouseOutCaraml}>
-        <h2>CARAML</h2>
-      </div>
-    );
+  Card.defaultProps = {
+    backgroundColor: 'rgba(229, 152, 155, 0.1)',
+    boxShadow: 'none',
+    border: '1px solid var(--white)'
   };
 
   const [isHoveringFudge, setIsHoveringFudge] = useState(false);

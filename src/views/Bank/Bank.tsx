@@ -24,6 +24,11 @@ const useStyles = makeStyles((theme) => ({
       height: '90px',
     },
   },
+  card: {
+    backgroundColor: 'rgba(229, 152, 155, 0.1)',
+    boxShadow: 'none',
+    border: '1px solid var(--white)'
+  }
 }));
 
 const Bank: React.FC = () => {

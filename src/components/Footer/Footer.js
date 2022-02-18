@@ -9,6 +9,8 @@ import YoutubeImage from '../../assets/img/youtube.svg';
 
 const useStyles = makeStyles((theme) => ({
   footer: {
+    position: 'absolute',
+    bottom: '0',
     paddingTop: '15px',
     paddingBottom: '15px',
     width: '100%',
@@ -48,16 +50,26 @@ const Footer = () => {
             </Typography>
           </Grid>
           <Grid item xs={6} style={{ textAlign: 'right' }}>
-            <a href="https://twitter.com/icecreamfinance" rel="noopener noreferrer" target="_blank" className={classes.link}>
+            <a
+              href="https://twitter.com/icecreamfinance"
+              rel="noopener noreferrer"
+              target="_blank"
+              className={classes.link}
+            >
               <img alt="twitter" src={TwitterImage} className={classes.img} />
             </a>
-            <a href="https://github.com/icecreamfinancial" rel="noopener noreferrer" target="_blank" className={classes.link}>
+            <a
+              href="https://github.com/icecreamfinancial"
+              rel="noopener noreferrer"
+              target="_blank"
+              className={classes.link}
+            >
               <img alt="github" src={GithubImage} className={classes.img} />
             </a>
             <a href="https://t.me/icecreamfinance" rel="noopener noreferrer" target="_blank" className={classes.link}>
               <img alt="telegram" src={TelegramImage} className={classes.img} />
             </a>
-{/*             <a
+            {/*             <a
               href="https://www.youtube.com/results?search_query=2omb+finance"
               rel="noopener noreferrer"
               target="_blank"
