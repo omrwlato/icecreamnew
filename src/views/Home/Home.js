@@ -20,6 +20,7 @@ import useFantomPrice from '../../hooks/useFantomPrice';
 import { tomb as tombTesting, tShare as tShareTesting } from '../../tomb-finance/deployments/deployments.testing.json';
 import { tomb as tombProd, tShare as tShareProd } from '../../tomb-finance/deployments/deployments.mainnet.json';
 import useTotalTreasuryBalance from '../../hooks/useTotalTreasuryBalance.js';
+import useRebateTreasury from '../../hooks/useRebateTreasury';
 
 import { Box, Button, Card, CardContent, Grid, Paper, Typography } from '@material-ui/core';
 import ZapModal from '../Bank/components/ZapModal';
@@ -52,16 +53,17 @@ const useStyles = makeStyles((theme) => ({
   button: {
     [theme.breakpoints.down('415')]: {
       marginTop: '10px',
-    }
+    },
   },
   card: {
     backgroundColor: 'rgba(229, 152, 155, 0.1)',
     boxShadow: 'none',
-    border: '1px solid var(--white)'
-  }
+    border: '1px solid var(--white)',
+  },
 }));
 
 const Home = () => {
+  const rebateStats = useRebateTreasury();
   const classes = useStyles();
   const TVL = useTotalValueLocked();
   const tombFtmLpStats = useLpStats('TOMB-FTM-LP');
@@ -330,12 +332,18 @@ const Home = () => {
 
         {/* Governance Coin */}
         <Grid item xs={12} sm={4}>
-          <Card style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }} onMouseOver={handleMouseOverFudge} onMouseOut={handleMouseOutFudge}>
+          <Card
+            style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}
+            onMouseOver={handleMouseOverFudge}
+            onMouseOut={handleMouseOutFudge}
+          >
             <CardContent align="center" style={{ position: 'relative' }}>
               <div>
                 <h2>FUDGE</h2>
               </div>
-              <div><h3>Governance Token</h3></div>
+              <div>
+                <h3>Governance Token</h3>
+              </div>
               {/* <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TOMB');
@@ -377,12 +385,18 @@ const Home = () => {
 
         {/* GSHARE */}
         <Grid item xs={12} sm={4}>
-          <Card style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }} onMouseOver={handleMouseOverStraw} onMouseOut={handleMouseOutStraw}>
+          <Card
+            style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}
+            onMouseOver={handleMouseOverStraw}
+            onMouseOut={handleMouseOutStraw}
+          >
             <CardContent align="center" style={{ position: 'relative' }}>
               <div>
                 <h2>STRAW</h2>
               </div>
-              <div><h3>Share Token</h3></div>
+              <div>
+                <h3>Share Token</h3>
+              </div>
               {/* <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TSHARE');
@@ -422,12 +436,18 @@ const Home = () => {
 
         {/* GBOND */}
         <Grid item xs={12} sm={4}>
-          <Card style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }} onMouseOver={handleMouseOverCaraml} onMouseOut={handleMouseOutCaraml}>
+          <Card
+            style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}
+            onMouseOver={handleMouseOverCaraml}
+            onMouseOut={handleMouseOutCaraml}
+          >
             <CardContent align="center" style={{ position: 'relative' }}>
               <div>
                 <h2>CARAML</h2>
               </div>
-              <div><h3>Bond Token</h3></div>
+              <div>
+                <h3>Bond Token</h3>
+              </div>
               {/* <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TBOND');
@@ -534,7 +554,14 @@ const Home = () => {
         </Typography>
         <Grid container justify="center" align="center" spacing={3}>
           <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
-            <Card style={{ height: 'auto', backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
+            <Card
+              style={{
+                height: '100%',
+                backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                boxShadow: 'none',
+                border: '1px solid var(--white)',
+              }}
+            >
               <CardContent align="center">
                 <Typography variant="h5">CREAM-AVAX LP:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_3omb_wftm} separator="," prefix="$" />
@@ -550,7 +577,14 @@ const Home = () => {
             </Card>
           </Grid>
           <Grid item xs={12} md={4} lg={4} className={classes.gridItem}>
-            <Card style={{ height: 'auto', backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
+            <Card
+              style={{
+                height: '100%',
+                backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                boxShadow: 'none',
+                border: '1px solid var(--white)',
+              }}
+            >
               <CardContent align="center">
                 <Typography variant="h5">FUDGE:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_3omb} separator="," prefix="$" />
@@ -566,13 +600,43 @@ const Home = () => {
             </Card>
           </Grid>
           <Grid item xs={12} md={4} lg={4} justify="center" className={classes.gridItem}>
-            <Card justify="center" style={{ height: 'auto' }} style={{ marginBottom: '10px', backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
+            <Card
+              style={{
+                height: 'auto',
+                marginBottom: '10px',
+                backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                boxShadow: 'none',
+                border: '1px solid var(--white)',
+              }}
+            >
+              <CardContent align="center">
+                <Typography variant="h5">TWAP:</Typography>
+                <Typography style={{ fontSize: '25px' }}>{rebateStats.tombPrice.toFixed(4)} FTM</Typography>
+              </CardContent>
+            </Card>
+            <Card
+              justify="center"
+              style={{ height: '100%' }}
+              style={{
+                marginBottom: '10px',
+                backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                boxShadow: 'none',
+                border: '1px solid var(--white)',
+              }}
+            >
               <CardContent align="center">
                 <Typography variant="h5">Total Value Burned:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_3omb} separator="," prefix="$" />
               </CardContent>
             </Card>
-            <Card style={{ height: 'auto', backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
+            <Card
+              style={{
+                height: 'auto',
+                backgroundColor: 'rgba(229, 152, 155, 0.1)',
+                boxShadow: 'none',
+                border: '1px solid var(--white)',
+              }}
+            >
               <CardContent align="center">
                 <Typography variant="h5">Total Treasury Balance:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance} separator="," prefix="$" />
