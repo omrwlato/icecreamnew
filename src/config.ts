@@ -20,18 +20,18 @@ const configurations: { [env: string]: Configuration } = {
       BIFI: ['0xd6070ae98b8069de6B494332d1A1a81B6179D960', 18],
       MIM: ['0x82f0b8b456c1a451378467398982d4834b6829c1', 18],
       BLOOM: ['0x9B2e37cDC711CfcAC1E1482B5741c74dd3924199', 9],
-      'DAI': ['0xd586e7f844cea2f87f50152665bcbc2c279d8d70', 18], //DAI
-      'CREAM': ['0xAE21d31a6494829a9E4B2B291F4984AAE8121757', 18], //CREAM
+      DAI: ['0xd586e7f844cea2f87f50152665bcbc2c279d8d70', 18], //DAI
+      CREAM: ['0xAE21d31a6494829a9E4B2B291F4984AAE8121757', 18], //CREAM
       'CREAM-CSHARE LP': ['0xeC1e129BbAac3DdE156643F5d41FC9b5a59033a7', 18], //CREAM-CSHARE
       'CREAM-AVAX LP': ['0x00C87ce7188F7652d0C0940274cEC5db62f1e825', 18], //CREAM-AVAX
       'CSHARE-AVAX LP': ['0xbD61dFAd83Fc19960476abca1324FfD798234c66', 18], //CSHARE-AVAX
-      'CSHARE': ['0x155f794b56353533E0AfBF76e1B1FC57DFAd5Bd7', 18], //CSHARE
+      CSHARE: ['0x155f794b56353533E0AfBF76e1B1FC57DFAd5Bd7', 18], //CSHARE
       'FUDGE-DAI LP': ['0xE367414f29E247b2D92edd610aA6Dd5A7FD631BA', 18], //FUDGE-DAI
       'STRAW-DAI LP': ['0xf71149502bc064a7Da58C4E275DA7896ed3f14F3', 18], //STRAW-DAI
-      'STRAW': ['0xf8D0C6c3ddC03F43A0687847f2b34bfd6941C2A2', 18], //STRAW
+      STRAW: ['0xf8D0C6c3ddC03F43A0687847f2b34bfd6941C2A2', 18], //STRAW
       'USDT-FTM LP': ['0xa6908C7E3Be8F4Cd2eB704B5cB73583eBF56Ee62', 18], //UDST-DAI
       'FUDGE-STRAW LP': ['0x83a52eff2e9d112e9b022399a9fd22a9db7d33ae', 18], //FUDGE-STRAW
-      'FUDGE': ['0xD9FF12172803c072a36785DeFea1Aa981A6A0C18', 18], //FUDGE
+      FUDGE: ['0xD9FF12172803c072a36785DeFea1Aa981A6A0C18', 18], //FUDGE
     },
     baseLaunchDate: new Date('2021-06-02 13:00:00Z'),
     bondLaunchesAt: new Date('2020-12-03T15:00:00Z'),
@@ -64,7 +64,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'FUDGE',
     finished: false,
     multiplier: '7500x',
-    site: "https://2omb.finance",
+    site: 'https://2omb.finance',
     buyLink: 'https://spookyswap.finance/swap?outputCurrency=0x7a6e4e3cc2ac9924605dca4ba31d1831c84b44ae',
     sort: 0,
     closedForStaking: true,
@@ -78,25 +78,26 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'FUDGE',
     finished: false,
     multiplier: '6000x',
-    site: "https://2omb.finance",
+    site: 'https://2omb.finance',
     buyLink: 'https://spookyswap.finance/add/FTM/0xc54A1684fD1bef1f077a336E6be4Bd9a3096a6Ca',
     sort: 1,
     closedForStaking: true,
   },
-  Tomb2shares2ombLPRewardPool: {
-    name: 'Earn FUDGE by staking CREAM-CSHARE LP',
-    poolId: 2,
-    sectionInUI: 0,
-    contract: 'Tomb2Shares2ombLPRewardPool',
-    depositTokenName: 'CREAM-CSHARE LP',
-    earnTokenName: 'FUDGE',
-    finished: false,
-    multiplier: '6000',
-    site: "https://2omb.finance",
-    buyLink: 'https://spookyswap.finance/add/0x7a6e4e3cc2ac9924605dca4ba31d1831c84b44ae/0xc54A1684fD1bef1f077a336E6be4Bd9a3096a6Ca',
-    sort: 2,
-    closedForStaking: false,
-  },
+  // Tomb2shares2ombLPRewardPool: {
+  //   name: 'Earn FUDGE by staking CREAM-CSHARE LP',
+  //   poolId: 2,
+  //   sectionInUI: 0,
+  //   contract: 'Tomb2Shares2ombLPRewardPool',
+  //   depositTokenName: 'CREAM-CSHARE LP',
+  //   earnTokenName: 'FUDGE',
+  //   finished: false,
+  //   multiplier: '6000',
+  //   site: 'https://2omb.finance',
+  //   buyLink:
+  //     'https://spookyswap.finance/add/0x7a6e4e3cc2ac9924605dca4ba31d1831c84b44ae/0xc54A1684fD1bef1f077a336E6be4Bd9a3096a6Ca',
+  //   sort: 2,
+  //   closedForStaking: false,
+  // },
   Tomb2ombWftmLPRewardPool: {
     name: 'Earn FUDGE by staking CREAM-AVAX LP',
     poolId: 3,
@@ -106,7 +107,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'FUDGE',
     finished: false,
     multiplier: '6000x',
-    site: "https://2omb.finance",
+    site: 'https://2omb.finance',
     buyLink: 'https://spookyswap.finance/add/FTM/0x7a6e4e3cc2ac9924605dca4ba31d1831c84b44ae',
     sort: 3,
     closedForStaking: true,
@@ -308,8 +309,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     closedForStaking: false,
   },
 
-
- /*  Tomb2SHARESRebates: {
+  /*  Tomb2SHARESRebates: {
     name: 'Bond 2SHARES, earn 3OMB',
     poolId: 0,
     sectionInUI: 3,
