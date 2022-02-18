@@ -349,7 +349,7 @@ const Home = () => {
 
         {/* Governance Coin */}
         <Grid item xs={12} sm={4}>
-          <Card onMouseOver={handleMouseOverFudge} onMouseOut={handleMouseOutFudge}>
+          <Card style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }} onMouseOver={handleMouseOverFudge} onMouseOut={handleMouseOutFudge}>
             <CardContent align="center" style={{ position: 'relative' }}>
               <div>
                 <h2>FUDGE</h2>
