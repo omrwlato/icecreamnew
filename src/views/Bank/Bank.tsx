@@ -120,8 +120,8 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
     pairName = 'FUDGE stake';
     uniswapUrl = 'https://traderjoexyz.com/pool/' + tombAddr;
   } else {
-    pairName = 'STRAW-DAI pair';
-    uniswapUrl = 'https://traderjoexyz.com/pool/0xd586E7F844cEa2F87f50152665BCbc2C279D8d70/' + tshareAddr;
+    pairName = 'STRAW-AVAX pair';
+    uniswapUrl = 'https://traderjoexyz.com/pool/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/' + tshareAddr;
   }
   return (
     <Card>
