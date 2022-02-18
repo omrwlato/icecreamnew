@@ -188,12 +188,6 @@ const Home = () => {
     setIsHoveringCaraml(false);
   };
 
-  Card.defaultProps = {
-    backgroundColor: 'rgba(229, 152, 155, 0.1)',
-    boxShadow: 'none',
-    border: '1px solid var(--white)'
-  };
-
   const [isHoveringFudge, setIsHoveringFudge] = useState(false);
   const [isHoveringStraw, setIsHoveringStraw] = useState(false);
   const [isHoveringCaraml, setIsHoveringCaraml] = useState(false);
@@ -341,7 +335,7 @@ const Home = () => {
               <div>
                 <h2>FUDGE</h2>
               </div>
-              {isHoveringFudge && <h3>Governance Token</h3>}
+              <div><h3>Governance Token</h3></div>
               {/* <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TOMB');
@@ -388,7 +382,7 @@ const Home = () => {
               <div>
                 <h2>STRAW</h2>
               </div>
-              {isHoveringStraw && <h3>Share Token</h3>}
+              <div><h3>Share Token</h3></div>
               {/* <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TSHARE');
@@ -433,7 +427,7 @@ const Home = () => {
               <div>
                 <h2>CARAML</h2>
               </div>
-              {isHoveringCaraml && <h3>Bond Token</h3>}
+              <div><h3>Bond Token</h3></div>
               {/* <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TBOND');
