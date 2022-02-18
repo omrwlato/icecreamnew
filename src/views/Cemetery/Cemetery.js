@@ -49,7 +49,7 @@ const Cemetery = () => {
               </Typography>
 
               <Box mt={5}>
-                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
+                {/*                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
                   <Typography color="textPrimary" variant="h4" gutterBottom>
                     Earn STRAW by staking LP Tokens
                   </Typography>
@@ -62,7 +62,7 @@ const Cemetery = () => {
                         </React.Fragment>
                       ))}
                   </Grid>
-                </div>
+                </div> */}
 
                 {/* <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 1).length === 0}>
                   <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
@@ -84,9 +84,9 @@ const Cemetery = () => {
 
                 {/* UNCOMMENT THIS AFTER GP ENDS  */}
 
-                 <Alert variant="filled" severity="info" style={{ marginTop: '50px' }}>
-                  All below pools have ended. Please unstake and collect your rewards.
-                </Alert> 
+                <Alert variant="filled" severity="info" style={{ marginTop: '50px', backgroundColor: '#757CE8' }}>
+                  Genesis pools will be live Feb 19 @2PM PST, please be aware of the 1% deposit tax.
+                </Alert>
 
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 0).length === 0}>
                   <Typography
@@ -118,7 +118,7 @@ const Cemetery = () => {
           <Bank />
         </Route>
       </Page>
-    </Switch>
+    </Switch >
   );
 };
 

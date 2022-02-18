@@ -40,6 +40,7 @@ const logosBySymbol: { [title: string]: string } = {
   'TSHARE-FTM-LP': tshareFtmLpLogo,
   'FUDGE': tombLogo,
   'CARAML': tBondLogo,
+  'STRAW': tShareLogo,
   'WAVAX': wavaxLogo,
   'FUDGE-STRAW LP':fsLogo
 };

@@ -7,38 +7,51 @@ import TokenSymbol from '../../components/TokenSymbol';
 const CemeteryCard = ({ bank }) => {
   return (
     <Grid item xs={12} md={4} lg={4}>
-      <Card variant="outlined" style={{ border: '1px solid var(--white)', backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none' }} >
-        <CardContent>
-          <Box style={{ position: 'relative' }}>
+      <Card variant="outlined" style={{ border: '1px solid var(--white)', backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', display: 'flex', alignItems: 'center', flexDirection: 'column', justifyContent: 'space-around' }} >
+        <CardContent >
+          <Box>
+            <Box style={{
+              alignItems: 'center',
+              display: 'flex',
+              flexDirection: 'column',
+            }}>
+              <Typography variant="h5" component="h2">
+                {bank.depositTokenName}
+              </Typography>
+            </Box>
+
             <Box
               style={{
                 height: '48px',
-                width: '48px',
                 borderRadius: '40px',
                 backgroundColor: 'transparent',
                 alignItems: 'center',
                 display: 'flex',
+                flexDirection: 'column',
                 justifyContent: 'center',
+                padding: '2em'
               }}
             >
               <TokenSymbol size={32} symbol={bank.depositTokenName} />
             </Box>
-            <Typography variant="h5" component="h2">
-              {bank.depositTokenName}
-            </Typography>
-            <Typography color="textSecondary">
-              {/* {bank.name} */}
-              Deposit {bank.depositTokenName.toUpperCase()} Earn {` ${bank.earnTokenName}`}
-            </Typography>
-            <Typography color="textSecondary">
-              Multiplier: {bank.multiplier}
-            </Typography>
+
+            <Box style={{
+              alignItems: 'center',
+              display: 'flex',
+              flexDirection: 'column',
+            }}>
+              <Typography color="textSecondary">
+                {/* {bank.name} */}
+                Deposit {bank.depositTokenName.toUpperCase()} Earn {` ${bank.earnTokenName}`}
+              </Typography>
+              <Typography color="textSecondary">
+                Multiplier: {bank.multiplier}
+              </Typography>
+            </Box>
+
           </Box>
         </CardContent>
         <CardActions style={{ justifyContent: 'flex-end' }}>
-          <Button color="primary" size="small" variant="contained" target="_blank" href={`${bank.site}`}>
-            ↗
-          </Button>
           <Button color="primary" size="small" variant="contained" target="_blank" href={`${bank.buyLink}`}>
             Buy
           </Button>
