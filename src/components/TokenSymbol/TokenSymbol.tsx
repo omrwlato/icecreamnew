@@ -18,7 +18,7 @@ import tshareFtmLpLogo from '../../assets/img/straw-dai.png';
 import ThreeombLPLogo from '../../assets/img/fudge-dai.png';
 import ThreesharesLPLogo from '../../assets/img/straw-dai.png';
 import fsLogo from '../../assets/img/fudge-straw.png';
-import faLogo from '../../assets/img/fudge-straw.png';
+import faLogo from '../../assets/img/fudge-avax.png';
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
