@@ -103,7 +103,7 @@ export class TombFinance {
     const tombRewardPoolSupply = await this.TOMB.balanceOf(TombFtmRewardPool.address);
     const tombRewardPoolSupply2 = await this.TOMB.balanceOf(TombFtmLpTombRewardPool.address);
     // const tombRewardPoolSupplyOld = await this.TOMB.balanceOf(TombFtmLpTombRewardPoolOld.address);
-    const tombCirculatingSupply = supply.sub(tombRewardPoolSupply).sub(tombRewardPoolSupply2);
+    const tombCirculatingSupply = supply.sub(tombRewardPoolSupply);
     // .sub(tombRewardPoolSupplyOld);
     const priceInFTM = await this.getTokenPriceFromPancakeswap(this.TOMB);
     console.log('price in ftm:', priceInFTM);
