@@ -104,8 +104,6 @@ const Home = () => {
     () => (tombStats ? Number(tombStats.priceInDollars).toFixed(2) : null),
     [tombStats],
   );
-  console.log(tombStats, 'TombStats');
-  console.log(tombPriceInDollars, 'TombPriceInDollars');
   const tombPriceInFTM = useMemo(() => (tombStats ? Number(tombStats.tokenInFtm).toFixed(4) : null), [tombStats]);
   const tombCirculatingSupply = useMemo(() => (tombStats ? String(tombStats.circulatingSupply) : null), [tombStats]);
   const tombTotalSupply = useMemo(() => (tombStats ? String(tombStats.totalSupply) : null), [tombStats]);
@@ -192,9 +190,9 @@ const Home = () => {
   //   setIsHoveringCaraml(false);
   // };
 
-  const [isHoveringFudge, setIsHoveringFudge] = useState(false);
-  const [isHoveringStraw, setIsHoveringStraw] = useState(false);
-  const [isHoveringCaraml, setIsHoveringCaraml] = useState(false);
+  // const [isHoveringFudge, setIsHoveringFudge] = useState(false);
+  // const [isHoveringStraw, setIsHoveringStraw] = useState(false);
+  // const [isHoveringCaraml, setIsHoveringCaraml] = useState(false);
 
   return (
     <Page>
