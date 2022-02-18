@@ -23,7 +23,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AccountButton from './AccountButton';
-
+import sundaeLogo from '../../assets/img/sundaelogo.png';
 const useStyles = makeStyles((theme) => ({
   '@global': {
     ul: {
@@ -101,7 +101,7 @@ const Nav = () => {
             <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
               {/* <a className={ classes.brandLink } href="/">2omb Finance</a> */}
               <Link to="/" color="inherit" className={classes.brandLink}>
-                Sundae Finance
+              <img alt="sundae.finance" src={sundaeLogo} height="100px" width='100px' />
               </Link>
             </Typography>
             <Box mr={5}>
@@ -161,10 +161,12 @@ const Nav = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
-              Sundae Finance
-            </Typography>
-
+            <img
+              alt="sundae.finance"
+              src={sundaeLogo}
+              style={{height: '40px', marginTop: '-10px', marginLeft: '10px', marginRight: '15px'}}
+            />
+            <AccountButton text="Connect" />
             <Drawer
               className={classes.drawer}
               onEscapeKeyDown={handleDrawerClose}

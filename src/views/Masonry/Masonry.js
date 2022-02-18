@@ -105,7 +105,7 @@ const Masonry = () => {
                     <Typography>
                       FUDGE Price<small> (TWAP)</small>
                     </Typography>
-                    <Typography>{rebateStats.tombPrice.toFixed(4)} FTM</Typography>
+                    <Typography>{rebateStats.tombPrice.toFixed(4)} DAI</Typography>
                   </CardContent>
                 </Card>
               </Grid>

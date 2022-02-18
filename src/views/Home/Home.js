@@ -611,7 +611,7 @@ const Home = () => {
             >
               <CardContent align="center">
                 <Typography variant="h5">TWAP:</Typography>
-                <Typography style={{ fontSize: '25px' }}>{rebateStats.tombPrice.toFixed(4)} FTM</Typography>
+                <Typography style={{ fontSize: '25px' }}>{rebateStats.tombPrice.toFixed(4)} DAI</Typography>
               </CardContent>
             </Card>
             <Card
