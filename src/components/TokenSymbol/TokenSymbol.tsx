@@ -18,6 +18,7 @@ import tshareFtmLpLogo from '../../assets/img/straw-dai.png';
 import ThreeombLPLogo from '../../assets/img/fudge-dai.png';
 import ThreesharesLPLogo from '../../assets/img/straw-dai.png';
 import fsLogo from '../../assets/img/fudge-straw.png';
+import faLogo from '../../assets/img/fudge-straw.png';
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
@@ -42,7 +43,8 @@ const logosBySymbol: { [title: string]: string } = {
   'CARAML': tBondLogo,
   'STRAW': tShareLogo,
   'WAVAX': wavaxLogo,
-  'FUDGE-STRAW LP':fsLogo
+  'FUDGE-STRAW LP':fsLogo,
+  'FUDGE-AVAX LP':faLogo
 };
 
 type LogoProps = {
@@ -56,11 +58,13 @@ const TokenSymbol: React.FC<LogoProps> = ({symbol}) => {
   }
   if(symbol === 'TOMB' || symbol === 'TSHARE' || symbol === 'TBOND' ){
     return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={110} height={110} />;
-  }/* else if( symbol === 'CREAM-CSHARE-LP'){
+  } else if( symbol === 'CREAM-CSHARE-LP'){
     return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={150} height={90} />;
   }else if( symbol === 'CREAM'){
     return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={100} height={89} />;
-  } */else{
+  }else if( symbol === 'WAVAX'){
+    return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={65} height={65} />;
+  }else{
     return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={100} height={100} />;
   }
     

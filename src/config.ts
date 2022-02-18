@@ -26,7 +26,8 @@ const configurations: { [env: string]: Configuration } = {
       'CREAM-AVAX LP': ['0x00C87ce7188F7652d0C0940274cEC5db62f1e825', 18], //CREAM-AVAX
       'CSHARE-AVAX LP': ['0xbD61dFAd83Fc19960476abca1324FfD798234c66', 18], //CSHARE-AVAX
       CSHARE: ['0x155f794b56353533E0AfBF76e1B1FC57DFAd5Bd7', 18], //CSHARE
-      'FUDGE-DAI LP': ['0xE367414f29E247b2D92edd610aA6Dd5A7FD631BA', 18], //FUDGE-DAI
+      'FUDGE-DAI LP': ['0xE367414f29E247b2D92edd610aA6Dd5A7FD631BA', 18],
+      'FUDGE-AVAX LP': ['0xE367414f29E247b2D92edd610aA6Dd5A7FD631BA', 18], //FUDGE-DAI
       'STRAW-DAI LP': ['0xf71149502bc064a7Da58C4E275DA7896ed3f14F3', 18], //STRAW-DAI
       STRAW: ['0xf8D0C6c3ddC03F43A0687847f2b34bfd6941C2A2', 18], //STRAW
       'USDT-FTM LP': ['0xa6908C7E3Be8F4Cd2eB704B5cB73583eBF56Ee62', 18], //UDST-DAI
@@ -83,21 +84,21 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 1,
     closedForStaking: true,
   },
-  // Tomb2shares2ombLPRewardPool: {
-  //   name: 'Earn FUDGE by staking CREAM-CSHARE LP',
-  //   poolId: 2,
-  //   sectionInUI: 0,
-  //   contract: 'Tomb2Shares2ombLPRewardPool',
-  //   depositTokenName: 'CREAM-CSHARE LP',
-  //   earnTokenName: 'FUDGE',
-  //   finished: false,
-  //   multiplier: '6000',
-  //   site: 'https://2omb.finance',
-  //   buyLink:
-  //     'https://spookyswap.finance/add/0x7a6e4e3cc2ac9924605dca4ba31d1831c84b44ae/0xc54A1684fD1bef1f077a336E6be4Bd9a3096a6Ca',
-  //   sort: 2,
-  //   closedForStaking: false,
-  // },
+/*   FUDGEDAILPRewardPool: {
+    name: 'Earn FUDGE by staking FUDGE-DAI LP',
+    poolId: 2,
+    sectionInUI: 0,
+    contract: 'FUDGEDAILPRewardPool',
+    depositTokenName: 'FUDGE-DAI LP',
+    earnTokenName: 'FUDGE',
+    finished: false,
+    multiplier: '6000',
+    site: 'https://2omb.finance',
+    buyLink:
+      'https://spookyswap.finance/add/0x7a6e4e3cc2ac9924605dca4ba31d1831c84b44ae/0xc54A1684fD1bef1f077a336E6be4Bd9a3096a6Ca',
+    sort: 2,
+    closedForStaking: false,
+  }, */
   Tomb2ombWftmLPRewardPool: {
     name: 'Earn FUDGE by staking CREAM-AVAX LP',
     poolId: 3,
@@ -126,34 +127,34 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 4,
     closedForStaking: true,
   },
-  // TombBelugaRewardPool: {
-  //   name: 'Earn 3OMB by staking BELUGA',
-  //   poolId: 4,
-  //   sectionInUI: 0,
-  //   contract: 'TombBelugaRewardPool',
-  //   depositTokenName: 'BELUGA',
-  //   earnTokenName: '3OMB',
-  //   finished: false,
-  //   multiplier: '500x',
-  //   site: 'https://beluga.fi',
-  //   buyLink: 'https://beets.fi/#/trade/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83/0x4A13a2cf881f5378DEF61E430139Ed26d843Df9A',
-  //   sort: 5,
-  //   closedForStaking: true,
-  // },
-  // TombBifiRewardPool: {
-  //   name: 'Earn 3OMB by staking BIFI',
-  //   poolId: 5,
-  //   sectionInUI: 0,
-  //   contract: 'TombBifiGenesisRewardPool',
-  //   depositTokenName: 'BIFI',
-  //   earnTokenName: '3OMB',
-  //   finished: false,
-  //   multiplier: '500x',
-  //   site: 'https://app.beefy.finance/#/fantom',
-  //   buyLink: 'https://beets.fi/#/trade/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83/0xd6070ae98b8069de6B494332d1A1a81B6179D960',
-  //   sort: 6,
-  //   closedForStaking: true,
-  // },
+  TombBelugaRewardPool: {
+    name: 'Earn FUDGE by staking FUDGE-AVAX',
+    poolId: 4,
+    sectionInUI: 0,
+    contract: 'TombBelugaRewardPool',
+    depositTokenName: 'FUDGE-AVAX LP',
+    earnTokenName: 'FUDGE',
+    finished: false,
+    multiplier: '500x',
+    site: 'https://beluga.fi',
+    buyLink: 'https://beets.fi/#/trade/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83/0x4A13a2cf881f5378DEF61E430139Ed26d843Df9A',
+    sort: 5,
+    closedForStaking: true,
+  },
+  TombBifiRewardPool: {
+    name: 'Earn FUDGE by staking FUDGE-DAI LP',
+    poolId: 5,
+    sectionInUI: 0,
+    contract: 'TombBloomGenesisRewardPool',
+    depositTokenName: 'FUDGE-DAI LP',
+    earnTokenName: 'FUDGE',
+    finished: false,
+    multiplier: '200x',
+    site: 'https://app.beefy.finance/#/fantom',
+    buyLink: 'https://beets.fi/#/trade/0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83/0xd6070ae98b8069de6B494332d1A1a81B6179D960',
+    sort: 6,
+    closedForStaking: true,
+  },
   TombWrappedFtmRewardPool: {
     name: 'Earn FUDGE by staking DAI',
     poolId: 5,
