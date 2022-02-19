@@ -110,7 +110,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     multiplier: '4000x',
     site: 'https://2omb.finance',
     buyLink: 'https://traderjoexyz.com/pool/AVAX/0xAE21d31a6494829a9E4B2B291F4984AAE8121757#/',
-    sort: 3,
+    sort: 2,
     closedForStaking: false,
   },
   Tomb2ombRewardPool: {
@@ -124,7 +124,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     multiplier: '1000x',
     site: 'https://2omb.finance',
     buyLink: 'https://traderjoexyz.com/trade?outputCurrency=0xAE21d31a6494829a9E4B2B291F4984AAE8121757#/',
-    sort: 4,
+    sort: 3,
     closedForStaking: false,
   },
   TombBelugaRewardPool: {
@@ -138,7 +138,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     multiplier: '4000x',
     site: 'https://beluga.fi',
     buyLink: 'https://traderjoexyz.com/pool/AVAX/0xD9FF12172803c072a36785DeFea1Aa981A6A0C18#/',
-    sort: 5,
+    sort: 4,
     closedForStaking: false,
   },
   TombBifiRewardPool: {
@@ -152,7 +152,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     multiplier: '4000x',
     site: 'https://app.beefy.finance/#/fantom',
     buyLink: 'https://traderjoexyz.com/pool/0xd586E7F844cEa2F87f50152665BCbc2C279D8d70/0xD9FF12172803c072a36785DeFea1Aa981A6A0C18',
-    sort: 6,
+    sort: 5,
     closedForStaking: false,
   },
   TombWrappedFtmRewardPool: {
@@ -166,7 +166,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     multiplier: '1000x',
     site: 'https://traderjoexyz.com/trade/0xd586e7f844cea2f87f50152665bcbc2c279d8d70',
     buyLink: 'https://traderjoexyz.com/trade/0xd586e7f844cea2f87f50152665bcbc2c279d8d70',
-    sort: 7,
+    sort: 6,
     closedForStaking: false,
   },
   TombMimRewardPool: {
@@ -180,7 +180,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     multiplier: '1000x',
     site: 'https://abracadabra.money/',
     buyLink: 'https://traderjoexyz.com/trade?outputCurrency=0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7#/',
-    sort: 8,
+    sort: 7,
     closedForStaking: false,
   },
   // TombBloomRewardPool: {
