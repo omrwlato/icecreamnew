@@ -288,8 +288,8 @@ export class TombFinance {
           return rewardPerSecond.mul(400).div(2000).div(24);
         } else if (depositTokenName === 'FUDGE-DAI LP') {
           return rewardPerSecond.mul(400).div(2000).div(24);
-        }else{
-        return rewardPerSecond.div(24);
+        }
+          return rewardPerSecond.div(24);
       }
       const poolStartTime = await poolContract.poolStartTime();
       const startDateTime = new Date(poolStartTime.toNumber() * 1000);
