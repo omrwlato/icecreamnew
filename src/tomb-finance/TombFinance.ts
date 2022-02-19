@@ -277,20 +277,18 @@ export class TombFinance {
         if (depositTokenName === 'CSHARE') {
           return rewardPerSecond.mul(100).div(2000).div(24);
         } else if (depositTokenName === 'CREAM') {
-          return rewardPerSecond.mul(100).div(2000).div(24);
+          return rewardPerSecond.mul(600).div(2000).div(24);
         } else if (depositTokenName === 'WAVAX') {
           return rewardPerSecond.mul(100).div(2000).div(24);
         } else if (depositTokenName === 'DAI') {
           return rewardPerSecond.mul(100).div(2000).div(24);
         } else if (depositTokenName === 'CREAM-AVAX LP') {
-          return rewardPerSecond.mul(400).div(2000).div(24);
+          return rewardPerSecond.mul(800).div(2000).div(24);
         } else if (depositTokenName === 'CSHARE-AVAX LP') {
           return rewardPerSecond.mul(400).div(2000).div(24);
         } else if (depositTokenName === 'FUDGE-DAI LP') {
           return rewardPerSecond.mul(400).div(2000).div(24);
-        } else if (depositTokenName === 'FUDGE-AVAX LP') {
-          return rewardPerSecond.mul(400).div(2000).div(24);
-        }
+        }else{
         return rewardPerSecond.div(24);
       }
       const poolStartTime = await poolContract.poolStartTime();
