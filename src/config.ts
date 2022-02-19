@@ -25,14 +25,14 @@ const configurations: { [env: string]: Configuration } = {
       'CREAM-CSHARE LP': ['0xeC1e129BbAac3DdE156643F5d41FC9b5a59033a7', 18], //CREAM-CSHARE
       'CREAM-AVAX LP': ['0x00C87ce7188F7652d0C0940274cEC5db62f1e825', 18], //CREAM-AVAX
       'CSHARE-AVAX LP': ['0xbD61dFAd83Fc19960476abca1324FfD798234c66', 18], //CSHARE-AVAX
-      CSHARE: ['0x155f794b56353533E0AfBF76e1B1FC57DFAd5Bd7', 18], //CSHARE
+      'CSHARE': ['0x155f794b56353533E0AfBF76e1B1FC57DFAd5Bd7', 18], //CSHARE
       'FUDGE-DAI LP': ['0xE367414f29E247b2D92edd610aA6Dd5A7FD631BA', 18],
       'FUDGE-AVAX LP': ['0xE367414f29E247b2D92edd610aA6Dd5A7FD631BA', 18], //FUDGE-DAI
       'STRAW-DAI LP': ['0xf71149502bc064a7Da58C4E275DA7896ed3f14F3', 18], //STRAW-DAI
-      STRAW: ['0xf8D0C6c3ddC03F43A0687847f2b34bfd6941C2A2', 18], //STRAW
+      'STRAW': ['0xf8D0C6c3ddC03F43A0687847f2b34bfd6941C2A2', 18], //STRAW
       'USDT-FTM LP': ['0xa6908C7E3Be8F4Cd2eB704B5cB73583eBF56Ee62', 18], //UDST-DAI
       'FUDGE-STRAW LP': ['0x83a52eff2e9d112e9b022399a9fd22a9db7d33ae', 18], //FUDGE-STRAW
-      FUDGE: ['0xD9FF12172803c072a36785DeFea1Aa981A6A0C18', 18], //FUDGE
+      'FUDGE': ['0xD9FF12172803c072a36785DeFea1Aa981A6A0C18', 18], //FUDGE
     },
     baseLaunchDate: new Date('2021-06-02 13:00:00Z'),
     bondLaunchesAt: new Date('2020-12-03T15:00:00Z'),
@@ -56,11 +56,11 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   finished: will disable the pool on the UI if set to true
   sort: the order of the pool
   */
-  Tomb2sharesRewardPool: {
+  FudgeCshareRewardPool: {
     name: 'Earn FUDGE by staking CSHARE',
     poolId: 0,
     sectionInUI: 0,
-    contract: 'Tomb2ShareRewardPool',
+    contract: 'FudgeCshareRewardPool',
     depositTokenName: 'CSHARE',
     earnTokenName: 'FUDGE',
     finished: false,
@@ -70,11 +70,11 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 0,
     closedForStaking: false,
   },
-  Tomb2sharesWftmLPRewardPool: {
+  FudgeCshareAvaxLPRewardPool: {
     name: 'Earn FUDGE by staking CSHARE-AVAX LP',
     poolId: 1,
     sectionInUI: 0,
-    contract: 'Tomb2SharesWftmLPRewardPool',
+    contract: 'FudgeCshareAvaxLPRewardPool',
     depositTokenName: 'CSHARE-AVAX LP',
     earnTokenName: 'FUDGE',
     finished: false,
@@ -99,11 +99,11 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 2,
     closedForStaking: false,
   }, */
-  Tomb2ombWftmLPRewardPool: {
+  FudgeCreamAvaxLPRewardPool: {
     name: 'Earn FUDGE by staking CREAM-AVAX LP',
     poolId: 3,
     sectionInUI: 0,
-    contract: 'Tomb2ombWftmLPRewardPool',
+    contract: 'FudgeCreamAvaxLPRewardPool',
     depositTokenName: 'CREAM-AVAX LP',
     earnTokenName: 'FUDGE',
     finished: false,
@@ -113,11 +113,11 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 2,
     closedForStaking: false,
   },
-  Tomb2ombRewardPool: {
+  FudgeCreamRewardPool: {
     name: 'Earn FUDGE by staking CREAM',
     poolId: 4,
     sectionInUI: 0,
-    contract: 'Tomb2ombRewardPool',
+    contract: 'FudgeCreamRewardPool',
     depositTokenName: 'CREAM',
     earnTokenName: 'FUDGE',
     finished: false,
@@ -127,11 +127,11 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 3,
     closedForStaking: false,
   },
-  TombBelugaRewardPool: {
+  FudgeFudgeAvaxLPRewardPool: {
     name: 'Earn FUDGE by staking FUDGE-AVAX',
     poolId: 7,
     sectionInUI: 0,
-    contract: 'TombBelugaRewardPool',
+    contract: 'FudgeFudgeAvaxLPRewardPool',
     depositTokenName: 'FUDGE-AVAX LP',
     earnTokenName: 'FUDGE',
     finished: false,
@@ -141,11 +141,11 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 4,
     closedForStaking: false,
   },
-  TombBifiRewardPool: {
+  FudgeFudgeDaiLPRewardPool: {
     name: 'Earn FUDGE by staking FUDGE-DAI LP',
     poolId: 8,
     sectionInUI: 0,
-    contract: 'TombBloomGenesisRewardPool',
+    contract: 'FudgeFudgeDaiLPRewardPool',
     depositTokenName: 'FUDGE-DAI LP',
     earnTokenName: 'FUDGE',
     finished: false,
@@ -155,11 +155,11 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 5,
     closedForStaking: false,
   },
-  TombWrappedFtmRewardPool: {
+  FudgeDaiRewardPool: {
     name: 'Earn FUDGE by staking DAI',
     poolId: 5,
     sectionInUI: 0,
-    contract: 'TombWrappedFtmRewardPool',
+    contract: 'FudgeDaiRewardPool',
     depositTokenName: 'DAI',
     earnTokenName: 'FUDGE',
     finished: false,
@@ -169,11 +169,11 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 6,
     closedForStaking: false,
   },
-  TombMimRewardPool: {
+  FudgeAvaxRewardPool: {
     name: 'Earn FUDGE by staking WAVAX',
     poolId: 6,
     sectionInUI: 0,
-    contract: 'TombMimGenesisRewardPool',
+    contract: 'FudgeAvaxRewardPool',
     depositTokenName: 'WAVAX',
     earnTokenName: 'FUDGE',
     finished: false,
@@ -225,7 +225,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   //   sort: 9,
   //   closedForStaking: true,
   // },
-  TombFtmLPTShareRewardPool: {
+/*   TombFtmLPTShareRewardPool: {
     name: 'Earn STRAW by FUDGE-DAI LP',
     poolId: 0,
     sectionInUI: 2,
@@ -308,7 +308,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     site: '',
     sort: 12,
     closedForStaking: false,
-  },
+  }, */
 
   /*  Tomb2SHARESRebates: {
     name: 'Bond 2SHARES, earn 3OMB',
