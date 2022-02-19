@@ -98,10 +98,9 @@ export class TombFinance {
   //===================================================================
 
   async getTombStat(): Promise<TokenStat> {
-    const { TombFtmRewardPool, TombFtmLpTombRewardPool } = this.contracts;
+    const { TombFtmRewardPool } = this.contracts;
     const supply = await this.TOMB.totalSupply();
     const tombRewardPoolSupply = await this.TOMB.balanceOf(TombFtmRewardPool.address);
-    const tombRewardPoolSupply2 = await this.TOMB.balanceOf(TombFtmLpTombRewardPool.address);
     // const tombRewardPoolSupplyOld = await this.TOMB.balanceOf(TombFtmLpTombRewardPoolOld.address);
     const tombCirculatingSupply = supply.sub(tombRewardPoolSupply);
     // .sub(tombRewardPoolSupplyOld);
@@ -274,21 +273,21 @@ export class TombFinance {
       if (!contractName.endsWith('TombRewardPool')) {
         const rewardPerSecond = await poolContract.tombPerSecond();
         if (depositTokenName === 'CSHARE') {
-          return rewardPerSecond.mul(100).div(2000).div(24).mul(20);
+          return rewardPerSecond.mul(100).div(2000).div(48);
         } else if (depositTokenName === 'CREAM') {
-          return rewardPerSecond.mul(100).div(2000).div(24).mul(20);
+          return rewardPerSecond.mul(100).div(2000).div(48);
         } else if (depositTokenName === 'WAVAX') {
-          return rewardPerSecond.mul(100).div(2000).div(24).mul(20);
+          return rewardPerSecond.mul(100).div(2000).div(48);
         } else if (depositTokenName === 'DAI') {
-          return rewardPerSecond.mul(100).div(2000).div(24).mul(20);
+          return rewardPerSecond.mul(100).div(2000).div(48);
         } else if (depositTokenName === 'CREAM-AVAX LP') {
-          return rewardPerSecond.mul(400).div(2000).div(24).mul(20);
+          return rewardPerSecond.mul(400).div(2000).div(48);
         } else if (depositTokenName === 'CSHARE-AVAX LP') {
-          return rewardPerSecond.mul(400).div(2000).div(24).mul(20);
+          return rewardPerSecond.mul(400).div(2000).div(48);
         } else if (depositTokenName === 'FUDGE-DAI LP') {
-          return rewardPerSecond.mul(400).div(2000).div(24).mul(20);
+          return rewardPerSecond.mul(400).div(2000).div(48);
         }else if (depositTokenName === 'FUDGE-AVAX LP') {
-        return rewardPerSecond.mul(400).div(2000).div(24).mul(20);
+        return rewardPerSecond.mul(400).div(2000).div(48);
       }
         return rewardPerSecond.div(24);
       }
