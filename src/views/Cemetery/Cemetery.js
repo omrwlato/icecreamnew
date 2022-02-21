@@ -86,7 +86,7 @@ const Cemetery = () => {
 
                 <Alert variant="filled" severity="info" style={{ marginTop: '50px', backgroundColor: '#757CE8' }}>
 
-                  Genesis pools will be live Feb 19 @2PM PST, please be aware of the 1% deposit tax.
+                  Genesis pools are now closed, please withdraw!
 
                 </Alert>
 
