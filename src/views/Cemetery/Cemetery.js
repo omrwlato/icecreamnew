@@ -66,7 +66,7 @@ const Cemetery = () => {
 
                  <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
                   <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
-                    Earn TOMB by staking LP
+                    Earn STRAW by staking LP
                   </Typography>
                   <Alert variant="filled" severity="warning">
                     LP pools start Feb 21 @2PM PST and will run for 370 days, please be aware of 0.25% deposit tax.
