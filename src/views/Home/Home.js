@@ -347,7 +347,7 @@ const Home = () => {
               <div>
                 <h3>Governance Token</h3>
               </div>
-              {/* <Button
+{/*                <Button
                 onClick={() => {
                   tombFinance.watchAssetInMetamask('TOMB');
                 }}
@@ -357,7 +357,7 @@ const Home = () => {
               >
                 +&nbsp;
                 <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
-              </Button> */}
+              </Button>  */}
               <Box mt={2} style={{ backgroundColor: 'transparent !important' }}>
                 <CardIcon style={{ backgroundColor: 'transparent !important' }}>
                   <TokenSymbol symbol="TOMB" style={{ backgroundColor: 'transparent !important' }} />
