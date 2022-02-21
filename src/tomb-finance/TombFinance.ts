@@ -459,14 +459,14 @@ export class TombFinance {
       } else if (tokenName === 'FUDGE-STRAW LP') {
         tokenPrice = await this.getLPV2TokenPrice(
           token,
-          this.TSHARE,
+          this.TOMB,
           true
         );
       }
       else if (tokenName === 'CREAM-STRAW LP') {
         tokenPrice = await this.getLPV2TokenPrice(
           token,
-          this.TSHARE,
+          new ERC20('0xAE21d31a6494829a9E4B2B291F4984AAE8121757', this.provider, 'CREAM'),
           false,
         );
       } else if (tokenName === 'FUDGE-CREAM LP') {
@@ -603,9 +603,11 @@ export class TombFinance {
       ? await this.getTombStat()
       : await this.getShareStat();
     const priceOfToken = stat.priceInDollars;
+    console.log(priceOfToken)
     const tokenInLP = Number(tokenSupply) / Number(totalSupply);
     const tokenPrice = (Number(priceOfToken) * tokenInLP * 2) //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total
       .toString();
+    console.log(tokenPrice)
     return tokenPrice;
   }
 
