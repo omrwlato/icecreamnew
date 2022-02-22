@@ -69,7 +69,7 @@ const Cemetery = () => {
                     Earn STRAW by staking LP
                   </Typography>
                   <Alert variant="filled" severity="warning">
-                    LP pools start Feb 21 @2PM PST and will run for 370 days, please be aware of 0.25% deposit tax.
+                    LP pools start Feb 21 @2PM PST and will run for 370 days, please be aware of 0.5% deposit tax.
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
