@@ -42,7 +42,7 @@ const TokenSymbol: React.FC<LogoProps> = ({ symbol }) => {
   if (symbol === 'CREAM-AVAX-LP' || symbol === 'CSHARE-AVAX-LP') {
     return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={100} height={100} />;
   } else if (symbol === 'CREAM-CSHARE-LP') {
-    return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={150} height={150} />;
+    return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={120} />;
   } else if (symbol === 'CREAM') {
     return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={90} height={90} />;
   } else {
