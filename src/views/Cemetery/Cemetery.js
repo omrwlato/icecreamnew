@@ -66,10 +66,10 @@ const Cemetery = () => {
 
                  <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
                   <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
-                    Earn STRAW by staking LP
+                    Earn CSHARE by staking your Liquidity Pairs
                   </Typography>
                   <Alert variant="filled" severity="warning">
-                    LP pools start Feb 21 @2PM PST and will run for 370 days, please be aware of 0.5% deposit tax.
+                    LP Pools have started and will run for 370 days
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
@@ -83,7 +83,7 @@ const Cemetery = () => {
                 </div> 
 
                 {/* UNCOMMENT THIS AFTER GP ENDS  */}
-
+{/* 
                 <Alert variant="filled" severity="info" style={{ marginTop: '50px', backgroundColor: '#757CE8' }}>
 
                   Genesis pools are now closed, please withdraw!
@@ -108,7 +108,7 @@ const Cemetery = () => {
                         </React.Fragment>
                       ))}
                   </Grid>
-                </div>
+                </div> */}
               </Box>
             </Container>
           ) : (

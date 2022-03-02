@@ -100,10 +100,10 @@ const Nav = () => {
           <>
             <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
               <Link to="/" color="inherit" className={classes.brandLink}>
-                <img alt="icecream.finance" src={icecreamLogo} height="5%" width="5%" />
+                <img alt="icecream.finance" src={icecreamLogo} height="10%" width="10%" />
               </Link>
             </Typography>
-            <Box mr={5}>
+            <Box style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '0px', fontSize: '1rem', flexGrow: '1' }}>
               <Link color="color" to="/" className={classes.link}>
                 Home
               </Link>
