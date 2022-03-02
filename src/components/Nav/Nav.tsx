@@ -23,7 +23,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AccountButton from './AccountButton';
-import icecreamLogo from '../../assets/img/icelogofont2.png';
+import icecreamLogo from '../../assets/img/NEWCREAM.png';
 const useStyles = makeStyles((theme) => ({
   '@global': {
     ul: {
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textTransform: 'uppercase',
     color: 'var(--white)',
-    fontSize: '14px',
+    fontSize: '16px',
     margin: theme.spacing(1, 2),
     textDecoration: 'none',
     '&:hover': {
@@ -100,13 +100,13 @@ const Nav = () => {
           <>
             <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
               <Link to="/" color="inherit" className={classes.brandLink}>
-                <img alt="sundae.finance" src={icecreamLogo} height="90px" width="200px" />
+                <img alt="icecream.finance" src={icecreamLogo} height="5%" width="5%" />
               </Link>
             </Typography>
             <Box mr={5}>
-{/*               <Link color="color" to="/" className={classes.link}>
+              <Link color="color" to="/" className={classes.link}>
                 Home
-              </Link> */}
+              </Link>
               <Link color="textPrimary" to="/farms" className={classes.link}>
                 Farm
               </Link>
