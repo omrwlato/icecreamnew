@@ -13,6 +13,7 @@ import {
   ListItem,
   ListItemText,
   Divider,
+  Grid,
 } from '@material-ui/core';
 import styled from 'styled-components';
 
@@ -40,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '0 10px',
     marginBottom: '3rem',
     position: 'sticky',
+
   },
   drawer: {
     width: 240,
@@ -53,11 +55,13 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbar: {
     flexWrap: 'wrap',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between'
   },
   toolbarTitle: {
     fontFamily: '"Gilroy"',
     fontSize: '30px',
-    flexGrow: 1,
   },
   link: {
     textTransform: 'uppercase',
@@ -70,6 +74,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   brandLink: {
+    display: 'flex',
     textDecoration: 'none',
     color: 'var(--white)',
     '&:hover': {
@@ -98,34 +103,34 @@ const Nav = () => {
       <Toolbar className={classes.toolbar}>
         {matches ? (
           <>
-            <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-              <Link to="/" color="inherit" className={classes.brandLink}>
-                <img alt="icecream.finance" src={icecreamLogo} height="10%" width="10%" />
-              </Link>
-            </Typography>
-            <Box style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '0px', fontSize: '1rem', flexGrow: '1' }}>
-              <Link color="color" to="/" className={classes.link}>
-                Home
-              </Link>
-              <Link color="textPrimary" to="/farms" className={classes.link}>
-                Farm
-              </Link>
-              <Link color="textPrimary" to="/boardroom" className={classes.link}>
-                Boardroom
-              </Link>
-{/*               <Link color="textPrimary" to="/bonds" className={classes.link}>
+            <Grid container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <Grid item xs={4} style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                <img alt="icecream.finance" src={icecreamLogo} width="20%" />
+              </Grid>
+              <Grid item xs={4} style={{ display: 'flex', justifyContent: 'center' }}>
+                <Box style={{ display: 'flex', justifyContent: 'center', paddingTop: '0px', fontSize: '1rem', flexGrow: 1 }}>
+                  <Link color="color" to="/" className={classes.link}>
+                    Home
+                  </Link>
+                  <Link color="textPrimary" to="/farms" className={classes.link}>
+                    Farm
+                  </Link>
+                  <Link color="textPrimary" to="/boardroom" className={classes.link}>
+                    Boardroom
+                  </Link>
+                  {/*               <Link color="textPrimary" to="/bonds" className={classes.link}>
                 Bonds
               </Link> */}
-              {/* <Link color="textPrimary" to="/rebates" className={classes.link}>
+                  {/* <Link color="textPrimary" to="/rebates" className={classes.link}>
                 DAO
               </Link> */}
-              {/* <Link color="textPrimary" to="/treasury" className={classes.link}>
+                  {/* <Link color="textPrimary" to="/treasury" className={classes.link}>
                 Treasury
               </Link>
               <a href="/" target="_blank" className={classes.link}>
                 Vaults
               </a> */}
-              {/* <Link color="textPrimary" to="/sbs" className={classes.link}>
+                  {/* <Link color="textPrimary" to="/sbs" className={classes.link}>
                 SBS
               </Link>
               <Link color="textPrimary" to="/liquidity" className={classes.link}>
@@ -134,10 +139,10 @@ const Nav = () => {
               <Link color="textPrimary" to="/regulations" className={classes.link}>
                 Regulations
               </Link> */}
-              <a href="https://yieldwolf.finance/avalanche/icecreamfinance" target="_blank" className={classes.link}>
-                Vaults
-              </a>
-{/*               <a href="" target="_blank" className={classes.link}>
+                  <a href="https://yieldwolf.finance/avalanche/icecreamfinance" target="_blank" className={classes.link}>
+                    Vaults
+                  </a>
+                  {/*               <a href="" target="_blank" className={classes.link}>
                 Social Club
               </a>
               <a href="https://icecreamfinancial.gitbook.io/sundae-finance/" target="_blank" className={classes.link}>
@@ -146,8 +151,12 @@ const Nav = () => {
               <a href="https://icecreamfinance.app" target="_blank" className={classes.link}>
                 IceCream
               </a> */}
-            </Box>
-            <AccountButton text="Connect" />
+                </Box>
+              </Grid>
+              <Grid item xs={4} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <AccountButton text="Connect" />
+              </Grid>
+            </Grid>
           </>
         ) : (
           <>
@@ -163,11 +172,6 @@ const Nav = () => {
             <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
               IceCream Finance
             </Typography>
-                         <img
-              alt="sundae.finance"
-              src={icecreamLogo}
-              style={{height: '40px', marginTop: '-10px', marginLeft: '10px', marginRight: '15px'}}
-            /> 
             <AccountButton text="Connect" />
             <Drawer
               className={classes.drawer}
@@ -190,14 +194,14 @@ const Nav = () => {
                 <ListItemLink primary="Home" to="/" />
                 <ListItemLink primary="Farm" to="/farms" />
                 <ListItemLink primary="Boardroom" to="/boardroom" />
-{/*                 <ListItemLink primary="Bonds" to="/bonds" />
+                {/*                 <ListItemLink primary="Bonds" to="/bonds" />
                 <ListItemLink primary="Dao" to="/rebates" /> */}
                 <ListItem button component="a" href="https://yieldwolf.finance/avalanche/icecreamfinance">
                   <ListItemText disableTypography style={{ color: '#FFFFFF' }}>
                     Vaults
                   </ListItemText>
                 </ListItem>
-{/*                 <ListItem button component="a" href="">
+                {/*                 <ListItem button component="a" href="">
                   <ListItemText disableTypography style={{ color: '#FFFFFF' }}>
                     Social Club
                   </ListItemText>
@@ -207,7 +211,7 @@ const Nav = () => {
                     Documents
                   </ListItemText>
                 </ListItem>
-{/*                 <ListItem button component="a" href="https://icecreamfinance.app">
+                {/*                 <ListItem button component="a" href="https://icecreamfinance.app">
                   <ListItemText disableTypography style={{ color: '#FFFFFF' }}>
                     IceCream
                   </ListItemText>
@@ -217,7 +221,7 @@ const Nav = () => {
           </>
         )}
       </Toolbar>
-    </AppBar>
+    </AppBar >
   );
 };
 
