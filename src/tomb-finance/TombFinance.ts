@@ -32,9 +32,8 @@ export class TombFinance {
   TSHARE: ERC20;
   TBOND: ERC20;
   WAVAX: ERC20;
-  FTM: ERC20;
-  DAI: ERC20;
   MIM: ERC20;
+  CREAM: ERC20;
   
 
   constructor(cfg: Configuration) {
@@ -50,16 +49,15 @@ export class TombFinance {
     for (const [symbol, [address, decimal]] of Object.entries(externalTokens)) {
       this.externalTokens[symbol] = new ERC20(address, provider, symbol, decimal);
     }
-    this.TOMB = new ERC20(deployments.tomb.address, provider, 'FUDGE');
-    this.TSHARE = new ERC20(deployments.tShare.address, provider, 'STRAW');
-    this.TBOND = new ERC20(deployments.tBond.address, provider, 'CARAML');
+    this.TOMB = new ERC20(deployments.tomb.address, provider, 'CREAM');
+    this.TSHARE = new ERC20(deployments.tShare.address, provider, 'CSHARE');
+    this.TBOND = new ERC20(deployments.tBond.address, provider, 'CBOND');
     this.WAVAX = this.externalTokens['WAVAX'];
-    this.DAI = this.externalTokens['DAI'];
-    this.FTM = this.externalTokens['WFTM'];
-    this.MIM = this.externalTokens['']
+    this.MIM = this.externalTokens['MIM'];
+
 
     // Uniswap V2 Pair
-    this.TOMBWFTM_LP = new Contract(externalTokens['FUDGE-DAI LP'][0], IUniswapV2PairABI, provider);
+    this.TOMBWFTM_LP = new Contract(externalTokens['CREAM-AVAX-LP'][0], IUniswapV2PairABI, provider);
 
     this.config = cfg;
     this.provider = provider;
@@ -128,16 +126,16 @@ export class TombFinance {
     const lpToken = this.externalTokens[name];
     const lpTokenSupplyBN = await lpToken.totalSupply();
     const lpTokenSupply = getDisplayBalance(lpTokenSupplyBN, 18);
-    const token0 = name.startsWith('FUDGE') ? this.TOMB : this.TSHARE;
-    const isTomb = name.startsWith('FUDGE');
+    const token0 = name.startsWith('CREAM') ? this.TOMB : this.TSHARE;
+    const isTomb = name.startsWith('CREAM');
     const tokenAmountBN = await token0.balanceOf(lpToken.address);
     const tokenAmount = getDisplayBalance(tokenAmountBN, 18);
 
-    const ftmAmountBN = await this.FTM.balanceOf(lpToken.address);
+    const ftmAmountBN = await this.WAVAX.balanceOf(lpToken.address);
     const ftmAmount = getDisplayBalance(ftmAmountBN, 18);
     const tokenAmountInOneLP = Number(tokenAmount) / Number(lpTokenSupply);
     const ftmAmountInOneLP = Number(ftmAmount) / Number(lpTokenSupply);
-    const lpTokenPrice = await this.getLPTokenPrice(lpToken, token0, isTomb, false);
+    const lpTokenPrice = await this.getLPTokenPrice(lpToken, token0, isTomb);
     const lpTokenPriceFixed = Number(lpTokenPrice).toFixed(2).toString();
     const liquidity = (Number(lpTokenSupply) * Number(lpTokenPrice)).toFixed(2).toString();
     return {
@@ -185,14 +183,15 @@ export class TombFinance {
 
     const supply = await this.TSHARE.totalSupply();
 
-    const priceInFTM = await this.getSTRAWPriceFromPancakeswap();
-    const tombRewardPoolSupply = await this.TSHARE.balanceOf(TombFtmLPTShareRewardPool.address);
-    const tShareCirculatingSupply = supply.sub(tombRewardPoolSupply);
-    const priceOfOneFTM = await this.getSTRAWPriceFromPancakeswap();
-    const priceOfSharesInDollars = ( Number(priceOfOneFTM)).toFixed(2);
+    const priceInBNB = await this.getTokenPriceFromPancakeswap(this.TSHARE); //is it getting price
+
+    const bombRewardPoolSupply = await this.TSHARE.balanceOf(TombFtmLPTShareRewardPool.address);
+    const tShareCirculatingSupply = supply.sub(bombRewardPoolSupply);
+    const priceOfOneBNB = await this.getWFTMPriceFromPancakeswap();
+    const priceOfSharesInDollars = (Number(priceInBNB) * Number(priceOfOneBNB)).toFixed(2);
 
     return {
-      tokenInFtm: priceInFTM,
+      tokenInFtm: priceOfSharesInDollars,
       priceInDollars: priceOfSharesInDollars,
       totalSupply: getDisplayBalance(supply, this.TSHARE.decimal, 0),
       circulatingSupply: getDisplayBalance(tShareCirculatingSupply, this.TSHARE.decimal, 0),
@@ -200,8 +199,8 @@ export class TombFinance {
   }
 
   async getTombStatInEstimatedTWAP(): Promise<TokenStat> {
-    const { SeigniorageOracle, TombFtmRewardPool } = this.contracts;
-    const expectedPrice = await SeigniorageOracle.twap(this.TOMB.address, ethers.utils.parseEther('1'));
+    const { Oracle, TombFtmRewardPool } = this.contracts;
+    const expectedPrice = await Oracle.twap(this.TOMB.address, ethers.utils.parseEther('1'));
 
     const supply = await this.TOMB.totalSupply();
     const tombRewardPoolSupply = await this.TOMB.balanceOf(TombFtmRewardPool.address);
@@ -236,7 +235,7 @@ export class TombFinance {
     const depositTokenPrice = await this.getDepositTokenPriceInDollars(bank.depositTokenName, depositToken);
     const stakeInPool = await depositToken.balanceOf(bank.address);
     const TVL = Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal));
-    const stat = bank.earnTokenName === 'FUDGE' ? await this.getTombStat() : await this.getShareStat();
+    const stat = bank.earnTokenName === 'CREAM' ? await this.getTombStat() : await this.getShareStat();
     const tokenPerSecond = await this.getTokenPerSecond(
       bank.earnTokenName,
       bank.contract,
@@ -300,138 +299,19 @@ export class TombFinance {
       }
       return await poolContract.epochTombPerSecond(0);
     }
-    const rewardPerSecond = await poolContract.tSharePerSecond();
-    if (depositTokenName === 'FUDGE') {
-      return rewardPerSecond.mul(2750).div(55000);
-    } else if (depositTokenName === 'FUDGE-STRAW LP') {
-      return rewardPerSecond.mul(2750).div(55000);
-    } else if (depositTokenName === 'STRAW-AVAX LP') {
-      return rewardPerSecond.mul(5500).div(55000);
-    } else if (depositTokenName === 'FUDGE-CREAM LP') {
-      return rewardPerSecond.mul(5500).div(55000);
-    } else if (depositTokenName === 'CREAM-STRAW LP') {
-      return rewardPerSecond.mul(2750).div(55000);
-    } else if (depositTokenName === 'FUDGE-DAI LP') {
-      return rewardPerSecond.mul(27500).div(55000);
+    const rewardPerSecond = await poolContract.csharePerSecond(); //update rewards
+    if (depositTokenName.startsWith('CSHARE')) {
+      return rewardPerSecond.mul(1025).div(41000);
+    } else if (depositTokenName.startsWith('CREAM-CSHARE')) {
+      return rewardPerSecond.mul(1025).div(41000);
+    } else if (depositTokenName === 'CREAM') {
+      return rewardPerSecond.mul(16400).div(41000);
     } else {
-      return rewardPerSecond.mul(8250).div(55000);
-    }
-  }
-  async getAVAXPriceFromPancakeswap(): Promise<string> {
-    //not here
-    const ready = await this.provider.ready;
-    if (!ready) return;
-    const { WAVAX, MIM } = this.externalTokens;
-    try {
-      const fusdt_wftm_lp_pair = this.externalTokens['MIM-WAVAX-LP'];
-      let ftm_amount_BN = await WAVAX.balanceOf(fusdt_wftm_lp_pair.address);
-      let ftm_amount = Number(getFullDisplayBalance(ftm_amount_BN, WAVAX.decimal));
-      let fusdt_amount_BN = await MIM.balanceOf(fusdt_wftm_lp_pair.address);
-      let fusdt_amount = Number(getFullDisplayBalance(fusdt_amount_BN, MIM.decimal));
-      return (fusdt_amount / ftm_amount).toString();
-    } catch (err) {
-      console.error(`Failed to fetch token price of AVAX: ${err}`);
-    }
-  }
-  async getWAVAXPriceFromPancakeswap(): Promise<string> {
-    //not here
-    const ready = await this.provider.ready;
-    if (!ready) return;
-    const { WAVAX, MIM } = this.externalTokens;
-    try {
-      const fusdt_wftm_lp_pair = this.externalTokens['MIM-WAVAX-LP'];
-      let ftm_amount_BN = await WAVAX.balanceOf(fusdt_wftm_lp_pair.address);
-      let ftm_amount = Number(getFullDisplayBalance(ftm_amount_BN, WAVAX.decimal));
-      let fusdt_amount_BN = await MIM.balanceOf(fusdt_wftm_lp_pair.address);
-      let fusdt_amount = Number(getFullDisplayBalance(fusdt_amount_BN, MIM.decimal));
-      return (fusdt_amount / ftm_amount).toString();
-    } catch (err) {
-      console.error(`Failed to fetch token price of AVAX: ${err}`);
+      return rewardPerSecond.mul(22550).div(41000);
     }
   }
 
-
-  async getCSHAREPriceFromPancakeswap(): Promise<string> {
-    //not here
-    const ready = await this.provider.ready;
-    const wavaxInDollars = await this.getWAVAXPriceFromPancakeswap();
-    if (!ready) return;
-    const { WAVAX, CSHARE } = this.externalTokens;
-    try {
-      const fusdt_wftm_lp_pair = this.externalTokens['CSHARE-AVAX LP'];
-      let ftm_amount_BN = await WAVAX.balanceOf(fusdt_wftm_lp_pair.address);
-      let ftm_amount = Number(getFullDisplayBalance(ftm_amount_BN, WAVAX.decimal));
-      let fusdt_amount_BN = await CSHARE.balanceOf(fusdt_wftm_lp_pair.address);
-      let fusdt_amount = Number(getFullDisplayBalance(fusdt_amount_BN, CSHARE.decimal));
-      let cshare_price = (ftm_amount / fusdt_amount) * Number(wavaxInDollars);
-      return cshare_price.toString();
-
-    } catch (err) {
-      console.error(`Failed to fetch token price of AVAX: ${err}`);
-    }
-  }
-
-
-  async getCREAMPriceFromPancakeswap(): Promise<string> {
-    //not here
-    const ready = await this.provider.ready;
-    const wavaxInDollars = await this.getWAVAXPriceFromPancakeswap();
-    if (!ready) return;
-    const { WAVAX, CREAM } = this.externalTokens;
-    try {
-      const fusdt_wftm_lp_pair = this.externalTokens['CREAM-AVAX LP'];
-      let ftm_amount_BN = await WAVAX.balanceOf(fusdt_wftm_lp_pair.address);
-      let ftm_amount = Number(getFullDisplayBalance(ftm_amount_BN, WAVAX.decimal));
-      let fusdt_amount_BN = await CREAM.balanceOf(fusdt_wftm_lp_pair.address);
-      let fusdt_amount = Number(getFullDisplayBalance(fusdt_amount_BN, CREAM.decimal));
-      let cream_price = (ftm_amount / fusdt_amount) * Number(wavaxInDollars);
-      return cream_price.toString();
-
-    } catch (err) {
-      console.error(`Failed to fetch token price of AVAX: ${err}`);
-    }
-  }
-
-  async getFUDGEPriceFromPancakeswap(): Promise<string> {
-    //not here
-    const ready = await this.provider.ready;
-    const daiInDollars = '1'
-    if (!ready) return;
-    const { DAI, FUDGE } = this.externalTokens;
-    try {
-      const fusdt_wftm_lp_pair = this.externalTokens['FUDGE-DAI LP'];
-      let ftm_amount_BN = await DAI.balanceOf(fusdt_wftm_lp_pair.address);
-      let ftm_amount = Number(getFullDisplayBalance(ftm_amount_BN, DAI.decimal));
-      let fusdt_amount_BN = await FUDGE.balanceOf(fusdt_wftm_lp_pair.address);
-      let fusdt_amount = Number(getFullDisplayBalance(fusdt_amount_BN, FUDGE.decimal));
-      let cream_price = (ftm_amount / fusdt_amount);
-      return cream_price.toString();
-
-    } catch (err) {
-      console.error(`Failed to fetch token price of AVAX: ${err}`);
-    }
-  }
-
-  async getSTRAWPriceFromPancakeswap(): Promise<string> {
-    //not here
-    const ready = await this.provider.ready;
-    const wavaxInDollars = await this.getWAVAXPriceFromPancakeswap();
-    if (!ready) return;
-    const { WAVAX, STRAW } = this.externalTokens;
-    try {
-      const fusdt_wftm_lp_pair = this.externalTokens['STRAW-AVAX LP'];
-      let ftm_amount_BN = await WAVAX.balanceOf(fusdt_wftm_lp_pair.address);
-      let ftm_amount = Number(getFullDisplayBalance(ftm_amount_BN, WAVAX.decimal));
-      let fusdt_amount_BN = await STRAW.balanceOf(fusdt_wftm_lp_pair.address);
-      let fusdt_amount = Number(getFullDisplayBalance(fusdt_amount_BN, STRAW.decimal));
-      let cream_price = (ftm_amount / fusdt_amount) * Number(wavaxInDollars)
-      console.log(`STRAW PRICE ${cream_price.toString()}`)
-      return cream_price.toString();
-
-    } catch (err) {
-      console.error(`Failed to fetch token price of AVAX: ${err}`);
-    }
-  }
+ 
 
   /**
    * Method to calculate the tokenPrice of the deposited asset in a pool/bank
@@ -442,73 +322,20 @@ export class TombFinance {
    * @returns
    */
 
-  async getDepositTokenPriceInDollars(tokenName: string, token: ERC20) {
+   async getDepositTokenPriceInDollars(tokenName: string, token: ERC20) {
     let tokenPrice;
     const priceOfOneFtmInDollars = await this.getWFTMPriceFromPancakeswap();
-    const priceOfOneAvaxInDollars = await this.getAVAXPriceFromPancakeswap();
-    const priceOfOneCshareInDollars = await this.getCSHAREPriceFromPancakeswap();
-    const priceOfOneCreamInDollars = await this.getCREAMPriceFromPancakeswap();
     if (tokenName === 'WAVAX') {
-      tokenPrice = priceOfOneAvaxInDollars;
-    } else if (tokenName === 'CSHARE') {
-      tokenPrice = priceOfOneCshareInDollars;
-    } else if (tokenName === 'CREAM') {
-      tokenPrice = priceOfOneCreamInDollars;
-    }
-    else {
-      if (tokenName === 'FUDGE-DAI LP') {
-        tokenPrice = await this.getLPTokenPrice(token, this.TOMB, true, false);
-      } else if (tokenName === 'STRAW-DAI LP') {
-        tokenPrice = await this.getLPTokenPrice(token, this.TSHARE, false, false);
-      } else if (tokenName === 'CSHARE-AVAX LP') {
-        tokenPrice = await this.getLPTokenPrice(
-          token,
-          new ERC20('0x155f794b56353533E0AfBF76e1B1FC57DFAd5Bd7', this.provider, 'CSHARE'),
-          false,
-          true,
-        );
-      } else if (tokenName === 'STRAW-AVAX LP') {
-        tokenPrice = await this.getLPV2TokenPrice(
-          token,
-          this.TSHARE,
-          false,
-        );
-      } else if (tokenName === 'FUDGE-STRAW LP') {
-        tokenPrice = await this.getLPV2TokenPrice(
-          token,
-          this.TOMB,
-          true
-        );
-      }
-      else if (tokenName === 'CREAM-STRAW LP') {
-        tokenPrice = await this.getLPV2TokenPrice(
-          token,
-          new ERC20('0xAE21d31a6494829a9E4B2B291F4984AAE8121757', this.provider, 'CREAM'),
-          false,
-        );
-      } else if (tokenName === 'FUDGE-CREAM LP') {
-        tokenPrice = await this.getLPV2TokenPrice(
-          token,
-          this.TOMB,
-          true
-        );
-      }
-      else if (tokenName === 'CREAM-AVAX LP') {
-        tokenPrice = await this.getLPTokenPrice(
-          token,
-          new ERC20('0xAE21d31a6494829a9E4B2B291F4984AAE8121757', this.provider, 'CREAM'),
-          true,
-          true,
-        );
-      } else if (tokenName === 'CREAM-CSHARE LP') {
-        tokenPrice = await this.getLPTokenPrice(
-          token,
-          new ERC20('0x155f794b56353533E0AfBF76e1B1FC57DFAd5Bd7', this.provider, 'CSHARE'),
-          true,
-          true,
-        );
-      } else if (tokenName === 'DAI') {
-        tokenPrice = priceOfOneFtmInDollars;
+      tokenPrice = priceOfOneFtmInDollars;
+    } else {
+      if (tokenName === 'CREAM-AVAX-LP') {
+        tokenPrice = await this.getLPTokenPrice(token, this.TOMB, true);
+      } else if (tokenName === 'CSHARE-AVAX-LP') {
+        tokenPrice = await this.getLPTokenPrice(token, this.TSHARE, false);
+      } else if (tokenName === 'CREAM-CSHARE-LP') {
+        tokenPrice = await this.getLPTokenPrice(token, this.TSHARE, false);
+      } else if (tokenName === 'MIM') {
+        tokenPrice = '1';
       } else {
         tokenPrice = await this.getTokenPriceFromPancakeswap(token);
         tokenPrice = (Number(tokenPrice) * Number(priceOfOneFtmInDollars)).toString();
@@ -579,18 +406,11 @@ export class TombFinance {
    * @param isTomb sanity check for usage of tomb token or tShare
    * @returns price of the LP token
    */
-  async getLPTokenPrice(lpToken: ERC20, token: ERC20, isTomb: boolean, isFake: boolean): Promise<string> {
+   async getLPTokenPrice(lpToken: ERC20, token: ERC20, isTomb: boolean): Promise<string> {
     const totalSupply = getFullDisplayBalance(await lpToken.totalSupply(), lpToken.decimal);
     //Get amount of tokenA
     const tokenSupply = getFullDisplayBalance(await token.balanceOf(lpToken.address), token.decimal);
-    const stat =
-      isFake === true
-        ? isTomb === true
-          ? await this.getTombStatFake()
-          : await this.getShareStatFake()
-        : isTomb === true
-          ? await this.getTombStat()
-          : await this.getShareStat();
+    const stat = isTomb === true ? await this.getTombStat() : await this.getShareStat();
     const priceOfToken = stat.priceInDollars;
     const tokenInLP = Number(tokenSupply) / Number(totalSupply);
     const tokenPrice = (Number(priceOfToken) * tokenInLP * 2) //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total
@@ -598,46 +418,6 @@ export class TombFinance {
     return tokenPrice;
   }
 
-  async getTombStatFake() {
-    const price = await fetch(
-      'https://api.coingecko.com/api/v3/simple/price?ids=icecream-finance&vs_currencies=usd',
-    ).then((res) => res.json());
-    return { priceInDollars: price['icecream-finance'].usd };
-  }
-
-  async getShareStatFake() {
-    const price = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=cream-shares&vs_currencies=usd').then(
-      (res) => res.json(),
-    );
-    return { priceInDollars: price['cream-shares'].usd };
-  }
-
-  async getLPV2TokenPrice(lpToken: ERC20, token: ERC20, isTomb: boolean): Promise<string> {
-    const totalSupply = getFullDisplayBalance(await lpToken.totalSupply(), lpToken.decimal);
-    //Get amount of tokenA
-    const tokenSupply = getFullDisplayBalance(await token.balanceOf(lpToken.address), token.decimal);
-    const stat = isTomb === true
-      ? await this.getTombStat()
-      : await this.getShareStat();
-    const priceOfToken = stat.priceInDollars;
-    console.log(priceOfToken)
-    const tokenInLP = Number(tokenSupply) / Number(totalSupply);
-    const tokenPrice = (Number(priceOfToken) * tokenInLP * 2) //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total
-      .toString();
-    console.log(tokenPrice)
-    return tokenPrice;
-  }
-
-
-  async getFudgeStat() {
-    const price = await this.getFUDGEPriceFromPancakeswap()
-    return price
-  }
-
-  async getStrawStat() {
-    const price = await this.getSTRAWPriceFromPancakeswap()
-    return price
-  }
 
 
   async earnedFromBank(
@@ -648,7 +428,7 @@ export class TombFinance {
   ): Promise<BigNumber> {
     const pool = this.contracts[poolName];
     try {
-      if (earnTokenName === 'FUDGE') {
+      if (earnTokenName === 'CREAM') {
         return await pool.pendingTOMB(poolId, account);
       } else {
         return await pool.pendingShare(poolId, account);
@@ -729,9 +509,9 @@ export class TombFinance {
     const ready = await this.provider.ready;
     if (!ready) return;
     const { chainId } = this.config;
-    const { DAI } = this.config.externalTokens;
+    const { WAVAX } = this.config.externalTokens;
 
-    const wftm = new Token(chainId, DAI[0], DAI[1], 'DAI');
+    const wftm = new Token(chainId, WAVAX[0], WAVAX[1]);
     const token = new Token(chainId, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
     try {
       const wftmToToken = await Fetcher.fetchPairData(wftm, token, this.provider);
@@ -768,18 +548,19 @@ export class TombFinance {
   // }
 
   async getWFTMPriceFromPancakeswap(): Promise<string> {
+    //not here
     const ready = await this.provider.ready;
     if (!ready) return;
-    const { WFTM, FUSDT } = this.externalTokens;
+    const { WAVAX, MIM } = this.externalTokens;
     try {
-      const fusdt_wftm_lp_pair = this.externalTokens['USDT-FTM LP'];
-      let ftm_amount_BN = await WFTM.balanceOf(fusdt_wftm_lp_pair.address);
-      let ftm_amount = Number(getFullDisplayBalance(ftm_amount_BN, WFTM.decimal));
-      let fusdt_amount_BN = await FUSDT.balanceOf(fusdt_wftm_lp_pair.address);
-      let fusdt_amount = Number(getFullDisplayBalance(fusdt_amount_BN, FUSDT.decimal));
+      const fusdt_wftm_lp_pair = this.externalTokens['USDT-BNB-LP'];
+      let ftm_amount_BN = await WAVAX.balanceOf(fusdt_wftm_lp_pair.address);
+      let ftm_amount = Number(getFullDisplayBalance(ftm_amount_BN, WAVAX.decimal));
+      let fusdt_amount_BN = await MIM.balanceOf(fusdt_wftm_lp_pair.address);
+      let fusdt_amount = Number(getFullDisplayBalance(fusdt_amount_BN, MIM.decimal));
       return (fusdt_amount / ftm_amount).toString();
     } catch (err) {
-      console.error(`Failed to fetch token price of WFTM: ${err}`);
+      console.error(`Failed to fetch token price of AVAX: ${err}`);
     }
   }
 
@@ -968,9 +749,6 @@ export class TombFinance {
       } else if (assetName === 'TSHARE') {
         asset = this.TSHARE;
         assetUrl = 'https://raw.githubusercontent.com/IceCreamFinancial/contracts-public/main/straw.png';
-      } else if (assetName === 'TBOND') {
-        asset = this.TBOND;
-        assetUrl = 'https://raw.githubusercontent.com/IceCreamFinancial/contracts-public/main/caraml.png';
       }
       await ethereum.request({
         method: 'wallet_watchAsset',

@@ -1,7 +1,5 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import Page from '../../components/Page';
-import HomeImage from '../../assets/img/home.png';
-import CashImage from '../../assets/img/3OMB.svg';
 import Image from 'material-ui-image';
 import styled from 'styled-components';
 import { Alert } from '@material-ui/lab';
@@ -20,7 +18,6 @@ import useFantomPrice from '../../hooks/useFantomPrice';
 import { tomb as tombTesting, tShare as tShareTesting } from '../../tomb-finance/deployments/deployments.testing.json';
 import { tomb as tombProd, tShare as tShareProd } from '../../tomb-finance/deployments/deployments.mainnet.json';
 import useTotalTreasuryBalance from '../../hooks/useTotalTreasuryBalance.js';
-import useRebateTreasury from '../../hooks/useRebateTreasury';
 
 import { Box, Button, Card, CardContent, Grid, Paper, Typography } from '@material-ui/core';
 import ZapModal from '../Bank/components/ZapModal';
@@ -68,27 +65,17 @@ const viewStrawAddress = 'https://dexscreener.com/avalanche/0x5eef38855090ccc49a
 const buystrawAddress = 'https://traderjoexyz.com/trade?outputCurrency=0xf8D0C6c3ddC03F43A0687847f2b34bfd6941C2A2#/';
 
 const Home = () => {
-  const rebateStats = useRebateTreasury();
   const classes = useStyles();
   const TVL = useTotalValueLocked();
-  const tombFtmLpStats = useLpStats('TOMB-FTM-LP');
-  const tShareFtmLpStats = useLpStats('TSHARE-FTM-LP');
+  const tombFtmLpStats = useLpStats('CREAM-AVAXLP');
+  const tShareFtmLpStats = useLpStats('CSHARE-AVAX-LP');
   const tombStats = useTombStats();
   const tShareStats = usetShareStats();
   const tBondStats = useBondStats();
   const tombFinance = useTombFinance();
   const { price: ftmPrice, marketCap: ftmMarketCap, priceChange: ftmPriceChange } = useFantomPrice();
-  const { balance: rebatesTVL } = useTotalTreasuryBalance();
-  const {
-    balance,
-    balance_2shares_wftm,
-    balance_3omb_wftm,
-    balance_3shares_wftm,
-    balance_3omb,
-    balance_3shares,
-    balance_2shares,
-  } = useTotalTreasuryBalance();
-  const totalTVL = TVL + rebatesTVL;
+
+  const totalTVL = TVL;
 
   let tomb;
   let tShare;
@@ -138,8 +125,8 @@ const Home = () => {
   );
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
 
-  const tombLpZap = useZap({ depositTokenName: 'TOMB-FTM-LP' });
-  const tshareLpZap = useZap({ depositTokenName: 'TSHARE-FTM-LP' });
+  const tombLpZap = useZap({ depositTokenName: 'CREAM-AVAX-LP' });
+  const tshareLpZap = useZap({ depositTokenName: 'CSHARE-AVAX-LP' });
 
   const StyledLink = styled.a`
     font-weight: 700;
@@ -155,7 +142,7 @@ const Home = () => {
         tombLpZap.onZap(zappingToken, tokenName, amount);
         onDissmissTombZap();
       }}
-      tokenName={'TOMB-FTM-LP'}
+      tokenName={'CREAM-AVAX-LP'}
     />,
   );
 
@@ -167,7 +154,7 @@ const Home = () => {
         tshareLpZap.onZap(zappingToken, tokenName, amount);
         onDissmissTshareZap();
       }}
-      tokenName={'TSHARE-FTM-LP'}
+      tokenName={'CSHARE-AVAX-LP'}
     />,
   );
 
@@ -344,7 +331,7 @@ const Home = () => {
           >
             <CardContent align="center" style={{ position: 'relative' }}>
               <div>
-                <h2>FUDGE</h2>
+                <h2>CREAM</h2>
               </div>
               <div>
                 <h3>Governance Token</h3>
@@ -413,7 +400,7 @@ const Home = () => {
           >
             <CardContent align="center" style={{ position: 'relative' }}>
               <div>
-                <h2>STRAW</h2>
+                <h2>CSHARE</h2>
               </div>
               <div>
                 <h3>Share Token</h3>
@@ -471,12 +458,12 @@ const Home = () => {
           </Card>
         </Grid>
 
-        {/* GBOND */}
+       {/*  {/* GBOND 
         <Grid item xs={12} sm={4}>
           <Card
             style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}
-            // onMouseOver={handleMouseOverCaraml}
-            // onMouseOut={handleMouseOutCaraml}
+             onMouseOver={handleMouseOverCaraml}
+             onMouseOut={handleMouseOutCaraml}
           >
             <CardContent align="center" style={{ position: 'relative' }}>
               <div>
@@ -495,7 +482,7 @@ const Home = () => {
               >
                 +&nbsp;
                 <img alt="metamask fox" style={{ width: '20px' }} src={MetamaskFox} />
-              </Button> */}
+              </Button> 
               <Box mt={2}>
                 <CardIcon>
                   <TokenSymbol symbol="TBOND" />
@@ -504,11 +491,11 @@ const Home = () => {
               Current Price
               <Box>
                 <span style={{ fontSize: '30px' }}>${tBondPriceInDollars ? tBondPriceInDollars : '-.--'}</span>
-                {/* <span style={{ fontSize: '30px' }}>{tBondPriceInFTM ? tBondPriceInFTM : '-.----'} </span> */}
+                {/* <span style={{ fontSize: '30px' }}>{tBondPriceInFTM ? tBondPriceInFTM : '-.----'} </span> 
               </Box>
               {/* <Box>
                 <span style={{ fontSize: '16px' }}>${tBondPriceInDollars ? tBondPriceInDollars : '-.--'}</span>
-              </Box> */}
+              </Box> *
               <span style={{ fontSize: '12px' }}>
                 Market Cap: ${(tBondCirculatingSupply * tBondPriceInDollars).toFixed(2)} <br />
                 Circulating Supply: {tBondCirculatingSupply} <br />
@@ -522,7 +509,7 @@ const Home = () => {
             </CardContent>
           </Card>
         </Grid>
-
+ */}
         {/* LP POOLS */}
 
         {/* <Grid item xs={12} sm={6}>
@@ -586,7 +573,7 @@ const Home = () => {
         </Grid> */}
       </Grid>
 
-      <Box mt={2} style={{ marginTop: '50px' }}>
+     {/*  <Box mt={2} style={{ marginTop: '50px' }}>
         <Typography align="center" variant="h4" gutterBottom style={{ marginBottom: '50px' }}>
           Protocol Owned Liquidity
         </Typography>
@@ -682,7 +669,7 @@ const Home = () => {
             </Card>
           </Grid>
         </Grid>
-      </Box>
+      </Box> */}
     </Page>
   );
 };

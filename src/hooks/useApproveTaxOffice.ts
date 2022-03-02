@@ -29,7 +29,7 @@ function useApproveTaxOffice(): [ApprovalState, () => Promise<void>] {
   // check the current approval status
   const approvalState: ApprovalState = useMemo(() => {
     // we might not have enough data to know whether or not we need to approve
-    if (token === tombFinance.FTM) return ApprovalState.APPROVED;
+    if (token === tombFinance.WAVAX) return ApprovalState.APPROVED;
     if (!currentAllowance) return ApprovalState.UNKNOWN;
 
     // amountToApprove will be defined if currentAllowance is

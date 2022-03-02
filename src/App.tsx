@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Provider } from 'react-redux';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { ThemeProvider as TP } from '@material-ui/core/styles';
@@ -13,9 +13,8 @@ import theme from './theme';
 import newTheme from './newTheme';
 import config from './config';
 import Updaters from './state/Updaters';
-import Loader from './components/Loader';
+import Loader from './components/MiniLoader';
 import Popups from './components/Popups';
-import Regulations from './views/Regulations/Regulations';
 import { RefreshContextProvider } from './contexts/RefreshContext';
 import Particles from 'react-tsparticles'; //'react-particles-js';
 
@@ -35,12 +34,21 @@ const NoMatch = () => (
 );
 
 const App: React.FC = () => {
+  const [loading, setLoading] = useState(false);
+
   // Clear localStorage for mobile users
   if (typeof localStorage.version_app === 'undefined' || localStorage.version_app !== '1.1') {
     localStorage.clear();
     localStorage.setItem('connectorId', '');
     localStorage.setItem('version_app', '1.1');
   }
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  }, []);
 
   usePromptNetwork();
 
@@ -50,7 +58,7 @@ const App: React.FC = () => {
         id="tsparticles"
         options={{
           background: {
-            image: 'public/background1.jpg',
+            image: 'public/background1.png',
           },
           fpsLimit: 120,
           interactivity: {
@@ -70,7 +78,7 @@ const App: React.FC = () => {
                 distance: 400,
                 duration: 2,
                 opacity: 0.8,
-                size: 40,
+                size: 15,
               },
               push: {
                 quantity: 4,
@@ -91,13 +99,13 @@ const App: React.FC = () => {
               enable: true,
               outMode: 'bounce',
               random: false,
-              speed: 3,
+              speed: 1.5,
               straight: false,
             },
             number: {
               density: {
                 enable: true,
-                area: 800,
+                area: 2000,
               },
               value: 80,
             },
@@ -109,13 +117,31 @@ const App: React.FC = () => {
             },
             size: {
               random: true,
-              value: 7,
+              value: 5,
             },
           },
           detectRetina: true,
         }}
       />
       <Providers>
+      {loading ? (
+        <div
+          style={{
+            alignItems: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            width: '100%',
+            height: '100vh',
+          }}
+        >
+          <img src={require('./assets/img/loader.gif')} alt="loading..." style={{ width: '8%' }} />
+          {/*<DotLoader
+        size={200} 
+        color={'#fe5f80'}
+        loading={loading}
+        />**/}
+        </div>
+      ) : (
         <Router>
           <Suspense fallback={<Loader />}>
             <Switch>
@@ -140,6 +166,7 @@ const App: React.FC = () => {
             </Switch>
           </Suspense>
         </Router>
+      )}
       </Providers>
     </div>
   );

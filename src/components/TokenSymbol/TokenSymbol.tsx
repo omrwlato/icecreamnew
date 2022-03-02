@@ -1,82 +1,53 @@
 import React from 'react';
 
 //Graveyard ecosystem logos
-import tombLogo from '../../assets/img/fudge.png';
-import tShareLogo from '../../assets/img/straw.png';
-import tBondLogo from '../../assets/img/caraml.png'; // home page up
-import tombLogoPNG from '../../assets/img/fudge.png';
-import tShareLogoPNG from '../../assets/img/straw.png';
-import wftmLogo from '../../assets/img/dai.png';
-import twoshareLogo from '../../assets/img/cshare.png';
-import twoombLogo from '../../assets/img/cream.png';
-import TwoombLPLogo from '../../assets/img/cream-wavax.png';
-import TwosharesLPLogo from '../../assets/img/cshare-avax.png';
-import TwoombTwosharesLPLogo from '../../assets/img/creamcshare.png';
-import wavaxLogo from '../../assets/img/wavax.png';
-import tombFtmLpLogo from '../../assets/img/fudge-dai.png';
-import tshareFtmLpLogo from '../../assets/img/straw-dai.png';
-import ThreeombLPLogo from '../../assets/img/fudge-dai.png';
-import ThreesharesLPLogo from '../../assets/img/straw-dai.png';
-import fsLogo from '../../assets/img/fudge-straw.png';
-import faLogo from '../../assets/img/fudge-avax.png';
-
-import fcLogo from '../../assets/img/fudge-cream.png';
-import csLogo from '../../assets/img/cream-straw.png';
-import saLogo from '../../assets/img/straw-avax.png';
+import tombLogo from '../../assets/img/NEWCREAM.png';
+import tShareLogo from '../../assets/img/cshare.svg';
+import tombLogoPNG from '../../assets/img/cream.svg';
+import tShareLogoPNG from '../../assets/img/NEWSHARE.png';
+import tBondLogo from '../../assets/img/cbond.png';
+import mimLogo from '../../assets/img/mim.png';
+import wavax from '../../assets/img/wavax.png';
+import creamCshare from '../../assets/img/creamcshare.png';
+import creamAvax from '../../assets/img/cream-wavax.png';
+import cshareAvax from '../../assets/img/cshare-avax.png';
 
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
   //=====================
+  TOMB: tombLogo,
   TOMBPNG: tombLogoPNG,
+  WAVAX: wavax,
   TSHAREPNG: tShareLogoPNG,
-  WFTM: wftmLogo,
-  'CREAM-AVAX LP': TwoombLPLogo,
-  'CSHARE-AVAX LP': TwosharesLPLogo,
-  'CREAM-CSHARE LP': TwoombTwosharesLPLogo,
-  'CREAM': twoombLogo,
-  'CSHARE': twoshareLogo,
-  'TOMB': tombLogo,
-  'TSHARE': tShareLogo,
-  'TBOND': tBondLogo,
-  'FUDGE-DAI LP': ThreeombLPLogo,
-  'STRAW-DAI LP': ThreesharesLPLogo,
-  'DAI': wftmLogo,
-  'TOMB-FTM-LP': tombFtmLpLogo,
-  'TSHARE-FTM-LP': tshareFtmLpLogo,
-  'FUDGE': tombLogoPNG,
-  'CARAML': tBondLogo,
-  'STRAW': tShareLogo,
-  'WAVAX': wavaxLogo,
-  'FUDGE-STRAW LP':fsLogo,
-  'FUDGE-AVAX LP':faLogo,
-  'FUDGE-CREAM LP':fcLogo,
-  'CREAM-STRAW LP':csLogo,
-  'STRAW-AVAX LP':saLogo
-
+  CREAM: tombLogo,
+  TSHARE: tShareLogoPNG,
+  TBOND: tBondLogo,
+  CBOND: tBondLogo,
+  CSHARE: tShareLogoPNG,
+  MIM: mimLogo,
+  'CREAM-AVAX-LP': creamAvax,
+  'CREAM-CSHARE-LP': creamCshare,
+  'CSHARE-AVAX-LP': cshareAvax,
 };
-
 type LogoProps = {
   symbol: string;
   size?: number;
 };
 
-const TokenSymbol: React.FC<LogoProps> = ({symbol}) => {
+const TokenSymbol: React.FC<LogoProps> = ({ symbol }) => {
   if (!logosBySymbol[symbol]) {
     throw new Error(`Invalid Token Logo symbol: ${symbol}`);
   }
-  if(symbol === 'TOMB' || symbol === 'TSHARE' || symbol === 'TBOND'  || symbol === 'FUDGE-DAI' || symbol === 'FUDGE-AVAX'){
-    return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={110} height={110} />;
-  } else if( symbol === 'CREAM-CSHARE-LP'){
-    return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={150} height={90} />;
-  }/* else if( symbol === 'CREAM'){
+  if (symbol === 'CREAM-AVAX-LP' || symbol === 'CSHARE-AVAX-LP') {
+    return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={125} height={75} />;
+  } else if (symbol === 'CREAM-CSHARE-LP') {
+    return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={130} />;
+  } else if (symbol === 'CREAM') {
     return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={100} height={89} />;
-  } */else if( symbol === 'WAVAX'){
-    return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={65} height={65} />;
-  }else{
+  } else {
     return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={100} height={100} />;
   }
-    
 };
 
 export default TokenSymbol;
