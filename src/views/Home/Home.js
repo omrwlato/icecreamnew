@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   card: {
-    backgroundColor: 'rgba(229, 152, 155, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
     boxShadow: 'none',
     border: '1px solid var(--white)',
   },
