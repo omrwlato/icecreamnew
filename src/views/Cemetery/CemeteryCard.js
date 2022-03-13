@@ -21,6 +21,9 @@ import useWithdraw from '../../hooks/useWithdraw';
 import useTokenBalance from '../../hooks/useTokenBalance';
 import MetamaskFox from '../../assets/img/metamask-fox.svg';
 import LinkIcon from '@mui/icons-material/Link';
+import InputIcon from '@mui/icons-material/Input';
+import ArrowDropUpTwoTone from '@mui/icons-material/ArrowDropUpTwoTone';
+import ArrowDropDownTwoTone from '@mui/icons-material/ArrowDropDownTwoTone';
 import TokenSymbol from '../../components/TokenSymbol';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
@@ -107,151 +110,208 @@ const CemeteryCard = ({ bank }) => {
   );
 
   return (
-
-    < Grid item xs={12} md={4} lg={4} >
+    < Grid item xs={12}>
       <Card >
         <CardContent style={{ position: 'relative', backgroundColor: 'white' }}>
-          <Grid alignItems="flex-start" justifyContent="space-between" style={{ display: 'flex', marginBottom: '10px' }}>
-            <Grid>
-              <TokenSymbol symbol={bank.depositTokenName} />
+          <Grid justifyContent="space-between" style={{ display: 'flex', flexDirection: "row" }}>
+            <Grid alignItems="flex-start" justifyContent="space-between" style={{ display: 'flex' }}>
+              <Grid style={{ padding: '10px' }}>
+                <TokenSymbol symbol={bank.depositTokenName} />
+              </Grid>
+              <Grid style={{ padding: '10px', display: 'flex', flexDirection: "row", alignContent: "center" }} mt={2} mb={2}>
+                <Grid>
+                  <Link style={{ textDecoration: 'none', color: '#2596be' }} to={{ pathname: `https://snowtrace.io/address/${bank.address}` }} target="_blank">
+                    <h2 style={{ color: 'black', padding: '10px' }}>{bank.depositTokenName}</h2>
+                  </Link>
+                </Grid>
+                <Grid style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Link style={{ textDecoration: 'none', color: '#2596be' }} to={{ pathname: `https://snowtrace.io/address/${bank.address}` }} target="_blank">
+                    <InputIcon style={{ color: 'black' }} />
+                  </Link>
+                </Grid>
+              </Grid>
             </Grid>
-            <Grid mt={2} mb={2}>
-              <h2 style={{ marginBottom: '10px', color: 'black' }}>{bank.depositTokenName}</h2>
-              <div style={{ display: 'flex', justifyContent: 'right', alignItems: 'right' }}>
-                <h3 style={{ marginBottom: '10px', color: 'black' }}>{bank.multiplier}</h3>
-              </div>
-            </Grid>
-          </Grid>
-          <hr style={{
-            color: '#D3D3D3',
-            backgroundColor: '#D3D3D3',
-            height: 1
-          }} />
-          <Grid justifyContent="space-between" style={{ display: 'flex', marginBottom: '5px', marginTop: '10px' }}>
-            <h3 style={{ marginBottom: '10px', color: 'black' }}>APR:</h3>
-            <h4 style={{ color: 'black' }}>{statsOnPool?.dailyAPR}%</h4>
-          </Grid>
-          <Grid justifyContent="space-between" style={{ display: 'flex', marginBottom: '5px' }}>
-            <h3 style={{ marginBottom: '10px', color: 'black' }}>Earn:</h3>
-            <h4 style={{ color: 'black' }}>{bank.earnTokenName}</h4>
-          </Grid>
-          <Grid>
-            <h3 style={{ color: 'black', marginBottom: '10px', marginTop: '15px' }}>{`${bank.earnTokenName} EARNED`}</h3>
-          </Grid>
-          <Grid alignItems="flex-start" justifyContent="space-between" style={{ display: 'flex', marginBottom: '10px' }}>
-            <Grid>
-              <h2 style={{ color: 'black' }}>{getDisplayBalance(earnings)}</h2>
-              <h5 style={{ color: 'grey', marginTop: '5px', marginBottom: '15px', fontWeight: 'normal' }}>{`≈ $${earnedInDollars}`}</h5>
-            </Grid>
-            <Button onClick={onReward} color="primary"
-              variant="contained"
-              style={{ borderRadius: '10px' }}
-              className="shinyButtonSecondary">
-              Collect
-            </Button>
-          </Grid>
-          <Grid style={{ display: 'flex', flexDirection: 'column', marginBottom: '10px' }}>
-            <Grid alignItems="flex-start">
-              <h3 style={{ marginBottom: '10px', color: 'black' }}>{`${bank.depositTokenName} Staked`}</h3>
-            </Grid>
-            <Grid alignItems="center">
 
-              <span>
-                {approveStatus !== ApprovalState.APPROVED ? (
-                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Button
-                      disabled={
-                        bank.closedForStaking ||
-                        approveStatus === ApprovalState.PENDING ||
-                        approveStatus === ApprovalState.UNKNOWN
-                      }
-                      onClick={approve}
-                      color="primary"
-                      variant="contained"
-                      style={{
-                        marginBottom: '5px',
-                        borderRadius: '10px',
+            <Grid alignItems="center" justifyContent="center" style={{ display: 'flex', flexDirection: "row", width: '60%' }}>
 
-                      }}
-                      className="shinyButtonSecondary"
-                    >
-                      {`Approve ${bank.depositTokenName}`}
-                    </Button>
-                  </div>
-                ) : (
-                  <Grid container justifyContent='space-between' alignItems='flex-start' flex spacing={2}>
-                    <Grid item>
-                      <h2 style={{ color: 'black' }}>
-                        {getDisplayBalance(stakedBalance, bank.depositToken.decimal)}
-                      </h2>
-                      <h5 style={{ color: 'grey', fontWeight: 'normal', marginTop: '5px' }}>
-                        {`≈ $${stakedInDollars}`}
-                      </h5>
-                    </Grid>
-                    <Grid item>
-                      <Grid container flex spacing={2}>
-                        <Grid item>
-                          <Button onClick={onPresentWithdraw} color="primary"
-                            variant="contained"
-                            style={{ borderRadius: '10px' }}
-                            className="shinyButtonSecondary">
-                            -
-                          </Button>
-                        </Grid>
-                        <Grid item >
-                          <Button color="primary"
-                            variant="contained"
-                            style={{ borderRadius: '10px' }}
-                            className="shinyButtonSecondary" disabled={bank.closedForStaking}
-                            onClick={() => (bank.closedForStaking ? null : onPresentDeposit())}>
-                            +
-                          </Button>
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                )}
-              </span>
-            </Grid>
-          </Grid>
-          <hr style={{
-            color: '#D3D3D3',
-            backgroundColor: '#D3D3D3',
-            height: 1
-          }} />
-          <Grid justifyContent="center" alignItems="center" style={{ display: 'flex' }}>
-            <Button className={classes.detailsButton}
-              style={{ borderRadius: '10px', textDecoration: 'none' }}
-              onClick={() => setShow(prev => !prev)}>{show ? "Hide" : "Details"}</Button>
-          </Grid>
-          {show &&
+              <Grid container item alignItems="center" justifyContent="center" style={{ display: 'flex', flexDirection: "column" }} >
+                <Grid item alignItems="center" justifyContent="center" style={{ padding: '10px' }}>
+                  <h3 style={{ color: 'black' }}>{`Staked`}</h3>
+                </Grid>
+                <Grid item alignItems="center" justifyContent="center" style={{ padding: '10px' }}>
+                  {approveStatus !== ApprovalState.APPROVED ? (
+                    <h2 style={{ color: 'black' }}>
+                      {`≈ $0`}
+                    </h2>
+                  ) : (
+                    <h2 style={{ color: 'black' }}>
+                      {`≈ $${stakedInDollars}`}
+                    </h2>
+                  )}
+                </Grid>
+              </Grid>
 
-            <Grid container spacing={1} alignItems="center" justifyContent="space-between" style={{ marginTop: '15px' }}>
-              <Grid item align="center" xs={12} sm={4}>
+              <Grid container item alignItems="center" justifyContent="center" style={{ display: 'flex', flexDirection: "column" }} >
+                <Grid item alignItems="center" justifyContent="center" style={{ padding: '10px' }}>
+                  <h3 style={{ color: 'black' }}>{`TVL`}</h3>
+                </Grid>
+                <Grid item alignItems="center" justifyContent="center" style={{ padding: '10px' }}>
+                  <h2 style={{ color: 'black' }}>${statsOnPool?.TVL}</h2>
+                </Grid>
+              </Grid>
+
+              <Grid container item alignItems="center" justifyContent="center" style={{ display: 'flex', flexDirection: "column" }} >
+                <Grid item alignItems="center" justifyContent="center" style={{ padding: '10px' }}>
+                  <h3 style={{ color: 'black' }}>{`APR`}</h3>
+                </Grid>
+                <Grid item alignItems="center" justifyContent="center" style={{ padding: '10px' }}>
+                  <h2 style={{ color: 'black' }}>{statsOnPool?.dailyAPR}%</h2>
+                </Grid>
+              </Grid>
+
+              <Grid container item alignItems="center" justifyContent="center" style={{ display: 'flex', flexDirection: "column" }} >
                 <Button
-                  onClick={async () => {
-                    await watchAssetInMetamask(bank);
+                  color="primary"
+                  variant="contained"
+                  style={{
+                    marginBottom: '5px',
+                    borderRadius: '10px',
                   }}
-                  style={{ border: 'transparent', color: '#fd8064' }}
                 >
-                  <b>+</b>&nbsp;&nbsp;
-                  <img alt="metamask fox" style={{ width: '20px', filter: 'grayscale(0%)' }} src={MetamaskFox} />
+                  {`${bank.multiplier}`}
                 </Button>
               </Grid>
-              <Grid item xs={12} sm={4} align="center">
-                <Typography variant={'subtitle1'} align="center" style={{ color: 'black' }}>TVL</Typography>
-                <Typography variant={'subtitle1'} align="center" style={{ color: 'black' }}>${statsOnPool?.TVL}</Typography>
 
+              <Grid container item alignItems="center" justifyContent="center" style={{ display: 'flex', flexDirection: "column" }} >
+                <Button className={classes.detailsButton}
+                  style={{ borderRadius: '10px', textDecoration: 'none' }}
+                  onClick={() => setShow(prev => !prev)}>
+                  {show ? <ArrowDropUpTwoTone sx={{ fontSize: 40 }} style={{ color: 'black' }} /> : <ArrowDropDownTwoTone sx={{ fontSize: 40 }} style={{ color: 'black' }} />}</Button>
               </Grid>
-              <Grid item xs={12} sm={4} align="center">
-                <Link style={{ textDecoration: 'none', color: '#2596be' }} to={{ pathname: `https://snowtrace.io/address/${bank.address}` }} target="_blank">
-                  {'View Contract'} <LinkIcon />
-                </Link>
 
-              </Grid>
+
             </Grid>
+          </Grid>
+          <div>
+            {show ?
+              <div>
+                <hr style={{
+                  color: '#D3D3D3',
+                  backgroundColor: '#D3D3D3',
+                  height: 1
+                }} />
 
-          }
+                <Grid justifyContent="center" style={{ display: 'flex', flexDirection: "row" }}>
+
+                  <Grid>
+                    <Grid justifyContent="center">
+                      <h3 style={{ color: 'black' }}>Deposit</h3>
+                    </Grid>
+                    <hr style={{
+                      color: '#D3D3D3',
+                      backgroundColor: '#D3D3D3',
+                      height: 1
+                    }} />
+
+                  </Grid>
+
+                  <Grid>
+
+
+                  </Grid>
+
+                </Grid>
+
+                <Grid justifyContent="space-between" style={{ display: 'flex', marginBottom: '5px', marginTop: '10px' }}>
+                  <h3 style={{ marginBottom: '10px', color: 'black' }}>APR:</h3>
+                  <h4 style={{ color: 'black' }}>{statsOnPool?.dailyAPR}%</h4>
+                </Grid>
+                <Grid justifyContent="space-between" style={{ display: 'flex', marginBottom: '5px' }}>
+                  <h3 style={{ marginBottom: '10px', color: 'black' }}>Earn:</h3>
+                  <h4 style={{ color: 'black' }}>{bank.earnTokenName}</h4>
+                </Grid>
+                <Grid>
+                  <h3 style={{ color: 'black', marginBottom: '10px', marginTop: '15px' }}>{`${bank.earnTokenName} EARNED`}</h3>
+                </Grid>
+                <Grid alignItems="flex-start" justifyContent="space-between" style={{ display: 'flex', marginBottom: '10px' }}>
+                  <Grid>
+                    <h2 style={{ color: 'black' }}>{getDisplayBalance(earnings)}</h2>
+                    <h5 style={{ color: 'grey', marginTop: '5px', marginBottom: '15px', fontWeight: 'normal' }}>{`≈ $${earnedInDollars}`}</h5>
+                  </Grid>
+                  <Button onClick={onReward} color="primary"
+                    variant="contained"
+                    style={{ borderRadius: '10px' }}
+                    className="shinyButtonSecondary">
+                    Collect
+                  </Button>
+                </Grid>
+                <Grid style={{ display: 'flex', flexDirection: 'column', marginBottom: '10px' }}>
+                  <Grid alignItems="flex-start">
+                    <h3 style={{ marginBottom: '10px', color: 'black' }}>{`${bank.depositTokenName} Staked`}</h3>
+                  </Grid>
+                  <Grid alignItems="center">
+
+                    <span>
+                      {approveStatus !== ApprovalState.APPROVED ? (
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                          <Button
+                            disabled={
+                              bank.closedForStaking ||
+                              approveStatus === ApprovalState.PENDING ||
+                              approveStatus === ApprovalState.UNKNOWN
+                            }
+                            onClick={approve}
+                            color="primary"
+                            variant="contained"
+                            style={{
+                              marginBottom: '5px',
+                              borderRadius: '10px',
+
+                            }}
+                            className="shinyButtonSecondary"
+                          >
+                            {`Approve ${bank.depositTokenName}`}
+                          </Button>
+                        </div>
+                      ) : (
+                        <Grid container justifyContent='space-between' alignItems='flex-start' flex spacing={2}>
+                          <Grid item>
+                            <h2 style={{ color: 'black' }}>
+                              {getDisplayBalance(stakedBalance, bank.depositToken.decimal)}
+                            </h2>
+                            <h5 style={{ color: 'grey', fontWeight: 'normal', marginTop: '5px' }}>
+                              {`≈ $${stakedInDollars}`}
+                            </h5>
+                          </Grid>
+                          <Grid item>
+                            <Grid container flex spacing={2}>
+                              <Grid item>
+                                <Button onClick={onPresentWithdraw} color="primary"
+                                  variant="contained"
+                                  style={{ borderRadius: '10px' }}
+                                  className="shinyButtonSecondary">
+                                  -
+                                </Button>
+                              </Grid>
+                              <Grid item >
+                                <Button color="primary"
+                                  variant="contained"
+                                  style={{ borderRadius: '10px' }}
+                                  className="shinyButtonSecondary" disabled={bank.closedForStaking}
+                                  onClick={() => (bank.closedForStaking ? null : onPresentDeposit())}>
+                                  +
+                                </Button>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      )}
+                    </span>
+                  </Grid>
+                </Grid>
+              </div>
+              : <div />}
+          </div>
         </CardContent>
       </Card >
     </Grid >
