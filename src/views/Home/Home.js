@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 
 const buycreamAddress = 'https://traderjoexyz.com/trade?outputCurrency=0xD9FF12172803c072a36785DeFea1Aa981A6A0C18#/';
 const viewCreamAddress = 'https://dexscreener.com/avalanche/0xe367414f29e247b2d92edd610aa6dd5a7fd631ba';
-const viewStrawAddress = 'https://dexscreener.com/avalanche/0x5eef38855090ccc49a1b7391f4c7b9efbdfe1456';
+const viewCshareAddress = 'https://dexscreener.com/avalanche/0x5eef38855090ccc49a1b7391f4c7b9efbdfe1456';
 const buycshareAddress = 'https://traderjoexyz.com/trade?outputCurrency=0xf8D0C6c3ddC03F43A0687847f2b34bfd6941C2A2#/';
 
 const Home = () => {
@@ -278,7 +278,7 @@ const Home = () => {
                       variant="contained"
                       style={{ marginTop: '20px', marginRight: '15px', backgroundColor: '#FE4794', color: 'white' }}
                       target="_blank"
-                      href={buyfudgeAddress}
+                      href={buycreamAddress}
                     >
                       Buy Now
                     </Button>
@@ -286,7 +286,7 @@ const Home = () => {
                       variant="contained"
                       style={{ marginTop: '20px', backgroundColor: '#FE4794' }}
                       target="_blank"
-                      href={viewFudgeAddress}
+                      href={viewCreamAddress}
                     >
                       Chart
                     </Button>
@@ -337,7 +337,7 @@ const Home = () => {
                       variant="contained"
                       style={{ marginTop: '20px', marginRight: '15px', backgroundColor: '#FE4794', color: 'white' }}
                       target="_blank"
-                      href={buystrawAddress}
+                      href={buycshareAddress}
                     >
                       Buy Now
                     </Button>
@@ -345,7 +345,7 @@ const Home = () => {
                       variant="contained"
                       style={{ marginTop: '20px', backgroundColor: '#FE4794' }}
                       target="_blank"
-                      href={viewStrawAddress}
+                      href={viewCshareAddress}
                     >
                       Chart
                     </Button>

@@ -65,7 +65,6 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
     />,
   );
 
-<<<<<<< HEAD
    const [onPresentZap, onDissmissZap] = useModal(
      <ZapModal
        decimals={bank.depositToken.decimal}
@@ -77,19 +76,6 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
        tokenName={bank.depositTokenName}
      />,
    );
-=======
-  // const [onPresentZap, onDissmissZap] = useModal(
-  //   <ZapModal
-  //     decimals={bank.depositToken.decimal}
-  //     onConfirm={(zappingToken, tokenName, amount) => {
-  //       if (Number(amount) <= 0 || isNaN(Number(amount))) return;
-  //       onZap(zappingToken, tokenName, amount);
-  //       onDissmissZap();
-  //     }}
-  //     tokenName={bank.depositTokenName}
-  //   />,
-  // );
->>>>>>> f4e3d3f959caa83a73b30908ba5ec3c3e304d518
 
   const [onPresentWithdraw, onDismissWithdraw] = useModal(
     <WithdrawModal
