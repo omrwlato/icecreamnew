@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     'background-color': 'transparent!important',
     'backdrop-filter': 'blur(8px)',
     // borderBottom: `1px solid ${theme.palette.divider}`,
-    marginBottom: '3rem',
+    marginBottom: '1rem',
     position: 'sticky',
   },
   drawer: {
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1, 2),
     textDecoration: 'none',
     '&:hover': {
-      color: '#571EB1',
+      color: '#383838',
     },
   },
   brandLink: {
@@ -98,12 +98,10 @@ const Nav = () => {
       <Toolbar className={classes.toolbar}>
         {matches ? (
           <>
-              <Typography variant="h6" color="inherit" noWrap style={{flexGrow: '0'}} className={classes.toolbarTitle}>
-              <Link to="/" color="inherit" className={classes.brandLink}>
-                <img alt="icecream.finance" src={icecreamLogo} height="60x" width="250px" />
-              </Link>
+            <Typography variant="h6" color="textPrimary" noWrap className={classes.toolbarTitle}>
+              IceCream Finance
             </Typography>
-             <Box style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '0px', fontSize: '1rem', flexGrow: '1' }}>
+            <Box mr={5} style={{fontWeight:'700'}}>
               <Link color="color" to="/" className={classes.link}>
                 Home
               </Link>
@@ -170,8 +168,8 @@ const Nav = () => {
             <AccountButton text="Connect" />
             <Drawer
               className={classes.drawer}
-              onEscapeKeyDown={handleDrawerClose}
-              onBackdropClick={handleDrawerClose}
+/*               onEscapeKeyDown={handleDrawerClose}
+              onBackdropClick={handleDrawerClose} */
               variant="temporary"
               anchor="left"
               open={open}

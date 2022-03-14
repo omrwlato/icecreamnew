@@ -59,10 +59,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const buyfudgeAddress = 'https://traderjoexyz.com/trade?outputCurrency=0xD9FF12172803c072a36785DeFea1Aa981A6A0C18#/';
-const viewFudgeAddress = 'https://dexscreener.com/avalanche/0xe367414f29e247b2d92edd610aa6dd5a7fd631ba';
+const buycreamAddress = 'https://traderjoexyz.com/trade?outputCurrency=0xD9FF12172803c072a36785DeFea1Aa981A6A0C18#/';
+const viewCreamAddress = 'https://dexscreener.com/avalanche/0xe367414f29e247b2d92edd610aa6dd5a7fd631ba';
 const viewStrawAddress = 'https://dexscreener.com/avalanche/0x5eef38855090ccc49a1b7391f4c7b9efbdfe1456';
-const buystrawAddress = 'https://traderjoexyz.com/trade?outputCurrency=0xf8D0C6c3ddC03F43A0687847f2b34bfd6941C2A2#/';
+const buycshareAddress = 'https://traderjoexyz.com/trade?outputCurrency=0xf8D0C6c3ddC03F43A0687847f2b34bfd6941C2A2#/';
 
 const Home = () => {
   const classes = useStyles();
@@ -127,6 +127,7 @@ const Home = () => {
 
   const tombLpZap = useZap({ depositTokenName: 'CREAM-AVAX-LP' });
   const tshareLpZap = useZap({ depositTokenName: 'CSHARE-AVAX-LP' });
+  const tombtshareLpZap = useZap({depositTokenName:'CREAM-CSHARE-LP'})
 
   const StyledLink = styled.a`
     font-weight: 700;
@@ -158,12 +159,23 @@ const Home = () => {
     />,
   );
 
-  // const handleMouseOverFudge = () => {
-  //   setIsHoveringFudge(true);
+  const [onPresenttombtshareZap, onDissmisstombtshareZap] = useModal(
+    <ZapModal
+      decimals={18}
+      onConfirm={(zappingToken, tokenName, amount) => {
+        if (Number(amount) <= 0 || isNaN(Number(amount))) return;
+        tombtshareLpZap.onZap(zappingToken, tokenName, amount);
+        onDissmisstombtshareZap();
+      }}
+      tokenName={'CREAM-CSHARE-LP'}
+    />,
+  );
+  // const handleMouseOverCream = () => {
+  //   setIsHoveringCream(true);
   // };
 
-  // const handleMouseOutFudge = () => {
-  //   setIsHoveringFudge(false);
+  // const handleMouseOutCream = () => {
+  //   setIsHoveringCream(false);
   // };
 
   // const handleMouseOverStraw = () => {
@@ -182,7 +194,7 @@ const Home = () => {
   //   setIsHoveringCaraml(false);
   // };
 
-  // const [isHoveringFudge, setIsHoveringFudge] = useState(false);
+  // const [isHoveringCream, setIsHoveringCream] = useState(false);
   // const [isHoveringStraw, setIsHoveringStraw] = useState(false);
   // const [isHoveringCaraml, setIsHoveringCaraml] = useState(false);
 
@@ -201,7 +213,7 @@ const Home = () => {
             <Paper style={{ backgroundColor: 'transparent', boxShadow: 'none', border: 'none' }}>
               <Box p={4} display="flex" justifyContent="center" alignItems="center">
                 <Typography variant="h3" fontWeight="bold" align="center">
-                  Get your spoons ready for the second scoop of the sweetest protocol on Avalanche
+              Stake on the sweetest protocol to earn CSHARE rewards via seigniorage!
                 </Typography>
               </Box>
             </Paper>
@@ -326,8 +338,8 @@ const Home = () => {
         <Grid item xs={12} sm={4}>
           <Card
             style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}
-            // onMouseOver={handleMouseOverFudge}
-            // onMouseOut={handleMouseOutFudge}
+            // onMouseOver={handleMouseOverCream}
+            // onMouseOut={handleMouseOutCream}
           >
             <CardContent align="center" style={{ position: 'relative' }}>
               <div>
@@ -373,7 +385,7 @@ const Home = () => {
                   color="primary"
                   style={{ marginTop: '20px', marginRight: '5px' }}
                   target="_blank"
-                  href={buyfudgeAddress}
+                  href={buycreamAddress}
                 >
                   Buy Now
                 </Button>
@@ -382,7 +394,7 @@ const Home = () => {
                   color="primary"
                   style={{ marginTop: '20px', marginRight: '5px' }}
                   target="_blank"
-                  href={viewFudgeAddress}
+                  href={viewCreamAddress}
                 >
                   Chart
                 </Button>
@@ -440,7 +452,7 @@ const Home = () => {
                   color="primary"
                   style={{ marginTop: '20px', marginRight: '5px' }}
                   target="_blank"
-                  href={buystrawAddress}
+                  href={buycshareAddress}
                 >
                   Buy Now
                 </Button>
@@ -467,7 +479,7 @@ const Home = () => {
           >
             <CardContent align="center" style={{ position: 'relative' }}>
               <div>
-                <h2>CARAML</h2>
+                <h2>CBOND</h2>
               </div>
               <div>
                 <h3>Bond Token</h3>
@@ -611,15 +623,15 @@ const Home = () => {
               }}
             >
               <CardContent align="center">
-                <Typography variant="h5">FUDGE:</Typography>
+                <Typography variant="h5">CREAM:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_3omb} separator="," prefix="$" />
               </CardContent>
               <CardContent align="center">
-                <Typography variant="h5">STRAW:</Typography>
+                <Typography variant="h5">CSHARE:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_3shares} separator="," prefix="$" />
               </CardContent>
               <CardContent align="center">
-                <Typography variant="h5">CARAML:</Typography>
+                <Typography variant="h5">CBOND:</Typography>
                 <CountUp style={{ fontSize: '25px' }} end={balance_2shares} separator="," prefix="$" />
               </CardContent>
             </Card>
@@ -636,7 +648,7 @@ const Home = () => {
             >
               <CardContent align="center">
                 <Typography variant="h5">TWAP:</Typography>
-                <Typography style={{ fontSize: '25px' }}>{tombPriceInFTM ? tombPriceInFTM : '-.----'} DAI</Typography>
+                <Typography style={{ fontSize: '25px' }}>{tombPriceInFTM ? tombPriceInFTM : '-.----'} AVAX</Typography>
               </CardContent>
             </Card>
             <Card

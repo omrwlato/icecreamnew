@@ -59,7 +59,7 @@ const Stake: React.FC = () => {
         onStake(value);
         onDismissDeposit();
       }}
-      tokenName={'STRAW'}
+      tokenName={'CSHARE'}
     />,
   );
 
@@ -70,7 +70,7 @@ const Stake: React.FC = () => {
         onWithdraw(value);
         onDismissWithdraw();
       }}
-      tokenName={'STRAW'}
+      tokenName={'CSHARE'}
     />,
   );
 
@@ -87,7 +87,7 @@ const Stake: React.FC = () => {
               </CardIcon>
               <Value value={getDisplayBalance(stakedBalance)} />
               <Label text={`≈ $${tokenPriceInDollars}`} color="#5f51c2" />
-              <Label text={'STRAW Staked'} color="#5f51c2" />
+              <Label text={'CSHARE Staked'} color="#5f51c2" />
             </StyledCardHeader>
             <StyledCardActions>
               {approveStatus !== ApprovalState.APPROVED ? (
@@ -98,7 +98,7 @@ const Stake: React.FC = () => {
                   style={{ marginTop: '20px' }}
                   onClick={approve}
                 >
-                  Approve STRAW
+                  Approve CSHARE
                 </Button>
               ) : (
                 <>

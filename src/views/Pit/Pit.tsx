@@ -71,7 +71,7 @@ const Pit: React.FC = () => {
         {!!account ? (
           <>
             <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-              CARAML
+              CBOND
             </Typography>
             <Route exact path={path}>
               <PageHeader icon={'🏦'} subtitle="Earn premiums upon redemption" />
@@ -81,13 +81,13 @@ const Pit: React.FC = () => {
                 <ExchangeCard
                   action="Purchase"
                   fromToken={tombFinance.TOMB}
-                  fromTokenName="FUDGE"
+                  fromTokenName="CREAM"
                   toToken={tombFinance.TBOND}
-                  toTokenName="CARAML"
+                  toTokenName="CBOND"
                   priceDesc={
                     !isBondPurchasable
-                      ? 'FUDGE is over peg'
-                      : getDisplayBalance(bondsPurchasable, 18, 4) + ' CARAML available for purchase'
+                      ? 'CREAM is over peg'
+                      : getDisplayBalance(bondsPurchasable, 18, 4) + ' CBOND available for purchase'
                   }
                   onExchange={handleBuyBonds}
                   disabled={!bondStat || isBondRedeemable}
@@ -95,14 +95,14 @@ const Pit: React.FC = () => {
               </StyledCardWrapper>
               <StyledStatsWrapper>
                 <ExchangeStat
-                  tokenName="FUDGE"
+                  tokenName="CREAM"
                   description="Last-Hour TWAP Price"
                   price={getDisplayBalance(cashPrice, 18, 4)}
                 />
                 <Spacer size="md" />
                 <ExchangeStat
-                  tokenName="CARAML"
-                  description="Current Price: (FUDGE)^2"
+                  tokenName="CBOND"
+                  description="Current Price: (CREAM)^2"
                   price={Number(bondStat?.tokenInFtm).toFixed(2) || '-'}
                 />
               </StyledStatsWrapper>
@@ -110,13 +110,13 @@ const Pit: React.FC = () => {
                 <ExchangeCard
                   action="Redeem"
                   fromToken={tombFinance.TBOND}
-                  fromTokenName="CARAML"
+                  fromTokenName="CBOND"
                   toToken={tombFinance.TOMB}
-                  toTokenName="FUDGE"
-                  priceDesc={`${getDisplayBalance(bondBalance)} CARAML Available in wallet`}
+                  toTokenName="CREAM"
+                  priceDesc={`${getDisplayBalance(bondBalance)} CBOND Available in wallet`}
                   onExchange={handleRedeemBonds}
                   disabled={!bondStat || bondBalance.eq(0) || !isBondRedeemable}
-                  disabledDescription={!isBondRedeemable ? `Enabled when CARAML > ${BOND_REDEEM_PRICE}DAI` : null}
+                  disabledDescription={!isBondRedeemable ? `Enabled when CBOND > ${BOND_REDEEM_PRICE}AVAX` : null}
                 />
               </StyledCardWrapper>
             </StyledBond>

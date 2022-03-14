@@ -25,13 +25,13 @@ const assetList = [
     depositTokenName: 'CSHARE-WAVAX LP',
   },
   {
-    depositTokenName: 'FUDGE-DAI LP',
+    depositTokenName: 'CREAM-AVAX LP',
   },
   {
-    depositTokenName: 'STRAW',
+    depositTokenName: 'CSHARE',
   },
   {
-    depositTokenName: 'STRAW-DAI LP',
+    depositTokenName: 'CSHARE-AVAX LP',
   },
 ]
 
@@ -121,13 +121,13 @@ const Cemetery = () => {
                     <Card style={{ height: "auto" }}>
                       <CardContent align="center">
                         <Typography variant="h5">
-                          FUDGE-DAI LP:
+                          CREAM-AVAX LP:
                         </Typography>
                         <CountUp style={{ fontSize: '25px' }} end={balance_3omb_wftm} separator="," prefix="$" />
                       </CardContent>
                       <CardContent align="center">
                         <Typography variant="h5">
-                          STRAW-DAI LP:
+                          CSHARE-AVAX LP:
                         </Typography>
                         <CountUp style={{ fontSize: '25px' }} end={balance_3shares_wftm} separator="," prefix="$" />
                       </CardContent>
@@ -143,13 +143,13 @@ const Cemetery = () => {
                     <Card style={{ height: "auto" }}>
                       <CardContent align="center">
                         <Typography variant="h5">
-                          FUDGE:
+                          CREAM:
                         </Typography>
                         <CountUp style={{ fontSize: '25px' }} end={balance_3omb} separator="," prefix="$" />
                       </CardContent>
                       <CardContent align="center">
                         <Typography variant="h5">
-                          STRAW:
+                          CSHARE:
                         </Typography>
                         <CountUp style={{ fontSize: '25px' }} end={balance_3shares} separator="," prefix="$" />
                       </CardContent>

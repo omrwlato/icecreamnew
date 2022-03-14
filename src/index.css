@@ -4,9 +4,9 @@
 
 :root {
   --black: #16191e;
-  --white: #e6e9ee;
-  --accent: #ff4949;
-  --accent-light: #ff6464;
+  --white: #000;
+  --accent: #FE4794;
+  --accent-light: #ff8383;
 }
 
 body,
@@ -87,7 +87,7 @@ footer .a:hover {
 }
 
 .MuiButton-containedPrimary {
-  color: var(--white) !important;
+  color: #fff !important;
   background-color: var(--accent);
 }
 
@@ -105,5 +105,5 @@ code {
 }
 .wallet-button:hover {
   background-color: black;
-  color: #757ce8 !important;
+  color: #FE4794 !important;
 }

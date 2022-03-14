@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 
-import { Button, Select, MenuItem, InputLabel, Typography, withStyles } from '@material-ui/core';
+import { Button, Select, MenuItem, InputLabel, withStyles } from '@material-ui/core';
 // import Button from '../../../components/Button'
 import Modal, { ModalProps } from '../../../components/Modal';
 import ModalActions from '../../../components/ModalActions';
@@ -35,8 +35,8 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
   const [zappingTokenBalance, setZappingTokenBalance] = useState(ftmBalance);
   const [estimate, setEstimate] = useState({ token0: '0', token1: '0' }); // token0 will always be FTM in this case
   const [approveZapperStatus, approveZapper] = useApproveZapper(zappingToken);
-  const tombFtmLpStats = useLpStats('TOMB-FTM-LP');
-  const tShareFtmLpStats = useLpStats('TSHARE-FTM-LP');
+  const tombFtmLpStats = useLpStats('CREAM-AVAX-LP');
+  const tShareFtmLpStats = useLpStats('CSHARE-AVAX-LP');
   const tombLPStats = useMemo(() => (tombFtmLpStats ? tombFtmLpStats : null), [tombFtmLpStats]);
   const tshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
   const ftmAmountPerLP = tokenName.startsWith(TOMB_TICKER) ? tombLPStats?.ftmAmount : tshareLPStats?.ftmAmount;
@@ -80,26 +80,21 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
   return (
     <Modal>
       <ModalTitle text={`Zap in ${tokenName}`} />
-      <Typography variant="h6" align="center">
-        Powered by{' '}
-        <a target="_blank" rel="noopener noreferrer" href="https://mlnl.finance">
-          mlnl.finance
-        </a>
-      </Typography>
 
       <StyledActionSpacer />
-      <InputLabel style={{ color: '#2c2560' }} id="label">
+      <InputLabel style={{ color: '#000' }} id="label">
         Select asset to zap with
       </InputLabel>
       <Select
         onChange={handleChangeAsset}
-        style={{ color: '#2c2560' }}
+        style={{ color: '#000' }}
         labelId="label"
         id="select"
         value={zappingToken}
       >
-        <StyledMenuItem value={FTM_TICKER}>FTM</StyledMenuItem>
-        <StyledMenuItem value={TSHARE_TICKER}>TSHARE</StyledMenuItem>
+        {/* <StyledMenuItem value={FTM_TICKER}>AVAX</StyledMenuItem> */}
+        <StyledMenuItem value={TSHARE_TICKER}>CSHARE</StyledMenuItem>
+        <StyledMenuItem value={TOMB_TICKER}>CREAM</StyledMenuItem>
         {/* Tomb as an input for zapping will be disabled due to issues occuring with the Gatekeeper system */}
         {/* <StyledMenuItem value={TOMB_TICKER}>TOMB</StyledMenuItem> */}
       </Select>
@@ -113,7 +108,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
       <Label text="Zap Estimations" />
       <StyledDescriptionText>
         {' '}
-        {tokenName}: {Number(estimate.token0) / Number(ftmAmountPerLP)}
+        {tokenName}: {Number(estimate.token1) / Number(ftmAmountPerLP)}
       </StyledDescriptionText>
       <StyledDescriptionText>
         {' '}
@@ -156,14 +151,14 @@ const StyledDescriptionText = styled.div`
 `;
 const StyledMenuItem = withStyles({
   root: {
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
     color: '#2c2560',
     '&:hover': {
       backgroundColor: 'grey',
       color: '#2c2560',
     },
     selected: {
-      backgroundColor: 'black',
+      backgroundColor: '#000!important',
     },
   },
 })(MenuItem);

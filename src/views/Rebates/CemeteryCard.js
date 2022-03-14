@@ -73,7 +73,7 @@ const CemeteryCard = ({ bank }) => {
             </Typography>
             <Typography color="textSecondary">
               {/* {bank.name} */}
-              Bond {bank.depositTokenName.toUpperCase()} Earn FUDGE
+              Bond {bank.depositTokenName.toUpperCase()} Earn CREAM
             </Typography>
             <Typography color="textSecondary">
               Multiplier: {bank.multiplier}

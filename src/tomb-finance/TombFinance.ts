@@ -31,7 +31,7 @@ export class TombFinance {
   TOMB: ERC20;
   TSHARE: ERC20;
   TBOND: ERC20;
-  WAVAX: ERC20;
+  FTM: ERC20;
   MIM: ERC20;
   CREAM: ERC20;
   
@@ -52,7 +52,7 @@ export class TombFinance {
     this.TOMB = new ERC20(deployments.tomb.address, provider, 'CREAM');
     this.TSHARE = new ERC20(deployments.tShare.address, provider, 'CSHARE');
     this.TBOND = new ERC20(deployments.tBond.address, provider, 'CBOND');
-    this.WAVAX = this.externalTokens['WAVAX'];
+    this.FTM = this.externalTokens['WAVAX'];
     this.MIM = this.externalTokens['MIM'];
 
 
@@ -122,7 +122,7 @@ export class TombFinance {
    * @param name of the LP token to load stats for
    * @returns
    */
-  async getLPStat(name: string): Promise<LPStat> {
+   async getLPStat(name: string): Promise<LPStat> {
     const lpToken = this.externalTokens[name];
     const lpTokenSupplyBN = await lpToken.totalSupply();
     const lpTokenSupply = getDisplayBalance(lpTokenSupplyBN, 18);
@@ -131,7 +131,7 @@ export class TombFinance {
     const tokenAmountBN = await token0.balanceOf(lpToken.address);
     const tokenAmount = getDisplayBalance(tokenAmountBN, 18);
 
-    const ftmAmountBN = await this.WAVAX.balanceOf(lpToken.address);
+    const ftmAmountBN = await this.FTM.balanceOf(lpToken.address);
     const ftmAmount = getDisplayBalance(ftmAmountBN, 18);
     const tokenAmountInOneLP = Number(tokenAmount) / Number(lpTokenSupply);
     const ftmAmountInOneLP = Number(ftmAmount) / Number(lpTokenSupply);
@@ -224,7 +224,7 @@ export class TombFinance {
   }
 
   /**
-   * Calculates the TVL, APR and daily APR of a provided pool/bank
+   * Calculates the TVL, APR and avaxly APR of a provided pool/bank
    * @param bank
    * @returns
    */
@@ -249,10 +249,10 @@ export class TombFinance {
     const totalRewardPricePerDay = Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(24)));
     const totalStakingTokenInPool =
       Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal));
-    const dailyAPR = (totalRewardPricePerDay / totalStakingTokenInPool) * 100;
+    const avaxlyAPR = (totalRewardPricePerDay / totalStakingTokenInPool) * 100;
     const yearlyAPR = (totalRewardPricePerYear / totalStakingTokenInPool) * 100;
     return {
-      dailyAPR: dailyAPR.toFixed(2).toString(),
+      avaxlyAPR: avaxlyAPR.toFixed(2).toString(),
       yearlyAPR: yearlyAPR.toFixed(2).toString(),
       TVL: TVL.toFixed(2).toString(),
     };
@@ -271,7 +271,7 @@ export class TombFinance {
     poolContract: Contract,
     depositTokenName: string,
   ) {
-    if (earnTokenName === 'FUDGE') {
+    if (earnTokenName === 'CREAM') {
       if (!contractName.endsWith('TombRewardPool')) {
         const rewardPerSecond = await poolContract.tombPerSecond();
         if (depositTokenName === 'CSHARE') {
@@ -280,13 +280,13 @@ export class TombFinance {
           return rewardPerSecond.mul(600).div(2000).div(24);
         } else if (depositTokenName === 'WAVAX') {
           return rewardPerSecond.mul(100).div(2000).div(24);
-        } else if (depositTokenName === 'DAI') {
+        } else if (depositTokenName === 'AVAX') {
           return rewardPerSecond.mul(100).div(2000).div(24);
         } else if (depositTokenName === 'CREAM-AVAX LP') {
           return rewardPerSecond.mul(800).div(2000).div(24);
         } else if (depositTokenName === 'CSHARE-AVAX LP') {
           return rewardPerSecond.mul(400).div(2000).div(24);
-        } else if (depositTokenName === 'FUDGE-DAI LP') {
+        } else if (depositTokenName === 'CREAM-AVAX LP') {
           return rewardPerSecond.mul(400).div(2000).div(24);
         }
         return rewardPerSecond.div(24);
@@ -453,7 +453,7 @@ export class TombFinance {
   /**
    * Deposits token to given pool.
    * @param poolName A name of pool contract.
-   * @param amount Number of tokens with decimals applied. (e.g. 1.45 DAI * 10^18)
+   * @param amount Number of tokens with decimals applied. (e.g. 1.45 AVAX * 10^18)
    * @returns {string} Transaction hash
    */
   async stake(poolName: ContractName, poolId: Number, amount: BigNumber): Promise<TransactionResponse> {
@@ -464,7 +464,7 @@ export class TombFinance {
   /**
    * Withdraws token from given pool.
    * @param poolName A name of pool contract.
-   * @param amount Number of tokens with decimals applied. (e.g. 1.45 DAI * 10^18)
+   * @param amount Number of tokens with decimals applied. (e.g. 1.45 AVAX * 10^18)
    * @returns {string} Transaction hash
    */
   async unstake(poolName: ContractName, poolId: Number, amount: BigNumber): Promise<TransactionResponse> {
@@ -573,7 +573,7 @@ export class TombFinance {
   async getMasonryAPR() {
     const Masonry = this.currentMasonry();
     const latestSnapshotIndex = await Masonry.latestSnapshotIndex();
-    const lastHistory = await Masonry.masonryHistory(latestSnapshotIndex);
+    const lastHistory = await Masonry.boardroomHistory(latestSnapshotIndex);
 
     const lastRewardsReceived = lastHistory[1];
 
@@ -682,7 +682,7 @@ export class TombFinance {
     const { Masonry, Treasury } = this.contracts;
     const nextEpochTimestamp = await Masonry.nextEpochPoint(); //in unix timestamp
     const currentEpoch = await Masonry.epoch();
-    const mason = await Masonry.masons(this.myAccount);
+    const mason = await Masonry.members(this.myAccount);
     const startTimeEpoch = mason.epochTimerStart;
     const period = await Treasury.PERIOD();
     const periodInHours = period / 60 / 60; // 6 hours, period is displayed in seconds which is 21600
@@ -715,7 +715,7 @@ export class TombFinance {
     const { Masonry, Treasury } = this.contracts;
     const nextEpochTimestamp = await Masonry.nextEpochPoint();
     const currentEpoch = await Masonry.epoch();
-    const mason = await Masonry.masons(this.myAccount);
+    const mason = await Masonry.members(this.myAccount);
     const startTimeEpoch = mason.epochTimerStart;
     const period = await Treasury.PERIOD();
     const PeriodInHours = period / 60 / 60;
@@ -745,10 +745,10 @@ export class TombFinance {
       let assetUrl;
       if (assetName === 'TOMB') {
         asset = this.TOMB;
-        assetUrl = 'https://raw.githubusercontent.com/IceCreamFinancial/contracts-public/main/fudge.png';
+        assetUrl = 'https://raw.githubusercontent.com/IceCreamFinancial/contracts-public/main/cream.png';
       } else if (assetName === 'TSHARE') {
         asset = this.TSHARE;
-        assetUrl = 'https://raw.githubusercontent.com/IceCreamFinancial/contracts-public/main/straw.png';
+        assetUrl = 'https://raw.githubusercontent.com/IceCreamFinancial/contracts-public/main/cshare.png';
       }
       await ethereum.request({
         method: 'wallet_watchAsset',
@@ -783,7 +783,7 @@ export class TombFinance {
     const { SpookyRouter } = this.contracts;
     const { _reserve0, _reserve1 } = await this.TOMBWFTM_LP.getReserves();
     let quote;
-    if (tokenName === 'TOMB') {
+    if (tokenName === 'CREAM') {
       quote = await SpookyRouter.quote(parseUnits(tokenAmount), _reserve1, _reserve0);
     } else {
       quote = await SpookyRouter.quote(parseUnits(tokenAmount), _reserve0, _reserve1);

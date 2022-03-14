@@ -12355,7 +12355,7 @@
       }
     ]
   },
-  "FudgeLPTShareRewardPool": {
+  "CreamLPTShareRewardPool": {
     "address": "0x2971aB78F17dC8EA57718D6D9b2385791029b288",
     "abi": [
       {
