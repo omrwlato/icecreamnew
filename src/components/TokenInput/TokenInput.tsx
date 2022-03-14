@@ -60,7 +60,7 @@ const StyledMaxText = styled.div`
   font-size: 14px;
   font-weight: 700;
   height: 44px;
-  justify-content: flex-end;
+  justify-content: center;
 `;
 
 export default TokenInput;

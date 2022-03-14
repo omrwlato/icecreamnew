@@ -62,7 +62,7 @@ const Cemetery = () => {
                 </div> */}
 
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
-                  <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
+                  <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px', color: 'black' }}>
                     Earn CSHARE by staking your Liquidity Pairs
                   </Typography>
                   <Alert variant="filled" severity="warning">
