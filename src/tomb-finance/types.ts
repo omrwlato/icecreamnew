@@ -24,7 +24,7 @@ export interface Bank extends BankInfo {
 }
 
 export type PoolStats = {
-  avaxlyAPR: string;
+  dailyAPR: string;
   yearlyAPR: string;
   TVL: string;
 };

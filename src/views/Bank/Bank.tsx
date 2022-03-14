@@ -61,7 +61,7 @@ const Bank: React.FC = () => {
             <Card className={classes.gridItem} style={{ border: '1px solid var(--white)', backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none' }}>
               <CardContent style={{ textAlign: 'center' }}>
                 <Typography>Daily APR</Typography>
-                <Typography>{bank.closedForStaking ? '0.00' : statsOnPool?.avaxlyAPR}%</Typography>
+                <Typography>{bank.closedForStaking ? '0.00' : statsOnPool?.dailyAPR}%</Typography>
               </CardContent>
             </Card>
           </Grid>
@@ -110,6 +110,7 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
 
   let pairName: string;
   let uniswapUrl: string;
+<<<<<<< HEAD
   if (bank.depositTokenName === ('CREAM-AVAX')) {
     pairName = 'CREAM-AVAX pair';
     uniswapUrl = 'https://traderjoexyz.com/pool/0xd586E7F844cEa2F87f50152665BCbc2C279D8d70/' + tombAddr;
@@ -121,6 +122,19 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
     uniswapUrl = 'https://traderjoexyz.com/pool/' + tombAddr;
   } else {
     pairName = 'CSHARE-AVAX pair';
+=======
+  if (bank.depositTokenName === ('FUDGE-DAI')) {
+    pairName = 'FUDGE-DAI pair';
+    uniswapUrl = 'https://traderjoexyz.com/pool/0xd586E7F844cEa2F87f50152665BCbc2C279D8d70/' + tombAddr;
+  } else if (bank.depositTokenName === ('FUDGE-STRAW')) {
+    pairName = 'FUDGE-STRAW pair';
+    uniswapUrl = 'https://traderjoexyz.com/pool/' + tshareAddr + tombAddr;
+  } else if (bank.depositTokenName === ('FUDGE')) {
+    pairName = 'FUDGE stake';
+    uniswapUrl = 'https://traderjoexyz.com/pool/' + tombAddr;
+  } else {
+    pairName = 'STRAW-AVAX pair';
+>>>>>>> f4e3d3f959caa83a73b30908ba5ec3c3e304d518
     uniswapUrl = 'https://traderjoexyz.com/pool/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7/' + tshareAddr;
   }
   return (
