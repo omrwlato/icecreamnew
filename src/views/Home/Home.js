@@ -344,16 +344,18 @@ const Home = () => {
                   </div>
                   <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     <Button
+                      color="primary"
                       variant="contained"
-                      style={{ marginTop: '20px', marginRight: '15px', backgroundColor: '#FE4794', color: 'white' }}
+                      style={{ marginTop: '20px', marginRight: '15px' }}
                       target="_blank"
                       href={buycreamAddress}
                     >
                       Buy Now
                     </Button>
                     <Button
+                      color="primary"
                       variant="contained"
-                      style={{ marginTop: '20px', backgroundColor: '#FE4794' }}
+                      style={{ marginTop: '20px' }}
                       target="_blank"
                       href={viewCreamAddress}
                     >
@@ -403,16 +405,18 @@ const Home = () => {
                   </div>
                   <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     <Button
+                      color="primary"
                       variant="contained"
-                      style={{ marginTop: '20px', marginRight: '15px', backgroundColor: '#FE4794', color: 'white' }}
+                      style={{ marginTop: '20px', marginRight: '15px' }}
                       target="_blank"
                       href={buycshareAddress}
                     >
                       Buy Now
                     </Button>
                     <Button
+                      color="primary"
                       variant="contained"
-                      style={{ marginTop: '20px', backgroundColor: '#FE4794' }}
+                      style={{ marginTop: '20px' }}
                       target="_blank"
                       href={viewCshareAddress}
                     >
@@ -456,12 +460,8 @@ const Home = () => {
                     <h4>{`≈ $${earnedInDollarsCreamAvax}`}</h4>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <Button
-                      variant="contained"
-                      style={{ marginTop: '5px', backgroundColor: '#FE4794', color: 'white' }}
-                      target="_blank"
-                    >
-                      Zap
+                    <Button color="primary" onClick={onPresentTombZap} variant="contained">
+                      Zap In
                     </Button>
                   </div>
                 </div>
@@ -494,12 +494,8 @@ const Home = () => {
                     <h4>{`≈ $${earnedInDollarsCshareAvax}`}</h4>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <Button
-                      variant="contained"
-                      style={{ marginTop: '5px', backgroundColor: '#FE4794', color: 'white' }}
-                      target="_blank"
-                    >
-                      Zap
+                    <Button color="primary" onClick={onPresentTshareZap} variant="contained">
+                      Zap In
                     </Button>
                   </div>
                 </div>
@@ -531,7 +527,7 @@ const Home = () => {
                     <h4>Rewards Earned:</h4>
                     <h4>{`≈ $${earnedInDollarsCshareCream}`}</h4>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  {/* <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     <Button
                       variant="contained"
                       style={{ marginTop: '5px', backgroundColor: '#FE4794', color: 'white' }}
@@ -539,7 +535,7 @@ const Home = () => {
                     >
                       Zap
                     </Button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
