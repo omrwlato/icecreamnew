@@ -12,7 +12,6 @@ import creamCshare from '../../assets/img/creamcshare.png';
 import creamAvax from '../../assets/img/cream-wavax.png';
 import cshareAvax from '../../assets/img/cshare-avax.png';
 
-
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
   //=====================

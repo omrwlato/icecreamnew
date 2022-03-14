@@ -134,7 +134,7 @@ const Home = () => {
 
   const tombLpZap = useZap({ depositTokenName: 'CREAM-AVAX-LP' });
   const tshareLpZap = useZap({ depositTokenName: 'CSHARE-AVAX-LP' });
-  const tombtshareLpZap = useZap({depositTokenName:'CREAM-CSHARE-LP'})
+  const tombtshareLpZap = useZap({ depositTokenName: 'CREAM-CSHARE-LP' });
 
   const StyledLink = styled.a`
     font-weight: 700;
@@ -215,7 +215,7 @@ const Home = () => {
             <Paper style={{ backgroundColor: 'transparent', boxShadow: 'none', border: 'none' }}>
               <Box p={4} display="flex" justifyContent="center" alignItems="center">
                 <Typography variant="h3" fontWeight="bold" align="center">
-              Stake on the sweetest protocol to earn CSHARE rewards via seigniorage!
+                  Stake on the sweetest protocol to earn CSHARE rewards via seigniorage!
                 </Typography>
               </Box>
             </Paper>
@@ -233,8 +233,8 @@ const Home = () => {
           </Box>
         </Grid>
 
-        <Grid container xs={12} sm={12} spacing={1}>
-          <Grid sm={7}>
+        <Grid container xs={12} sm={12} style={{ marginTop: '20px' }}>
+          <Grid sm={7} style={{ marginRight: '20px' }}>
             {/* Cream */}
             <Grid style={{ backgroundColor: '#FFFFFF', borderRadius: '15px' }}>
               <div style={{ display: 'flex', padding: '15px' }}>
@@ -295,7 +295,7 @@ const Home = () => {
               </div>
             </Grid>
             {/* CShare */}
-            <Grid style={{ backgroundColor: '#FFFFFF', borderRadius: '15px' }}>
+            <Grid style={{ backgroundColor: '#FFFFFF', borderRadius: '15px', marginTop: '20px' }}>
               <div style={{ display: 'flex', padding: '15px' }}>
                 <div
                   style={{
@@ -356,34 +356,121 @@ const Home = () => {
           </Grid>
           <Grid style={{ backgroundColor: '#FFFFFF', borderRadius: '15px' }} sm={4}>
             <div style={{ display: 'flex', padding: '15px', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '15px' }}>
                 <h1>Rewards</h1>
               </div>
               <div style={{ display: 'flex' }}>
-                <div>
+                <div style={{ width: '30%' }}>
                   <TokenSymbol symbol="CREAM-AVAX-LP" style={{ backgroundColor: 'transparent !important' }} />
                 </div>
-                <div>
-                  <h4>Staked Amount:</h4>
-                  <h4>Rewards Earned:</h4>
+                <div style={{ width: '70%' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignContent: 'space-between',
+                      justifyContent: 'space-between',
+                      width: '100%',
+                    }}
+                  >
+                    <h4>Staked Amount:</h4>
+                    <h4>0</h4>
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignContent: 'space-between',
+                      justifyContent: 'space-between',
+                      width: '100%',
+                    }}
+                  >
+                    <h4>Rewards Earned:</h4>
+                    <h4>0</h4>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <Button
+                      variant="contained"
+                      style={{ marginTop: '5px', backgroundColor: '#FE4794', color: 'white' }}
+                      target="_blank"
+                    >
+                      Zap
+                    </Button>
+                  </div>
                 </div>
               </div>
               <div style={{ display: 'flex' }}>
-                <div>
+                <div style={{ width: '30%' }}>
                   <TokenSymbol symbol="CSHARE-AVAX-LP" style={{ backgroundColor: 'transparent !important' }} />
                 </div>
-                <div>
-                  <h4>Staked Amount:</h4>
-                  <h4>Rewards Earned:</h4>
+                <div style={{ width: '70%' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignContent: 'space-between',
+                      justifyContent: 'space-between',
+                      width: '100%',
+                    }}
+                  >
+                    <h4>Staked Amount:</h4>
+                    <h4>0</h4>
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignContent: 'space-between',
+                      justifyContent: 'space-between',
+                      width: '100%',
+                    }}
+                  >
+                    <h4>Rewards Earned:</h4>
+                    <h4>0</h4>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <Button
+                      variant="contained"
+                      style={{ marginTop: '5px', backgroundColor: '#FE4794', color: 'white' }}
+                      target="_blank"
+                    >
+                      Zap
+                    </Button>
+                  </div>
                 </div>
               </div>
               <div style={{ display: 'flex' }}>
-                <div>
+                <div style={{ width: '45%' }}>
                   <TokenSymbol symbol="CREAM-CSHARE-LP" style={{ backgroundColor: 'transparent !important' }} />
                 </div>
-                <div>
-                  <h4>Staked Amount:</h4>
-                  <h4>Rewards Earned:</h4>
+                <div style={{ width: '55%' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignContent: 'space-between',
+                      justifyContent: 'space-between',
+                      width: '100%',
+                    }}
+                  >
+                    <h4>Staked Amount:</h4>
+                    <h4>0</h4>
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignContent: 'space-between',
+                      justifyContent: 'space-between',
+                      width: '100%',
+                    }}
+                  >
+                    <h4>Rewards Earned:</h4>
+                    <h4>0</h4>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <Button
+                      variant="contained"
+                      style={{ marginTop: '5px', backgroundColor: '#FE4794', color: 'white' }}
+                      target="_blank"
+                    >
+                      Zap
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
