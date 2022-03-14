@@ -115,7 +115,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
         ({Number(estimate.token0)} {FTM_TICKER} / {Number(estimate.token1)}{' '}
         {tokenName.startsWith(TOMB_TICKER) ? TOMB_TICKER : TSHARE_TICKER}){' '}
       </StyledDescriptionText>
-    {/*   <ModalActions>
+      <ModalActions>
         <Button
           color="primary"
           variant="contained"
@@ -126,7 +126,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
           {approveZapperStatus !== ApprovalState.APPROVED ? 'Approve' : "Let's go"}
         </Button>
       </ModalActions>
- */}
+
       <StyledActionSpacer />
       <Alert variant="filled" severity="warning">
         Beta feature. Use at your own risk!
