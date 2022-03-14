@@ -73,7 +73,6 @@ const CemeteryCard = ({ bank }) => {
   const tShareStats = useShareStats();
   const tokenStats = bank.earnTokenName === 'CSHARE' ? tShareStats : bombStats;
   const stakedBalance = useStakedBalance(bank.contract, bank.poolId);
-  console.log(bank, 'bank');
   const stakedTokenPriceInDollars = useStakedTokenPriceInDollars(bank.depositTokenName, bank.depositToken);
   const tokenPriceInDollars = useMemo(
     () => (tokenStats ? Number(tokenStats.priceInDollars).toFixed(2) : null),

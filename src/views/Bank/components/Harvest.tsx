@@ -28,15 +28,15 @@ const Harvest: React.FC<HarvestProps> = ({ bank }) => {
   const tombStats = useTombStats();
   const tShareStats = useShareStats();
 
-  const tokenName = bank.earnTokenName === 'STRAW' ? 'STRAW' : 'FUDGE';
-  const tokenStats = bank.earnTokenName === 'STRAW' ? tShareStats : tombStats;
+  const tokenName = bank.earnTokenName === 'CSHARE' ? 'CSHARE' : 'CREAM';
+  const tokenStats = bank.earnTokenName === 'CSHARE' ? tShareStats : tombStats;
   const tokenPriceInDollars = useMemo(
     () => (tokenStats ? Number(tokenStats.priceInDollars).toFixed(2) : null),
     [tokenStats],
   );
   const earnedInDollars = (Number(tokenPriceInDollars) * Number(getDisplayBalance(earnings))).toFixed(2);
   return (
-    <Card style={{ boxShadow: 'none !important', border: '1px solid var(--white)', backgroundColor: 'rgba(229, 152, 155, 0.1)' }}>
+    <Card style={{ boxShadow: 'none !important', border: '1px solid var(--black)', backgroundColor: 'rgba(229, 152, 155, 0.1)' }}>
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>

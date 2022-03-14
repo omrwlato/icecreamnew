@@ -16,6 +16,11 @@ import usetShareStats from '../../hooks/usetShareStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
 import useFantomPrice from '../../hooks/useFantomPrice';
 import useTokenBalance from '../../hooks/useTokenBalance';
+import useStakedBalance from '../../hooks/useStakedBalance';
+import useBanks from '../../hooks/useBanks';
+import useEarnings from '../../hooks/useEarnings';
+import useShareStats from '../../hooks/usetShareStats';
+import useStakedTokenPriceInDollars from '../../hooks/useStakedTokenPriceInDollars';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import { tomb as tombTesting, tShare as tShareTesting } from '../../tomb-finance/deployments/deployments.testing.json';
 import { tomb as tombProd, tShare as tShareProd } from '../../tomb-finance/deployments/deployments.mainnet.json';
@@ -58,18 +63,82 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const buyfudgeAddress = 'https://traderjoexyz.com/trade?outputCurrency=0xD9FF12172803c072a36785DeFea1Aa981A6A0C18#/';
-const viewFudgeAddress = 'https://dexscreener.com/avalanche/0xe367414f29e247b2d92edd610aa6dd5a7fd631ba';
-const viewStrawAddress = 'https://dexscreener.com/avalanche/0x5eef38855090ccc49a1b7391f4c7b9efbdfe1456';
-const buystrawAddress = 'https://traderjoexyz.com/trade?outputCurrency=0xf8D0C6c3ddC03F43A0687847f2b34bfd6941C2A2#/';
+const buycreamAddress = 'https://traderjoexyz.com/trade?outputCurrency=0xD9FF12172803c072a36785DeFea1Aa981A6A0C18#/';
+const viewCreamAddress = 'https://dexscreener.com/avalanche/0xe367414f29e247b2d92edd610aa6dd5a7fd631ba';
+const viewCshareAddress = 'https://dexscreener.com/avalanche/0x5eef38855090ccc49a1b7391f4c7b9efbdfe1456';
+const buycshareAddress = 'https://traderjoexyz.com/trade?outputCurrency=0xf8D0C6c3ddC03F43A0687847f2b34bfd6941C2A2#/';
 
 const Home = () => {
   const classes = useStyles();
+  const [banks] = useBanks();
+  const activeBanks = banks.filter((bank) => !bank.finished);
+  const creamAvaxBank = activeBanks[0];
+  const cshareAvaxBank = activeBanks[1];
+  const cshareCreamBank = activeBanks[3];
+  const stakedBalanceCreamAvax = useStakedBalance(creamAvaxBank.contract, creamAvaxBank.poolId);
+  const stakedBalanceCshareAvax = useStakedBalance(cshareAvaxBank.contract, cshareAvaxBank.poolId);
+  const stakedBalanceCshareCream = useStakedBalance(cshareCreamBank.contract, cshareCreamBank.poolId);
+  const stakedTokenPriceInDollarsCreamAvax = useStakedTokenPriceInDollars(
+    creamAvaxBank.depositTokenName,
+    creamAvaxBank.depositToken,
+  );
+  const stakedTokenPriceInDollarsCshareAvax = useStakedTokenPriceInDollars(
+    cshareAvaxBank.depositTokenName,
+    cshareAvaxBank.depositToken,
+  );
+  const stakedTokenPriceInDollarsCshareCream = useStakedTokenPriceInDollars(
+    cshareCreamBank.depositTokenName,
+    cshareCreamBank.depositToken,
+  );
+  const tShareStats = useShareStats();
+  const tombStats = useTombStats();
+  const stakedInDollarsCreamAvax = (
+    Number(stakedTokenPriceInDollarsCreamAvax) *
+    Number(getDisplayBalance(stakedBalanceCreamAvax, creamAvaxBank.depositToken.decimal))
+  ).toFixed(2);
+  const stakedInDollarsCshareAvax = (
+    Number(stakedTokenPriceInDollarsCshareAvax) *
+    Number(getDisplayBalance(stakedBalanceCshareAvax, cshareAvaxBank.depositToken.decimal))
+  ).toFixed(2);
+  const stakedInDollarsCshareCream = (
+    Number(stakedTokenPriceInDollarsCshareCream) *
+    Number(getDisplayBalance(stakedBalanceCshareCream, cshareCreamBank.depositToken.decimal))
+  ).toFixed(2);
+  const earningsCreamAvax = useEarnings(creamAvaxBank.contract, creamAvaxBank.earnTokenName, creamAvaxBank.poolId);
+  const earningsCshareAvax = useEarnings(cshareAvaxBank.contract, cshareAvaxBank.earnTokenName, cshareAvaxBank.poolId);
+  const earningsCshareCream = useEarnings(
+    cshareCreamBank.contract,
+    cshareCreamBank.earnTokenName,
+    cshareCreamBank.poolId,
+  );
+  const tokenStatsCreamAvax = creamAvaxBank.earnTokenName === 'CSHARE' ? tShareStats : tombStats;
+  const tokenStatsCshareAvax = cshareAvaxBank.earnTokenName === 'CSHARE' ? tShareStats : tombStats;
+  const tokenStatsCshareCream = cshareAvaxBank.earnTokenName === 'CSHARE' ? tShareStats : tombStats;
+  const tokenPriceInDollarsCreamAvax = useMemo(
+    () => (tokenStatsCreamAvax ? Number(tokenStatsCreamAvax.priceInDollars).toFixed(2) : null),
+    [tokenStatsCreamAvax],
+  );
+  const tokenPriceInDollarsCshareAvax = useMemo(
+    () => (tokenStatsCshareAvax ? Number(tokenStatsCshareAvax.priceInDollars).toFixed(2) : null),
+    [tokenStatsCshareAvax],
+  );
+  const tokenPriceInDollarsCshareCream = useMemo(
+    () => (tokenStatsCshareCream ? Number(tokenStatsCshareCream.priceInDollars).toFixed(2) : null),
+    [tokenStatsCshareCream],
+  );
+  const earnedInDollarsCreamAvax = (
+    Number(tokenPriceInDollarsCreamAvax) * Number(getDisplayBalance(earningsCreamAvax))
+  ).toFixed(2);
+
+  const earnedInDollarsCshareAvax = (
+    Number(tokenPriceInDollarsCshareAvax) * Number(getDisplayBalance(earningsCshareAvax))
+  ).toFixed(2);
+  const earnedInDollarsCshareCream = (
+    Number(tokenPriceInDollarsCshareCream) * Number(getDisplayBalance(earningsCshareCream))
+  ).toFixed(2);
   const TVL = useTotalValueLocked();
   const tombFtmLpStats = useLpStats('CREAM-AVAXLP');
   const tShareFtmLpStats = useLpStats('CSHARE-AVAX-LP');
-  const tombStats = useTombStats();
-  const tShareStats = usetShareStats();
   const tBondStats = useBondStats();
   const tombFinance = useTombFinance();
   const tombBalance = useTokenBalance(tombFinance.TOMB);
@@ -134,6 +203,7 @@ const Home = () => {
 
   const tombLpZap = useZap({ depositTokenName: 'CREAM-AVAX-LP' });
   const tshareLpZap = useZap({ depositTokenName: 'CSHARE-AVAX-LP' });
+  const tombtshareLpZap = useZap({ depositTokenName: 'CREAM-CSHARE-LP' });
 
   const StyledLink = styled.a`
     font-weight: 700;
@@ -165,12 +235,23 @@ const Home = () => {
     />,
   );
 
-  // const handleMouseOverFudge = () => {
-  //   setIsHoveringFudge(true);
+  const [onPresenttombtshareZap, onDissmisstombtshareZap] = useModal(
+    <ZapModal
+      decimals={18}
+      onConfirm={(zappingToken, tokenName, amount) => {
+        if (Number(amount) <= 0 || isNaN(Number(amount))) return;
+        tombtshareLpZap.onZap(zappingToken, tokenName, amount);
+        onDissmisstombtshareZap();
+      }}
+      tokenName={'CREAM-CSHARE-LP'}
+    />,
+  );
+  // const handleMouseOverCream = () => {
+  //   setIsHoveringCream(true);
   // };
 
-  // const handleMouseOutFudge = () => {
-  //   setIsHoveringFudge(false);
+  // const handleMouseOutCream = () => {
+  //   setIsHoveringCream(false);
   // };
 
   // const handleMouseOverStraw = () => {
@@ -203,7 +284,7 @@ const Home = () => {
             <Paper style={{ backgroundColor: 'transparent', boxShadow: 'none', border: 'none' }}>
               <Box p={4} display="flex" justifyContent="center" alignItems="center">
                 <Typography variant="h3" fontWeight="bold" align="center">
-                  Get your spoons ready for the second scoop of the sweetest protocol on Avalanche
+                  Stake on the sweetest protocol to earn CSHARE rewards via seigniorage!
                 </Typography>
               </Box>
             </Paper>
@@ -221,8 +302,8 @@ const Home = () => {
           </Box>
         </Grid>
 
-        <Grid container xs={12} sm={12} spacing={1}>
-          <Grid sm={7}>
+        <Grid container xs={12} sm={12} style={{ marginTop: '20px' }}>
+          <Grid sm={7} style={{ marginRight: '20px' }}>
             {/* Cream */}
             <Grid style={{ backgroundColor: '#FFFFFF', borderRadius: '15px' }}>
               <div style={{ display: 'flex', padding: '15px' }}>
@@ -263,18 +344,20 @@ const Home = () => {
                   </div>
                   <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     <Button
+                      color="primary"
                       variant="contained"
-                      style={{ marginTop: '20px', marginRight: '15px', backgroundColor: '#FE4794', color: 'white' }}
+                      style={{ marginTop: '20px', marginRight: '15px' }}
                       target="_blank"
-                      href={buyfudgeAddress}
+                      href={buycreamAddress}
                     >
                       Buy Now
                     </Button>
                     <Button
+                      color="primary"
                       variant="contained"
-                      style={{ marginTop: '20px', backgroundColor: '#FE4794' }}
+                      style={{ marginTop: '20px' }}
                       target="_blank"
-                      href={viewFudgeAddress}
+                      href={viewCreamAddress}
                     >
                       Chart
                     </Button>
@@ -283,7 +366,7 @@ const Home = () => {
               </div>
             </Grid>
             {/* CShare */}
-            <Grid style={{ backgroundColor: '#FFFFFF', borderRadius: '15px' }}>
+            <Grid style={{ backgroundColor: '#FFFFFF', borderRadius: '15px', marginTop: '20px' }}>
               <div style={{ display: 'flex', padding: '15px' }}>
                 <div
                   style={{
@@ -322,18 +405,20 @@ const Home = () => {
                   </div>
                   <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     <Button
+                      color="primary"
                       variant="contained"
-                      style={{ marginTop: '20px', marginRight: '15px', backgroundColor: '#FE4794', color: 'white' }}
+                      style={{ marginTop: '20px', marginRight: '15px' }}
                       target="_blank"
-                      href={buystrawAddress}
+                      href={buycshareAddress}
                     >
                       Buy Now
                     </Button>
                     <Button
+                      color="primary"
                       variant="contained"
-                      style={{ marginTop: '20px', backgroundColor: '#FE4794' }}
+                      style={{ marginTop: '20px' }}
                       target="_blank"
-                      href={viewStrawAddress}
+                      href={viewCshareAddress}
                     >
                       Chart
                     </Button>
@@ -343,35 +428,113 @@ const Home = () => {
             </Grid>
           </Grid>
           <Grid style={{ backgroundColor: '#FFFFFF', borderRadius: '15px' }} sm={4}>
-            <div style={{ display: 'flex', padding: '15px', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div
+              style={{
+                display: 'flex',
+                padding: '15px',
+                flexDirection: 'column',
+                height: '100%',
+                justifyContent: 'space-evenly',
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '15px' }}>
                 <h1>Rewards</h1>
               </div>
               <div style={{ display: 'flex' }}>
-                <div>
+                <div style={{ width: '30%' }}>
                   <TokenSymbol symbol="CREAM-AVAX-LP" style={{ backgroundColor: 'transparent !important' }} />
                 </div>
-                <div>
-                  <h4>Staked Amount:</h4>
-                  <h4>Rewards Earned:</h4>
+                <div style={{ width: '70%' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignContent: 'space-between',
+                      justifyContent: 'space-between',
+                      width: '100%',
+                    }}
+                  >
+                    <h4>Staked Amount:</h4>
+                    <h4>{`≈ $${stakedInDollarsCreamAvax}`}</h4>
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignContent: 'space-between',
+                      justifyContent: 'space-between',
+                      width: '100%',
+                    }}
+                  >
+                    <h4>Rewards Earned:</h4>
+                    <h4>{`≈ $${earnedInDollarsCreamAvax}`}</h4>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
+                    <Button color="primary" onClick={onPresentTombZap} variant="contained">
+                      Zap In
+                    </Button>
+                  </div>
                 </div>
               </div>
               <div style={{ display: 'flex' }}>
-                <div>
+                <div style={{ width: '30%' }}>
                   <TokenSymbol symbol="CSHARE-AVAX-LP" style={{ backgroundColor: 'transparent !important' }} />
                 </div>
-                <div>
-                  <h4>Staked Amount:</h4>
-                  <h4>Rewards Earned:</h4>
+                <div style={{ width: '70%' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignContent: 'space-between',
+                      justifyContent: 'space-between',
+                      width: '100%',
+                    }}
+                  >
+                    <h4>Staked Amount:</h4>
+                    <h4>{`≈ $${stakedInDollarsCshareAvax}`}</h4>
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignContent: 'space-between',
+                      justifyContent: 'space-between',
+                      width: '100%',
+                    }}
+                  >
+                    <h4>Rewards Earned:</h4>
+                    <h4>{`≈ $${earnedInDollarsCshareAvax}`}</h4>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
+                    <Button color="primary" onClick={onPresentTshareZap} variant="contained">
+                      Zap In
+                    </Button>
+                  </div>
                 </div>
               </div>
               <div style={{ display: 'flex' }}>
-                <div>
+                <div style={{ width: '30%' }}>
                   <TokenSymbol symbol="CREAM-CSHARE-LP" style={{ backgroundColor: 'transparent !important' }} />
                 </div>
-                <div>
-                  <h4>Staked Amount:</h4>
-                  <h4>Rewards Earned:</h4>
+                <div style={{ width: '70%' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignContent: 'space-between',
+                      justifyContent: 'space-between',
+                      width: '100%',
+                    }}
+                  >
+                    <h4>Staked Amount:</h4>
+                    <h4>{`≈ $${stakedInDollarsCshareCream}`}</h4>
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignContent: 'space-between',
+                      justifyContent: 'space-between',
+                      width: '100%',
+                    }}
+                  >
+                    <h4>Rewards Earned:</h4>
+                    <h4>{`≈ $${earnedInDollarsCshareCream}`}</h4>
+                  </div>
                 </div>
               </div>
             </div>

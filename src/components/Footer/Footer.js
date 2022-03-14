@@ -44,13 +44,13 @@ const Footer = () => {
     <footer className={classes.footer}>
       <Container maxWidth="lg">
         <Grid container>
-          <Grid item xs={6}>
-            <Typography variant="body2" color="textPrimary" align="left">
+          <Grid item xs={12}>
+            <Typography variant="body2" color="textPrimary" align="center">
               {'Copyright © IceCream x Sundae Finance '}
               {new Date().getFullYear()}
             </Typography>
             </Grid>
-          <Grid item xs={6} style={{ textAlign: 'right', height: '20px' }}>
+          <Grid item xs={12} style={{ textAlign: 'center', height: '20px', paddingTop:'20px' }}>
             <a
               href="https://twitter.com/IcecreamFinance"
               rel="noopener noreferrer"

@@ -46,13 +46,13 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   finished: will disable the pool on the UI if set to true
   sort: the order of the pool
   */
-/*   FudgeCshareRewardPool: {
-    name: 'Earn FUDGE by staking CSHARE',
+/*   CreamCshareRewardPool: {
+    name: 'Earn CREAM by staking CSHARE',
     poolId: 0,
     sectionInUI: 0,
-    contract: 'FudgeCshare2RewardPool',
+    contract: 'CreamCshare2RewardPool',
     depositTokenName: 'CSHARE',
-    earnTokenName: 'FUDGE',
+    earnTokenName: 'CREAM',
     finished: false,
     multiplier: '1000x',
     site: 'https://icecreamfinance.app',

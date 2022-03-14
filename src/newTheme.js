@@ -5,15 +5,15 @@ const newTheme = createMuiTheme({
   palette: {
     type: 'dark',
     text: {
-      primary: '#E6E9EE',
+      primary: '#000',
     },
     background: {
       default: 'transparent',
       paper: 'transparent',
     },
     primary: {
-      light: '#757CE8',
-      main: '#757ce8',
+      light: '#000',
+      main: '#FE4794',
       dark: '#571EB1',
       contrastText: '#16191E',
     },
@@ -30,7 +30,7 @@ const newTheme = createMuiTheme({
     },
   },
   typography: {
-    color: '#E6E9EE',
+    color: '#000',
     fontFamily: ['"Gilroy"', 'sans-serif'].join(','),
   },
   components: {

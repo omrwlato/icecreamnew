@@ -126,10 +126,10 @@ const Masonry = () => {
                 >
                   <CardContent align="center">
                     <Typography>
-                      FUDGE Price<small> (TWAP)</small>
+                      CREAM Price<small> (TWAP)</small>
                     </Typography>
-                    {/* <Typography>{rebateStats.tombPrice.toFixed(4)} DAI</Typography> */}
-                    <Typography>{tombPriceInFTM ? tombPriceInFTM : '-.----'} DAI</Typography>
+                    {/* <Typography>{rebateStats.tombPrice.toFixed(4)} AVAX</Typography> */}
+                    <Typography>{tombPriceInFTM ? tombPriceInFTM : '-.----'} AVAX</Typography>
                   </CardContent>
                 </Card>
               </Grid>
@@ -144,7 +144,7 @@ const Masonry = () => {
                 >
                   <CardContent align="center">
                     <Typography>APR</Typography>
-                    <Typography>{masonryAPR.toFixed(2)}%</Typography>
+                    <Typography>{scalingFactor >= 1 ? masonryAPR.toFixed(2) : 0}%</Typography>
                   </CardContent>
                 </Card>
               </Grid>
@@ -158,7 +158,7 @@ const Masonry = () => {
                   }}
                 >
                   <CardContent align="center">
-                    <Typography>STRAWs Staked</Typography>
+                    <Typography>CSHAREs Staked</Typography>
                     <Typography>{getDisplayBalance(totalStaked)}</Typography>
                   </CardContent>
                 </Card>
@@ -166,8 +166,9 @@ const Masonry = () => {
             </Grid>
 
             <Grid container justify="center">
-              <Alert variant="filled" severity="info" style={{ marginTop: '50px', backgroundColor: '#757CE8' }}>
-                Staked STRAWs can only be withdrawn after 6 epochs since deposit.
+              <Alert variant="filled" severity="warning" style={{ marginTop: '30px'}}>
+              Boardroom will not print if TWAP is not above 1.01 AVAX, funds staked will be locked
+                  for 6 EPOCHS
               </Alert>
             </Grid>
 

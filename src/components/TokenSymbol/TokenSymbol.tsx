@@ -12,7 +12,6 @@ import creamCshare from '../../assets/img/creamcshare.png';
 import creamAvax from '../../assets/img/cream-wavax.png';
 import cshareAvax from '../../assets/img/cshare-avax.png';
 
-
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
   //=====================
@@ -42,7 +41,7 @@ const TokenSymbol: React.FC<LogoProps> = ({ symbol }) => {
   if (symbol === 'CREAM-AVAX-LP' || symbol === 'CSHARE-AVAX-LP') {
     return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={100} height={100} />;
   } else if (symbol === 'CREAM-CSHARE-LP') {
-    return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={120} />;
+    return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={100} height={100} />;
   } else if (symbol === 'CREAM') {
     return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={90} height={90} />;
   } else {

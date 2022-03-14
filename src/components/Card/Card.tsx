@@ -5,13 +5,7 @@ const Card: React.FC = ({ children }) => <StyledCard>{children}</StyledCard>;
 
 const StyledCard = styled.div`
   background-color: rgba(255, 255, 255, 0.9); //${(props) => props.theme.color.grey[800]};
-  backdrop-filter: blur(10px) !important;
-  -webkit-box-shadow: 10px 22px 33px 0px rgba(0, 0, 0, 0.58) !important;
-  -moz-box-shadow: 10px 22px 33px 0px rgba(0, 0, 0, 0.58) !important;
-  box-shadow: 10px 22px 33px 0px rgba(0, 0, 0, 0.58) !important;
-  overflow: hidden !important;
-  border-radius: 15px;
-  color: #FFFFFF !important;
+  color: #2c2560 !important;
   display: flex;
   flex: 1;
   flex-direction: column;

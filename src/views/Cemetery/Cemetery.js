@@ -48,7 +48,7 @@ const Cemetery = () => {
               <Box mt={5}>
                 {/*                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
                   <Typography color="textPrimary" variant="h4" gutterBottom>
-                    Earn STRAW by staking LP Tokens
+                    Earn CSHARE by staking LP Tokens
                   </Typography>
                   <Grid container spacing={3}>
                     {activeBanks
@@ -68,8 +68,7 @@ const Cemetery = () => {
                   <Alert variant="filled" severity="warning">
                     LP Pools have started and will run for 370 days
                   </Alert>
-                  <Grid container spacing={3} alignItems="center"
-                    justifyContent="left" style={{ marginTop: '20px' }}>
+                  <Grid container spacing={3} alignItems="center" justifyContent="left" style={{ marginTop: '20px' }}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 2)
                       .map((bank) => (
@@ -118,7 +117,7 @@ const Cemetery = () => {
           <Bank />
         </Route>
       </Page>
-    </Switch >
+    </Switch>
   );
 };
 

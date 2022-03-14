@@ -55,7 +55,7 @@ const Cemetery = () => {
 
   const rebateStats = useRebateTreasury()
   console.log(rebateStats)
-  const [claimablefudge, setClaimablefudge] = useState(0);
+  const [claimablecream, setClaimablecream] = useState(0);
   const [vested, setVested] = useState(0)
 
   useEffect(() => {
@@ -71,12 +71,12 @@ const Cemetery = () => {
 
     const claimable = await rebateStats.RebateTreasury.methods.claimableTomb(address).call()
     const vesting = await rebateStats.RebateTreasury.methods.vesting(address).call()
-    setClaimablefudge(+web3.utils.fromWei(claimable))
+    setClaimablecream(+web3.utils.fromWei(claimable))
     setVested(+web3.utils.fromWei(BN(vesting.amount).sub(BN(vesting.claimed))))
   }
 
   async function claimTomb() {
-    console.log("claiming the tomb")
+    console.log("claiming the cream")
     if (!window.ethereum) return
     const address = (await window.ethereum.request({ method: "eth_accounts" }))[0]
     if (!address) return
@@ -106,9 +106,9 @@ const Cemetery = () => {
                     <Card className={classes.gridItem} style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
                       <CardContent align="center">
                         <Typography variant="h5">
-                          FUDGE Price <small>(TWAP)</small>
+                          CREAM Price <small>(TWAP)</small>
                         </Typography>
-                        <Typography variant="h6">{rebateStats.tombPrice.toFixed(3)} DAI</Typography>
+                        <Typography variant="h6">{rebateStats.tombPrice.toFixed(3)} AVAX</Typography>
                       </CardContent>
                     </Card>
                   </Grid>
@@ -144,10 +144,10 @@ const Cemetery = () => {
                     <Card style={{ height: "auto" }} style={{ backgroundColor: 'rgba(229, 152, 155, 0.1)', boxShadow: 'none', border: '1px solid var(--white)' }}>
                       <CardContent align="center">
                         <Typography variant="h5">
-                          FUDGE Vesting
+                          CREAM Vesting
                         </Typography>
                         <Typography variant="h6">{vested.toFixed(4)} Total Vested</Typography>
-                        <Typography variant="h6">{claimablefudge.toFixed(4)} Claimable</Typography>
+                        <Typography variant="h6">{claimablecream.toFixed(4)} Claimable</Typography>
                         <Button color="primary" size="small" variant="contained" onClick={claimTomb} style={{ marginTop: "8px" }}>
                           CLAIM
                         </Button>
