@@ -428,7 +428,15 @@ const Home = () => {
             </Grid>
           </Grid>
           <Grid style={{ backgroundColor: '#FFFFFF', borderRadius: '15px' }} sm={4}>
-            <div style={{ display: 'flex', padding: '15px', flexDirection: 'column' }}>
+            <div
+              style={{
+                display: 'flex',
+                padding: '15px',
+                flexDirection: 'column',
+                height: '100%',
+                justifyContent: 'space-evenly',
+              }}
+            >
               <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '15px' }}>
                 <h1>Rewards</h1>
               </div>
@@ -459,7 +467,7 @@ const Home = () => {
                     <h4>Rewards Earned:</h4>
                     <h4>{`≈ $${earnedInDollarsCreamAvax}`}</h4>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
                     <Button color="primary" onClick={onPresentTombZap} variant="contained">
                       Zap In
                     </Button>
@@ -493,7 +501,7 @@ const Home = () => {
                     <h4>Rewards Earned:</h4>
                     <h4>{`≈ $${earnedInDollarsCshareAvax}`}</h4>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
                     <Button color="primary" onClick={onPresentTshareZap} variant="contained">
                       Zap In
                     </Button>
@@ -527,15 +535,6 @@ const Home = () => {
                     <h4>Rewards Earned:</h4>
                     <h4>{`≈ $${earnedInDollarsCshareCream}`}</h4>
                   </div>
-                  {/* <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <Button
-                      variant="contained"
-                      style={{ marginTop: '5px', backgroundColor: '#FE4794', color: 'white' }}
-                      target="_blank"
-                    >
-                      Zap
-                    </Button>
-                  </div> */}
                 </div>
               </div>
             </div>
