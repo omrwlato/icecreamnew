@@ -16,6 +16,11 @@ import usetShareStats from '../../hooks/usetShareStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
 import useFantomPrice from '../../hooks/useFantomPrice';
 import useTokenBalance from '../../hooks/useTokenBalance';
+import useStakedBalance from '../../hooks/useStakedBalance';
+import useBanks from '../../hooks/useBanks';
+import useEarnings from '../../hooks/useEarnings';
+import useShareStats from '../../hooks/usetShareStats';
+import useStakedTokenPriceInDollars from '../../hooks/useStakedTokenPriceInDollars';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import { tomb as tombTesting, tShare as tShareTesting } from '../../tomb-finance/deployments/deployments.testing.json';
 import { tomb as tombProd, tShare as tShareProd } from '../../tomb-finance/deployments/deployments.mainnet.json';
@@ -65,11 +70,75 @@ const buycshareAddress = 'https://traderjoexyz.com/trade?outputCurrency=0xf8D0C6
 
 const Home = () => {
   const classes = useStyles();
+  const [banks] = useBanks();
+  const activeBanks = banks.filter((bank) => !bank.finished);
+  const creamAvaxBank = activeBanks[0];
+  const cshareAvaxBank = activeBanks[1];
+  const cshareCreamBank = activeBanks[3];
+  const stakedBalanceCreamAvax = useStakedBalance(creamAvaxBank.contract, creamAvaxBank.poolId);
+  const stakedBalanceCshareAvax = useStakedBalance(cshareAvaxBank.contract, cshareAvaxBank.poolId);
+  const stakedBalanceCshareCream = useStakedBalance(cshareCreamBank.contract, cshareCreamBank.poolId);
+  const stakedTokenPriceInDollarsCreamAvax = useStakedTokenPriceInDollars(
+    creamAvaxBank.depositTokenName,
+    creamAvaxBank.depositToken,
+  );
+  const stakedTokenPriceInDollarsCshareAvax = useStakedTokenPriceInDollars(
+    cshareAvaxBank.depositTokenName,
+    cshareAvaxBank.depositToken,
+  );
+  const stakedTokenPriceInDollarsCshareCream = useStakedTokenPriceInDollars(
+    cshareCreamBank.depositTokenName,
+    cshareCreamBank.depositToken,
+  );
+  const tShareStats = useShareStats();
+  const tombStats = useTombStats();
+  const stakedInDollarsCreamAvax = (
+    Number(stakedTokenPriceInDollarsCreamAvax) *
+    Number(getDisplayBalance(stakedBalanceCreamAvax, creamAvaxBank.depositToken.decimal))
+  ).toFixed(2);
+  const stakedInDollarsCshareAvax = (
+    Number(stakedTokenPriceInDollarsCshareAvax) *
+    Number(getDisplayBalance(stakedBalanceCshareAvax, cshareAvaxBank.depositToken.decimal))
+  ).toFixed(2);
+  const stakedInDollarsCshareCream = (
+    Number(stakedTokenPriceInDollarsCshareCream) *
+    Number(getDisplayBalance(stakedBalanceCshareCream, cshareCreamBank.depositToken.decimal))
+  ).toFixed(2);
+  const earningsCreamAvax = useEarnings(creamAvaxBank.contract, creamAvaxBank.earnTokenName, creamAvaxBank.poolId);
+  const earningsCshareAvax = useEarnings(cshareAvaxBank.contract, cshareAvaxBank.earnTokenName, cshareAvaxBank.poolId);
+  const earningsCshareCream = useEarnings(
+    cshareCreamBank.contract,
+    cshareCreamBank.earnTokenName,
+    cshareCreamBank.poolId,
+  );
+  const tokenStatsCreamAvax = creamAvaxBank.earnTokenName === 'CSHARE' ? tShareStats : tombStats;
+  const tokenStatsCshareAvax = cshareAvaxBank.earnTokenName === 'CSHARE' ? tShareStats : tombStats;
+  const tokenStatsCshareCream = cshareAvaxBank.earnTokenName === 'CSHARE' ? tShareStats : tombStats;
+  const tokenPriceInDollarsCreamAvax = useMemo(
+    () => (tokenStatsCreamAvax ? Number(tokenStatsCreamAvax.priceInDollars).toFixed(2) : null),
+    [tokenStatsCreamAvax],
+  );
+  const tokenPriceInDollarsCshareAvax = useMemo(
+    () => (tokenStatsCshareAvax ? Number(tokenStatsCshareAvax.priceInDollars).toFixed(2) : null),
+    [tokenStatsCshareAvax],
+  );
+  const tokenPriceInDollarsCshareCream = useMemo(
+    () => (tokenStatsCshareCream ? Number(tokenStatsCshareCream.priceInDollars).toFixed(2) : null),
+    [tokenStatsCshareCream],
+  );
+  const earnedInDollarsCreamAvax = (
+    Number(tokenPriceInDollarsCreamAvax) * Number(getDisplayBalance(earningsCreamAvax))
+  ).toFixed(2);
+
+  const earnedInDollarsCshareAvax = (
+    Number(tokenPriceInDollarsCshareAvax) * Number(getDisplayBalance(earningsCshareAvax))
+  ).toFixed(2);
+  const earnedInDollarsCshareCream = (
+    Number(tokenPriceInDollarsCshareCream) * Number(getDisplayBalance(earningsCshareCream))
+  ).toFixed(2);
   const TVL = useTotalValueLocked();
   const tombFtmLpStats = useLpStats('CREAM-AVAXLP');
   const tShareFtmLpStats = useLpStats('CSHARE-AVAX-LP');
-  const tombStats = useTombStats();
-  const tShareStats = usetShareStats();
   const tBondStats = useBondStats();
   const tombFinance = useTombFinance();
   const tombBalance = useTokenBalance(tombFinance.TOMB);
@@ -373,7 +442,7 @@ const Home = () => {
                     }}
                   >
                     <h4>Staked Amount:</h4>
-                    <h4>0</h4>
+                    <h4>{`≈ $${stakedInDollarsCreamAvax}`}</h4>
                   </div>
                   <div
                     style={{
@@ -384,7 +453,7 @@ const Home = () => {
                     }}
                   >
                     <h4>Rewards Earned:</h4>
-                    <h4>0</h4>
+                    <h4>{`≈ $${earnedInDollarsCreamAvax}`}</h4>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     <Button
@@ -411,7 +480,7 @@ const Home = () => {
                     }}
                   >
                     <h4>Staked Amount:</h4>
-                    <h4>0</h4>
+                    <h4>{`≈ $${stakedInDollarsCshareAvax}`}</h4>
                   </div>
                   <div
                     style={{
@@ -422,7 +491,7 @@ const Home = () => {
                     }}
                   >
                     <h4>Rewards Earned:</h4>
-                    <h4>0</h4>
+                    <h4>{`≈ $${earnedInDollarsCshareAvax}`}</h4>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     <Button
@@ -436,10 +505,10 @@ const Home = () => {
                 </div>
               </div>
               <div style={{ display: 'flex' }}>
-                <div style={{ width: '45%' }}>
+                <div style={{ width: '30%' }}>
                   <TokenSymbol symbol="CREAM-CSHARE-LP" style={{ backgroundColor: 'transparent !important' }} />
                 </div>
-                <div style={{ width: '55%' }}>
+                <div style={{ width: '70%' }}>
                   <div
                     style={{
                       display: 'flex',
@@ -449,7 +518,7 @@ const Home = () => {
                     }}
                   >
                     <h4>Staked Amount:</h4>
-                    <h4>0</h4>
+                    <h4>{`≈ $${stakedInDollarsCshareCream}`}</h4>
                   </div>
                   <div
                     style={{
@@ -460,7 +529,7 @@ const Home = () => {
                     }}
                   >
                     <h4>Rewards Earned:</h4>
-                    <h4>0</h4>
+                    <h4>{`≈ $${earnedInDollarsCshareCream}`}</h4>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     <Button
