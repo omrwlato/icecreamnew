@@ -427,7 +427,7 @@ const Home = () => {
               </div>
             </Grid>
           </Grid>
-          <Grid style={{ backgroundColor: '#FFFFFF', borderRadius: '15px' }} sm={4}>
+          <Grid style={{ backgroundColor: '#FFFFFF', borderRadius: '15px', width: '100%' }} sm={4}>
             <div
               style={{
                 display: 'flex',
