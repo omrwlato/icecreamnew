@@ -150,8 +150,8 @@ const CemeteryCard = ({ bank }) => {
     <Grid item xs={12}>
       <Card>
         <CardContent style={{ position: 'relative', backgroundColor: 'white' }}>
-          <Grid justifyContent="space-between" style={{ display: 'flex', flexDirection: 'row' }}>
-            <Grid alignItems="flex-start" justifyContent="space-between" style={{ display: 'flex' }}>
+          <Grid container justifyContent="space-between" style={{ display: 'flex', flexDirection: 'row' }}>
+            <Grid item xs={12} sm={4} alignItems="flex-start" justifyContent="flex-start" style={{ display: 'flex' }}>
               <Grid style={{ padding: '10px' }}>
                 {console.log(bank.depositTokenName, 'sdada')}
                 <TokenSymbol symbol={bank.depositTokenName} />
@@ -191,13 +191,19 @@ const CemeteryCard = ({ bank }) => {
             </Grid>
 
             <Grid
+              container
+              item
+              xs={12}
+              sm={8}
               alignItems="center"
               justifyContent="center"
-              style={{ display: 'flex', flexDirection: 'row', width: '60%' }}
+              style={{ display: 'flex', flexDirection: 'row' }}
             >
               <Grid
                 container
                 item
+                xs={12}
+                sm={3}
                 alignItems="center"
                 justifyContent="center"
                 style={{ display: 'flex', flexDirection: 'column' }}
@@ -217,6 +223,8 @@ const CemeteryCard = ({ bank }) => {
               <Grid
                 container
                 item
+                xs={12}
+                sm={3}
                 alignItems="center"
                 justifyContent="center"
                 style={{ display: 'flex', flexDirection: 'column' }}
@@ -232,6 +240,8 @@ const CemeteryCard = ({ bank }) => {
               <Grid
                 container
                 item
+                xs={12}
+                sm={2}
                 alignItems="center"
                 justifyContent="center"
                 style={{ display: 'flex', flexDirection: 'column' }}
@@ -247,6 +257,8 @@ const CemeteryCard = ({ bank }) => {
               <Grid
                 container
                 item
+                xs={12}
+                sm={2}
                 alignItems="center"
                 justifyContent="center"
                 style={{ display: 'flex', flexDirection: 'column' }}
@@ -266,6 +278,8 @@ const CemeteryCard = ({ bank }) => {
               <Grid
                 container
                 item
+                xs={12}
+                sm={2}
                 alignItems="center"
                 justifyContent="center"
                 style={{ display: 'flex', flexDirection: 'column' }}
