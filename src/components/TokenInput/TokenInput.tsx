@@ -42,7 +42,8 @@ const TokenInput: React.FC<TokenInputProps> = ({ max, symbol, onChange, onSelect
             </div>
 */
 
-const StyledTokenInput = styled.div``;
+const StyledTokenInput = styled.div`
+`;
 
 const StyledSpacer = styled.div`
   width: ${(props) => props.theme.spacing[3]}px;
