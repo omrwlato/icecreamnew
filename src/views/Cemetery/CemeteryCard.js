@@ -29,6 +29,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import TokenInput from '../../components/TokenInput';
 import { getFullDisplayBalance } from '../../utils/formatBalance';
 import { Divider } from '@mui/material';
+import tShareLogoPNG from '../../assets/img/cshare.png';
 
 async function watchAssetInMetamask(asset) {
   const { ethereum } = window;
@@ -183,7 +184,7 @@ const CemeteryCard = ({ bank }) => {
                   </Grid>
                 </Grid>
                 <Grid>
-                  <h3 style={{ color: 'black', padding: '10px' }}>{`EARN ${bank.earnTokenName} `}</h3>
+                  <h3 style={{ color: 'black', paddingLeft: '20px' }}>{`EARN ${bank.earnTokenName} `}</h3>
                 </Grid>
 
               </Grid>
@@ -423,7 +424,7 @@ const CemeteryCard = ({ bank }) => {
                           }}
                         />
                         <Grid item style={{ alignItems: 'center', justifyContent: "center", display: 'flex', flexDirection: 'column', margin: '10px', padding: '10px' }}>
-                          <TokenSymbol symbol={bank.depositTokenName} />
+                          <TokenSymbol symbol={bank.earnTokenName} />
                           <h2 style={{ color: 'black', padding: '10px' }}>{getDisplayBalance(earnings)} {bank.earnTokenName}</h2>
                           <h5
                             style={{ color: 'grey', marginTop: '0px', marginBottom: '15px', fontWeight: 'normal' }}
