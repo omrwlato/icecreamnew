@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Alert } from '@material-ui/lab';
 import { createGlobalStyle } from 'styled-components';
 import CountUp from 'react-countup';
+import { isMobile } from 'react-device-detect';
 import CardIcon from '../../components/CardIcon';
 import TokenSymbol from '../../components/TokenSymbol';
 import useTombStats from '../../hooks/useTombStats';
@@ -302,10 +303,10 @@ const Home = () => {
           </Box>
         </Grid>
 
-        <Grid container xs={12} sm={12} style={{ marginTop: '20px' }}>
-          <Grid sm={7} style={{ marginRight: '20px' }}>
+        <Grid container justifyContent="space-around" xs={12} sm={12} style={{ marginTop: '20px' }}>
+          <Grid sm={7}>
             {/* Cream */}
-            <Grid style={{ backgroundColor: '#FFFFFF', borderRadius: '15px' }}>
+            <Grid style={{ backgroundColor: '#FFFFFF', borderRadius: '15px' }} xs={12}>
               <div style={{ display: 'flex', padding: '15px' }}>
                 <div
                   style={{
@@ -325,48 +326,97 @@ const Home = () => {
                     <p>Governance Token</p>
                   </div>
                 </div>
-                <div style={{ width: '70%', padding: '0px 40px' }}>
-                  <span style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>Market Cap:</span>
-                    <span>${(tombCirculatingSupply * tombPriceInDollars).toFixed(2)}</span>
-                  </span>
-                  <span style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>Circulating Supply:</span>
-                    <span>{tombCirculatingSupply}</span>
-                  </span>
-                  <span style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>Total Supply:</span>
-                    <span>{tombTotalSupply}</span>
-                  </span>
-                  <div style={{ display: 'flex', alignItems: 'flex-end', marginTop: '20px', flexDirection: 'column' }}>
-                    <span style={{ fontSize: '45px' }}>${tombPriceInDollars ? tombPriceInDollars : '-.--'}</span>
-                    <span style={{ fontSize: '14px' }}>Per CREAM</span>
+                {isMobile ? (
+                  <div style={{ width: '70%', padding: '0px 40px' }}>
+                    <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ fontWeight: 'bold' }}>Market Cap:</span>
+                      <span>${(tombCirculatingSupply * tombPriceInDollars).toFixed(2)}</span>
+                    </span>
+                    <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ fontWeight: 'bold' }}>Circulating Supply:</span>
+                      <span>{tombCirculatingSupply}</span>
+                    </span>
+                    <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ fontWeight: 'bold' }}>Total Supply:</span>
+                      <span>{tombTotalSupply}</span>
+                    </span>
+                    <div
+                      style={{ display: 'flex', alignItems: 'flex-end', marginTop: '20px', flexDirection: 'column' }}
+                    >
+                      <span style={{ fontSize: '20px' }}>${tombPriceInDollars ? tombPriceInDollars : '-.--'}</span>
+                      <span style={{ fontSize: '14px' }}>Per CREAM</span>
+                    </div>
+                    <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                      <Button
+                        color="primary"
+                        variant="contained"
+                        style={{ marginTop: '20px', marginRight: '15px' }}
+                        target="_blank"
+                        href={buycreamAddress}
+                      >
+                        Buy Now
+                      </Button>
+                      <Button
+                        color="primary"
+                        variant="contained"
+                        style={{ marginTop: '20px' }}
+                        target="_blank"
+                        href={viewCreamAddress}
+                      >
+                        Chart
+                      </Button>
+                    </Box>
                   </div>
-                  <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      style={{ marginTop: '20px', marginRight: '15px' }}
-                      target="_blank"
-                      href={buycreamAddress}
-                    >
-                      Buy Now
-                    </Button>
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      style={{ marginTop: '20px' }}
-                      target="_blank"
-                      href={viewCreamAddress}
-                    >
-                      Chart
-                    </Button>
-                  </Box>
-                </div>
+                ) : (
+                  <div style={{ width: '70%', padding: '0px 40px' }}>
+                    <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ fontWeight: 'bold', fontSize: '20px' }}>Market Cap:</span>
+                      <span style={{ fontSize: '20px' }}>
+                        ${(tombCirculatingSupply * tombPriceInDollars).toFixed(2)}
+                      </span>
+                    </span>
+                    <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ fontWeight: 'bold', fontSize: '20px' }}>Circulating Supply:</span>
+                      <span style={{ fontSize: '20px' }}>{tombCirculatingSupply}</span>
+                    </span>
+                    <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ fontWeight: 'bold', fontSize: '20px' }}>Total Supply:</span>
+                      <span style={{ fontSize: '20px' }}>{tombTotalSupply}</span>
+                    </span>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <div
+                        style={{ display: 'flex', alignItems: 'flex-end', marginTop: '20px', flexDirection: 'column' }}
+                      >
+                        <span style={{ fontSize: '45px' }}>${tombPriceInDollars ? tombPriceInDollars : '-.--'}</span>
+                        <span style={{ fontSize: '14px' }}>Per CREAM</span>
+                      </div>
+                      <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                        <Button
+                          color="primary"
+                          variant="contained"
+                          style={{ marginTop: '20px', marginRight: '15px' }}
+                          target="_blank"
+                          href={buycreamAddress}
+                        >
+                          Buy Now
+                        </Button>
+                        <Button
+                          color="primary"
+                          variant="contained"
+                          style={{ marginTop: '20px' }}
+                          target="_blank"
+                          href={viewCreamAddress}
+                        >
+                          Chart
+                        </Button>
+                      </Box>
+                    </div>
+                  </div>
+                )}
               </div>
             </Grid>
             {/* CShare */}
-            <Grid style={{ backgroundColor: '#FFFFFF', borderRadius: '15px', marginTop: '20px' }}>
+            <Grid style={{ backgroundColor: '#FFFFFF', borderRadius: '15px', marginTop: '20px' }} xs={12}>
               <div style={{ display: 'flex', padding: '15px' }}>
                 <div
                   style={{
@@ -386,48 +436,99 @@ const Home = () => {
                     <p>Utility Token</p>
                   </div>
                 </div>
-                <div style={{ width: '70%', padding: '0px 40px' }}>
-                  <span style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>Market Cap:</span>
-                    <span>${(tShareCirculatingSupply * tSharePriceInDollars).toFixed(2)}</span>
-                  </span>
-                  <span style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>Circulating Supply:</span>
-                    <span>{tShareCirculatingSupply}</span>
-                  </span>
-                  <span style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>Total Supply:</span>
-                    <span>{tShareTotalSupply}</span>
-                  </span>
-                  <div style={{ display: 'flex', alignItems: 'flex-end', marginTop: '20px', flexDirection: 'column' }}>
-                    <span style={{ fontSize: '45px' }}>${tSharePriceInDollars ? tSharePriceInDollars : '-.--'}</span>
-                    <span style={{ fontSize: '14px' }}>Per CSHARE</span>
+                {isMobile ? (
+                  <div style={{ width: '70%', padding: '0px 40px' }}>
+                    <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ fontWeight: 'bold' }}>Market Cap:</span>
+                      <span>${(tShareCirculatingSupply * tSharePriceInDollars).toFixed(2)}</span>
+                    </span>
+                    <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ fontWeight: 'bold' }}>Circulating Supply:</span>
+                      <span>{tShareCirculatingSupply}</span>
+                    </span>
+                    <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ fontWeight: 'bold' }}>Total Supply:</span>
+                      <span>{tShareTotalSupply}</span>
+                    </span>
+                    <div
+                      style={{ display: 'flex', alignItems: 'flex-end', marginTop: '20px', flexDirection: 'column' }}
+                    >
+                      <span style={{ fontSize: '20px' }}>${tSharePriceInDollars ? tSharePriceInDollars : '-.--'}</span>
+                      <span style={{ fontSize: '14px' }}>Per CSHARE</span>
+                    </div>
+                    <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                      <Button
+                        color="primary"
+                        variant="contained"
+                        style={{ marginTop: '20px', marginRight: '15px' }}
+                        target="_blank"
+                        href={buycshareAddress}
+                      >
+                        Buy Now
+                      </Button>
+                      <Button
+                        color="primary"
+                        variant="contained"
+                        style={{ marginTop: '20px' }}
+                        target="_blank"
+                        href={viewCshareAddress}
+                      >
+                        Chart
+                      </Button>
+                    </Box>
                   </div>
-                  <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      style={{ marginTop: '20px', marginRight: '15px' }}
-                      target="_blank"
-                      href={buycshareAddress}
-                    >
-                      Buy Now
-                    </Button>
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      style={{ marginTop: '20px' }}
-                      target="_blank"
-                      href={viewCshareAddress}
-                    >
-                      Chart
-                    </Button>
-                  </Box>
-                </div>
+                ) : (
+                  <div style={{ width: '70%', padding: '0px 40px' }}>
+                    <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ fontWeight: 'bold', fontSize: '20px' }}>Market Cap:</span>
+                      <span style={{ fontSize: '20px' }}>
+                        ${(tShareCirculatingSupply * tSharePriceInDollars).toFixed(2)}
+                      </span>
+                    </span>
+                    <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ fontWeight: 'bold', fontSize: '20px' }}>Circulating Supply:</span>
+                      <span style={{ fontSize: '20px' }}>{tShareCirculatingSupply}</span>
+                    </span>
+                    <span style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ fontWeight: 'bold', fontSize: '20px' }}>Total Supply:</span>
+                      <span style={{ fontSize: '20px' }}>{tShareTotalSupply}</span>
+                    </span>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <div
+                        style={{ display: 'flex', alignItems: 'flex-end', marginTop: '20px', flexDirection: 'column' }}
+                      >
+                        <span style={{ fontSize: '45px' }}>
+                          ${tSharePriceInDollars ? tSharePriceInDollars : '-.--'}
+                        </span>
+                        <span style={{ fontSize: '14px' }}>Per CSHARE</span>
+                      </div>
+                      <Box style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                        <Button
+                          color="primary"
+                          variant="contained"
+                          style={{ marginTop: '20px', marginRight: '15px' }}
+                          target="_blank"
+                          href={buycshareAddress}
+                        >
+                          Buy Now
+                        </Button>
+                        <Button
+                          color="primary"
+                          variant="contained"
+                          style={{ marginTop: '20px' }}
+                          target="_blank"
+                          href={viewCshareAddress}
+                        >
+                          Chart
+                        </Button>
+                      </Box>
+                    </div>
+                  </div>
+                )}
               </div>
             </Grid>
           </Grid>
-          <Grid style={{ backgroundColor: '#FFFFFF', borderRadius: '15px', width: '100%' }} sm={4}>
+          <Grid style={{ backgroundColor: '#FFFFFF', borderRadius: '15px', width: '100%' }} sm={4} xs={12}>
             <div
               style={{
                 display: 'flex',
