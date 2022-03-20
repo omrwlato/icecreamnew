@@ -65,7 +65,6 @@ const TxModal: React.FC<ModalProps> = ({ onDismiss }) => {
 };
 
 const StyledModal = styled(Modal)`
-  marginTop: 500px
   width: 360px;
 `;
 

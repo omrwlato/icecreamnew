@@ -18,7 +18,7 @@ export const red = {
 };
 
 export const grey = {
-  100: '#000',
+  100: '#f5f5f5',
   200: '#eeeeee',
   300: '#e0e0e0',
   400: '#bdbdbd',

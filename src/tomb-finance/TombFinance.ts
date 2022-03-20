@@ -301,11 +301,11 @@ export class TombFinance {
     }
     const rewardPerSecond = await poolContract.csharePerSecond(); //update rewards
     if (depositTokenName.startsWith('CSHARE')) {
-      return rewardPerSecond.mul(1025).div(41000);
+      return rewardPerSecond.mul(10000).div(41000);
     } else if (depositTokenName.startsWith('CREAM-CSHARE')) {
       return rewardPerSecond.mul(1025).div(41000);
     } else if (depositTokenName === 'CREAM') {
-      return rewardPerSecond.mul(16400).div(41000);
+      return rewardPerSecond.mul(20000).div(41000);
     } else {
       return rewardPerSecond.mul(22550).div(41000);
     }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import {
@@ -13,9 +13,8 @@ import {
   ListItem,
   ListItemText,
   Divider,
-  Grid,
+  Button,
 } from '@material-ui/core';
-import styled from 'styled-components';
 
 import ListItemLink from '../ListItemLink';
 
@@ -24,7 +23,8 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AccountButton from './AccountButton';
-import icecreamLogo from '../../assets/img/icecreamlogo2.png';
+import DiscordImage from '../../assets/img/discord.svg';
+import sundaeLogo from '../../assets/img/sundaelogo.png';
 const useStyles = makeStyles((theme) => ({
   '@global': {
     ul: {
@@ -36,9 +36,10 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     color: 'var(--white)',
     'background-color': 'transparent!important',
-    'backdrop-filter': 'blur(8px)',
+    'backdrop-filter': 'blur(10px)',
     // borderBottom: `1px solid ${theme.palette.divider}`,
-    marginBottom: '1rem',
+    padding: '0 10px',
+    marginBottom: '3rem',
     position: 'sticky',
   },
   drawer: {
@@ -61,21 +62,22 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     textTransform: 'uppercase',
-    color: 'var(--black)',
-    fontSize: '16px',
-    margin: theme.spacing(1, 2),
+    color: 'var(--white)',
+    fontSize: '18px',
+    marginTop: '15px',
+    margin: theme.spacing(10, 1, 1, 2),
     textDecoration: 'none',
     '&:hover': {
-      color: '#383838',
+      color: '#571EB1',
     },
   },
   brandLink: {
     textDecoration: 'none',
-    color: 'var(--white)',
+    color: '#000',
+    alignItems:'left',
     '&:hover': {
       textDecoration: 'none',
     },
-  
   },
 }));
 
@@ -84,7 +86,6 @@ const Nav = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [isOpen, setIsOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -99,20 +100,23 @@ const Nav = () => {
       <Toolbar className={classes.toolbar}>
         {matches ? (
           <>
-            <Typography variant="h6" color="textPrimary" noWrap className={classes.toolbarTitle}>
+            <Typography  variant="h5" color="inherit" noWrap className='toolbar-title'>
               IceCream Finance
+              {/*               <Link to="/" color="inherit" className={classes.brandLink}>
+                <img alt="sundae.finance" src={sundaeLogo} height="90px" width="200px" />
+              </Link> */}
             </Typography>
-            <Box mr={5} style={{fontWeight:'700'}}>
-              <Link color="color" to="/" className={classes.link}>
+            <Box mr={5}>
+              <Link color="color" to="/" className='nav-link'>
                 Home
               </Link>
-              <Link color="textPrimary" to="/farms" className={classes.link}>
+              <Link color="textPrimary" to="/farms" className='nav-link'>
                 Farm
               </Link>
-              <Link color="textPrimary" to="/boardroom" className={classes.link}>
+              <Link color="textPrimary" to="/boardroom" className='nav-link'>
                 Boardroom
               </Link>
-{/*               <Link color="textPrimary" to="/bonds" className={classes.link}>
+{/*               <Link color="textPrimary" to="/bonds" className='nav-link'>
                 Bonds
               </Link> */}
               {/* <Link color="textPrimary" to="/rebates" className={classes.link}>
@@ -133,20 +137,29 @@ const Nav = () => {
               <Link color="textPrimary" to="/regulations" className={classes.link}>
                 Regulations
               </Link> */}
-              <a href="https://yieldwolf.finance/avalanche/icecreamfinance" target="_blank" className={classes.link}>
+              <a href="https://yieldwolf.finance/avalanche/icecreamfinance" target="_blank" className='nav-link'>
                 Vaults
               </a>
-{/*               <a href="" target="_blank" className={classes.link}>
+{/*               <a href="" target="_blank" className='nav-link'>
                 Social Club
-              </a>
-              <a href="https://icecreamfinancial.gitbook.io/sundae-finance/" target="_blank" className={classes.link}>
+              </a> */}
+              <a href="https://icecreamfinancial.gitbook.io/icecream-finance/" target="_blank" className='nav-link'>
                 Docs
               </a>
-              <a href="https://icecreamfinance.app" target="_blank" className={classes.link}>
+{/*               <a href="https://icecreamfinance.app" target="_blank" className='nav-link'>
                 IceCream
               </a> */}
             </Box>
+
             <AccountButton text="Connect" />
+            {/*   <img alt='logo4' style={{ width: 50 }} src={String(logo4)} />
+            <span style={{ fontSize: '16px', color: '#000000', marginRight: '15px', marginLeft: '10px' }}>${tombPriceInDollars ? tombPriceInDollars : '-.--'}</span>
+            <img alt='logoshare' style={{ width: 50 }} src={String(logohshare2)} />
+            <span style={{ fontSize: '16px', color: '#000000', marginRight: '30px', marginLeft: '10px' }}>${tSharePriceInDollars ? tSharePriceInDollars : '-.--'}</span>
+            <Button href="https://discord.gg/KbHU9hrayQ" variant="contained" color='secondary' style={{ marginRight: '25px', borderRadius: '14px', width: '60px' }}>
+              <img alt='discordlogo' style={{ width: 22 }} src={String(DiscordImage)} />
+            </Button> */}
+
           </>
         ) : (
           <>
@@ -159,14 +172,10 @@ const Nav = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
+            <Typography variant="h6" noWrap>
+              IceCream Finance
             </Typography>
-                         <img
-              alt="sundae.finance"
-              src={icecreamLogo}
-              style={{height: '40px', marginTop: '-10px', marginLeft: '10px', marginRight: '15px'}}
-            /> 
-            <AccountButton text="Connect" />
+
             <Drawer
               className={classes.drawer}
 /*               onEscapeKeyDown={handleDrawerClose}
@@ -188,8 +197,8 @@ const Nav = () => {
                 <ListItemLink primary="Home" to="/" />
                 <ListItemLink primary="Farm" to="/farms" />
                 <ListItemLink primary="Boardroom" to="/boardroom" />
-{/*                 <ListItemLink primary="Bonds" to="/bonds" />
-                <ListItemLink primary="Dao" to="/rebates" /> */}
+{/*                 <ListItemLink primary="Bonds" to="/bonds" /> */}
+{/*                 <ListItemLink primary="Dao" to="/rebates" /> */}
                 <ListItem button component="a" href="https://yieldwolf.finance/avalanche/icecreamfinance">
                   <ListItemText disableTypography style={{ color: '#FFFFFF' }}>
                     Vaults
@@ -200,14 +209,14 @@ const Nav = () => {
                     Social Club
                   </ListItemText>
                 </ListItem> */}
-                <ListItem button component="a" href="">
+                <ListItem button component="a" href="https://icecreamfinancial.gitbook.io/icecream-finance/">
                   <ListItemText disableTypography style={{ color: '#FFFFFF' }}>
-                    Documents
+                    Docs
                   </ListItemText>
                 </ListItem>
 {/*                 <ListItem button component="a" href="https://icecreamfinance.app">
                   <ListItemText disableTypography style={{ color: '#FFFFFF' }}>
-                    IceCream
+                    IceCream Finance
                   </ListItemText>
                 </ListItem> */}
               </List>

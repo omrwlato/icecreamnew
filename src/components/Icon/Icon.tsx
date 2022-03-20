@@ -11,3 +11,4 @@ const Icon: React.FC = ({ children }) => <StyledIcon>{children}</StyledIcon>;
 const StyledIcon = styled.div``;
 
 export default Icon;
+

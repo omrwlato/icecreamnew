@@ -21,13 +21,16 @@ import useBanks from '../../hooks/useBanks';
 //   }
 // `;
 
-const BackgroundImage = createGlobalStyle`
+/* const BackgroundImage = createGlobalStyle`
   body {
     background-color: var(--black);
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='32' viewBox='0 0 16 32'%3E%3Cg fill='%231D1E1F' fill-opacity='0.4'%3E%3Cpath fill-rule='evenodd' d='M0 24h4v2H0v-2zm0 4h6v2H0v-2zm0-8h2v2H0v-2zM0 0h4v2H0V0zm0 4h2v2H0V4zm16 20h-6v2h6v-2zm0 4H8v2h8v-2zm0-8h-4v2h4v-2zm0-20h-6v2h6V0zm0 4h-4v2h4V4zm-2 12h2v2h-2v-2zm0-8h2v2h-2V8zM2 8h10v2H2V8zm0 8h10v2H2v-2zm-2-4h14v2H0v-2zm4-8h6v2H4V4zm0 16h6v2H4v-2zM6 0h2v2H6V0zm0 24h2v2H6v-2z'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-`;
+* {
+    border-radius: 0 !important;
+}
+`; */
 
 const Cemetery = () => {
   const [banks] = useBanks();
@@ -38,7 +41,7 @@ const Cemetery = () => {
     <Switch>
       <Page>
         <Route exact path={path}>
-          <BackgroundImage />
+         {/*  <BackgroundImage /> */}
           {!!account ? (
             <Container maxWidth="lg">
               <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
@@ -48,7 +51,7 @@ const Cemetery = () => {
               <Box mt={5}>
                 {/*                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
                   <Typography color="textPrimary" variant="h4" gutterBottom>
-                    Earn CSHARE by staking LP Tokens
+                    Earn STRAW by staking LP Tokens
                   </Typography>
                   <Grid container spacing={3}>
                     {activeBanks
@@ -62,13 +65,10 @@ const Cemetery = () => {
                 </div> */}
 
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
-                  <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px', color: 'black' }}>
-                    Earn CSHARE by staking your Liquidity Pairs
+                  <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
+                    Earn CSHARE by staking LP
                   </Typography>
-                  <Alert variant="filled" severity="warning">
-                    LP Pools have started and will run for 370 days
-                  </Alert>
-                  <Grid container spacing={3} alignItems="center" justifyContent="left" style={{ marginTop: '20px' }}>
+                  <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 2)
                       .map((bank) => (
@@ -80,22 +80,22 @@ const Cemetery = () => {
                 </div>
 
                 {/* UNCOMMENT THIS AFTER GP ENDS  */}
-                {/* 
-                <Alert variant="filled" severity="info" style={{ marginTop: '50px', backgroundColor: '#757CE8' }}>
 
-                  Genesis pools are now closed, please withdraw!
 
-                </Alert>
-
-                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 0).length === 0}>
+{/*                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 0).length === 0}>
                   <Typography
                     color="textPrimary"
                     variant="h4"
                     gutterBottom
-                    style={{ marginTop: '15px', marginBottom: '30px' }}
+                    style={{ marginTop: '25px' }}
                   >
-                    Genesis Pools
+                    Finished Pools
                   </Typography>
+                  <Alert variant="filled" severity="info" style={{ marginTop: '25px',marginBottom:'25px' }}>
+
+                  The following pools have concluded. Please unstake.
+
+                  </Alert>
                   <Grid container spacing={3}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 0)
@@ -113,11 +113,11 @@ const Cemetery = () => {
           )}
         </Route>
         <Route path={`${path}/:bankId`}>
-          <BackgroundImage />
+         {/*  <BackgroundImage /> */}
           <Bank />
         </Route>
       </Page>
-    </Switch>
+    </Switch >
   );
 };
 

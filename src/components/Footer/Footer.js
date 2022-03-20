@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '15px',
     paddingBottom: '15px',
     width: '100%',
-    color: 'var(--white)',
+    color: 'black',
     backgroundColor: 'transparent',
     textAlign: 'center',
     height: '1.3rem',
@@ -28,13 +28,19 @@ const useStyles = makeStyles((theme) => ({
     height: '24px',
     display: 'inline',
     marginLeft: '20px',
-    filter: 'sepia(1) brightness(2) hue-rotate(314deg) saturate(7.5)',
   },
 
   img: {
     width: '24px',
     height: '24px',
-    color: 'var(--white)',
+  },
+  elipse: {
+    position: 'absolute',
+    width: '80px',
+    height: '80px',
+    left: '1700px',
+    top: '-100px',
+
   },
 }));
 
@@ -50,7 +56,7 @@ const Footer = () => {
               {new Date().getFullYear()}
             </Typography>
             </Grid>
-          <Grid item xs={12} style={{ textAlign: 'center', height: '20px', paddingTop:'20px' }}>
+            <Grid item xs={12} style={{ textAlign: 'center', marginTop: '10px' }}>
             <a
               href="https://twitter.com/IcecreamFinance"
               rel="noopener noreferrer"

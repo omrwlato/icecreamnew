@@ -8,42 +8,34 @@ const newTheme = createMuiTheme({
       primary: '#000',
     },
     background: {
-      default: 'transparent',
-      paper: 'transparent',
+      default: '#121212',
+      paper: 'rgba(255, 255, 255, 0.9)',
     },
     primary: {
-      light: '#000',
-      main: '#FE4794',
-      dark: '#571EB1',
-      contrastText: '#16191E',
+      light: '#FFD170',
+      main: '#ff4794',
+      dark: '#ff6394',
+      contrastText: '#000',
+    },
+    discord :{
+      light: '#6043f7',
+      main: '#6043f7',
     },
     secondary: {
-      light: '#757CE8',
-      main: '#757CE8',
-      dark: '#757CE8',
+      light: '#6043f7',
+      main: '#6043f7',
+      dark: '#757ce8',
       contrastText: '#000',
     },
     action: {
-      disabledBackground: '#9f9d9d !important',
+      disabledBackground: '#CDCDCD',
       active: '#000',
       hover: '#000',
     },
   },
   typography: {
-    color: '#000',
+    color: '#E6E9EE',
     fontFamily: ['"Gilroy"', 'sans-serif'].join(','),
-  },
-  components: {
-    MuiButton: {
-      variants: [
-        {
-          props: { variant: 'standard' },
-          style: {
-            border: '1px solid var(--white)',
-          },
-        },
-      ],
-    },
   },
 });
 

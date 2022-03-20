@@ -182,7 +182,7 @@ const Providers: React.FC = ({ children }) => {
             walletconnect: { rpcUrl: config.defaultProvider },
             walletlink: {
               url: config.defaultProvider,
-              appName: 'Sundae Finance',
+              appName: 'IceCream Finance',
               appLogoUrl: './sundaelogo.png',
             },
           }}

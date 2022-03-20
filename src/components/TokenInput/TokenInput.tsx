@@ -42,8 +42,7 @@ const TokenInput: React.FC<TokenInputProps> = ({ max, symbol, onChange, onSelect
             </div>
 */
 
-const StyledTokenInput = styled.div`
-`;
+const StyledTokenInput = styled.div``;
 
 const StyledSpacer = styled.div`
   width: ${(props) => props.theme.spacing[3]}px;
@@ -61,7 +60,7 @@ const StyledMaxText = styled.div`
   font-size: 14px;
   font-weight: 700;
   height: 44px;
-  justify-content: center;
+  justify-content: flex-end;
 `;
 
 export default TokenInput;
