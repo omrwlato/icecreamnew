@@ -64,10 +64,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const buycreamAddress = 'https://traderjoexyz.com/trade?outputCurrency=0xD9FF12172803c072a36785DeFea1Aa981A6A0C18#/';
-const viewCreamAddress = 'https://dexscreener.com/avalanche/0xe367414f29e247b2d92edd610aa6dd5a7fd631ba';
-const viewCshareAddress = 'https://dexscreener.com/avalanche/0x5eef38855090ccc49a1b7391f4c7b9efbdfe1456';
-const buycshareAddress = 'https://traderjoexyz.com/trade?outputCurrency=0xf8D0C6c3ddC03F43A0687847f2b34bfd6941C2A2#/';
+const buycreamAddress = 'https://traderjoexyz.com/trade?outputCurrency=0xAE21d31a6494829a9E4B2B291F4984AAE8121757#/';
+const viewCreamAddress = 'https://dexscreener.com/avalanche/0x00c87ce7188f7652d0c0940274cec5db62f1e825';
+const viewCshareAddress = 'https://dexscreener.com/avalanche/0xbd61dfad83fc19960476abca1324ffd798234c66';
+const buycshareAddress = 'https://traderjoexyz.com/trade?outputCurrency=0x155f794b56353533E0AfBF76e1B1FC57DFAd5Bd7#/';
 
 const Home = () => {
   const classes = useStyles();
