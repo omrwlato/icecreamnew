@@ -28,7 +28,7 @@ import { tomb as tombProd, tShare as tShareProd } from '../../tomb-finance/deplo
 import useTotalTreasuryBalance from '../../hooks/useTotalTreasuryBalance.js';
 import useModal from '../../hooks/useModal';
 import { Box, Button, CardContent, Grid, Paper, Typography } from '@material-ui/core';
-import  Card  from '../../components/Card';
+import Card from '../../components/Card';
 import ZapModal from '../Bank/components/ZapModal';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -75,9 +75,11 @@ const Home = () => {
   const activeBanks = banks.filter((bank) => !bank.finished);
   const creamAvaxBank = activeBanks[0];
   const cshareAvaxBank = activeBanks[1];
+  const creamBank = activeBanks[2];
   const cshareCreamBank = activeBanks[3];
   const stakedBalanceCreamAvax = useStakedBalance(creamAvaxBank.contract, creamAvaxBank.poolId);
   const stakedBalanceCshareAvax = useStakedBalance(cshareAvaxBank.contract, cshareAvaxBank.poolId);
+  const stakedBalanceCream = useStakedBalance(creamBank.contract, creamBank.poolId);
   const stakedBalanceCshareCream = useStakedBalance(cshareCreamBank.contract, cshareCreamBank.poolId);
   const stakedTokenPriceInDollarsCreamAvax = useStakedTokenPriceInDollars(
     creamAvaxBank.depositTokenName,
@@ -86,6 +88,10 @@ const Home = () => {
   const stakedTokenPriceInDollarsCshareAvax = useStakedTokenPriceInDollars(
     cshareAvaxBank.depositTokenName,
     cshareAvaxBank.depositToken,
+  );
+  const stakedTokenPriceInDollarsCream = useStakedTokenPriceInDollars(
+    creamBank.depositTokenName,
+    creamBank.depositToken,
   );
   const stakedTokenPriceInDollarsCshareCream = useStakedTokenPriceInDollars(
     cshareCreamBank.depositTokenName,
@@ -101,23 +107,33 @@ const Home = () => {
     Number(stakedTokenPriceInDollarsCshareAvax) *
     Number(getDisplayBalance(stakedBalanceCshareAvax, cshareAvaxBank.depositToken.decimal))
   ).toFixed(2);
+  const stakedInDollarsCream = (
+    Number(stakedTokenPriceInDollarsCream) *
+    Number(getDisplayBalance(stakedBalanceCream, creamBank.depositToken.decimal))
+  ).toFixed(2);
   const stakedInDollarsCshareCream = (
     Number(stakedTokenPriceInDollarsCshareCream) *
     Number(getDisplayBalance(stakedBalanceCshareCream, cshareCreamBank.depositToken.decimal))
   ).toFixed(2);
   const earningsCreamAvax = useEarnings(creamAvaxBank.contract, creamAvaxBank.earnTokenName, creamAvaxBank.poolId);
   const earningsCshareAvax = useEarnings(cshareAvaxBank.contract, cshareAvaxBank.earnTokenName, cshareAvaxBank.poolId);
+  const earningsCream = useEarnings(creamBank.contract, creamBank.earnTokenName, creamBank.poolId);
   const earningsCshareCream = useEarnings(
     cshareCreamBank.contract,
     cshareCreamBank.earnTokenName,
     cshareCreamBank.poolId,
   );
   const tokenStatsCreamAvax = creamAvaxBank.earnTokenName === 'CSHARE' ? tShareStats : tombStats;
+  const tokenStatsCream = creamBank.earnTokenName === 'CSHARE' ? tShareStats : tombStats;
   const tokenStatsCshareAvax = cshareAvaxBank.earnTokenName === 'CSHARE' ? tShareStats : tombStats;
   const tokenStatsCshareCream = cshareAvaxBank.earnTokenName === 'CSHARE' ? tShareStats : tombStats;
   const tokenPriceInDollarsCreamAvax = useMemo(
     () => (tokenStatsCreamAvax ? Number(tokenStatsCreamAvax.priceInDollars).toFixed(2) : null),
     [tokenStatsCreamAvax],
+  );
+  const tokenPriceInDollarsCream = useMemo(
+    () => (tokenStatsCream ? Number(tokenStatsCream.priceInDollars).toFixed(2) : null),
+    [tokenStatsCream],
   );
   const tokenPriceInDollarsCshareAvax = useMemo(
     () => (tokenStatsCshareAvax ? Number(tokenStatsCshareAvax.priceInDollars).toFixed(2) : null),
@@ -130,6 +146,7 @@ const Home = () => {
   const earnedInDollarsCreamAvax = (
     Number(tokenPriceInDollarsCreamAvax) * Number(getDisplayBalance(earningsCreamAvax))
   ).toFixed(2);
+  const earnedInDollarsCream = (Number(tokenPriceInDollarsCream) * Number(getDisplayBalance(earningsCream))).toFixed(2);
 
   const earnedInDollarsCshareAvax = (
     Number(tokenPriceInDollarsCshareAvax) * Number(getDisplayBalance(earningsCshareAvax))
@@ -206,7 +223,6 @@ const Home = () => {
   const tshareLpZap = useZap({ depositTokenName: 'CSHARE-AVAX-LP' });
   const tombtshareLpZap = useZap({ depositTokenName: 'CREAM-CSHARE-LP' });
 
-
   const [onPresentTombZap, onDissmissTombZap] = useModal(
     <ZapModal
       decimals={18}
@@ -250,14 +266,13 @@ const Home = () => {
         <h2 style={{ color: '#ff4794' }}>IceCream Finance</h2>
         <p>Algo stablecoin on Avalanche C Chain, pegged to the price of 1 AVAX via seigniorage.</p>
         <p>
-          Stake your CREAM-AVAX LP in the Farms to earn CSHARE rewards. Then stake your earned CSHARE in the Boardroom to
-          earn more CREAM!
+          Stake your CREAM-AVAX LP in the Farms to earn CSHARE rewards. Then stake your earned CSHARE in the Boardroom
+          to earn more CREAM!
         </p>
       </Box>
     </Modal>,
   );
 
-  
   const StyledLink = styled.a`
     font-weight: 700;
     text-decoration: none;
@@ -303,24 +318,21 @@ const Home = () => {
   return (
     <Page>
       {/*       <BackgroundImage /> */}
-      <Grid container spacing={3} >
-
+      <Grid container spacing={3}>
         {/* Explanation text */}
         <Grid container direction="column" alignItems="center" justifyContent="center">
           <Grid item xs={12} sm={8}>
-            <Box p={4} justifyContent="center" alignItems="center" >
+            <Box p={4} justifyContent="center" alignItems="center">
               <Typography variant="h3" fontWeight="bold" align="center">
                 The sweetest protocol on Avalanche!
               </Typography>
             </Box>
-            <Box style={{ justifyContent: "center", alignItems: "center", display: 'flex' }}>
+            <Box style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
               <Button
-                style={{ marginBottom: '20px', backgroundColor:'#ff4794', color:'#fff' }}
+                style={{ marginBottom: '20px', backgroundColor: '#ff4794', color: '#fff' }}
                 disabled={false}
                 onClick={onPresentModal}
                 variant="contained"
-                
-                
               >
                 Read More
               </Button>
@@ -330,8 +342,11 @@ const Home = () => {
 
         {/* TVL */}
         <Grid container justify="center">
-          <Box mt={3} style={{ justifyContent: "center", display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <h3 >Total Value Locked</h3>
+          <Box
+            mt={3}
+            style={{ justifyContent: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+          >
+            <h3>Total Value Locked</h3>
             <CountUp style={{ fontSize: '50px', marginBottom: '30px' }} end={TVL} separator="," prefix="$" />
           </Box>
         </Grid>
@@ -342,7 +357,9 @@ const Home = () => {
               <Card>
                 <CardContent style={{ position: 'relative', backgroundColor: 'white' }}>
                   <Grid container style={{ display: 'flex', padding: '15px' }}>
-                    <Grid item xs={3}
+                    <Grid
+                      item
+                      xs={3}
                       style={{
                         display: 'flex',
                         justifyContent: 'center',
@@ -354,29 +371,51 @@ const Home = () => {
                       <h2 style={{ paddingTop: '10px' }}>CREAM</h2>
                       <h4>Governance Token</h4>
                     </Grid>
-                    <Grid item xs={9} style={{ padding: '10px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'stretch' }}>
+                    <Grid
+                      item
+                      xs={9}
+                      style={{
+                        padding: '10px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'stretch',
+                      }}
+                    >
                       <Grid style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <h3>Market Cap:</h3>
-                        <h3>
-                          ${(tombCirculatingSupply * tombPriceInDollars).toFixed(2)}
-                        </h3>
+                        <h3>${(tombCirculatingSupply * tombPriceInDollars).toFixed(2)}</h3>
                       </Grid>
                       <Grid style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <h3>Circulating Supply:</h3>
-                        <h3 >{tombCirculatingSupply}</h3>
+                        <h3>{tombCirculatingSupply}</h3>
                       </Grid>
 
                       <Grid style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <h3>Total Supply:</h3>
-                        <h3 >{tombTotalSupply}</h3>
+                        <h3>{tombTotalSupply}</h3>
                       </Grid>
 
-                      <Grid style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', marginTop: '15px' }}>
-                        <Grid xs={12} sm={6} style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end' }}>
+                      <Grid
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          flexWrap: 'wrap',
+                          marginTop: '15px',
+                        }}
+                      >
+                        <Grid
+                          xs={12}
+                          sm={6}
+                          style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end' }}
+                        >
                           <h2 style={{ fontSize: '40px' }}>${tombPriceInDollars ? tombPriceInDollars : '-.--'}</h2>
                         </Grid>
-                        <Grid xs={12} sm={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end' }}>
-
+                        <Grid
+                          xs={12}
+                          sm={6}
+                          style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end' }}
+                        >
                           <Button
                             color="primary"
                             variant="contained"
@@ -397,19 +436,19 @@ const Home = () => {
                           </Button>
                         </Grid>
                       </Grid>
-
                     </Grid>
                   </Grid>
                 </CardContent>
               </Card>
             </Grid>
 
-
             <Grid item xs={12}>
               <Card>
                 <CardContent style={{ position: 'relative', backgroundColor: 'white' }}>
                   <Grid container style={{ display: 'flex', padding: '15px' }}>
-                    <Grid item xs={3}
+                    <Grid
+                      item
+                      xs={3}
                       style={{
                         display: 'flex',
                         justifyContent: 'center',
@@ -421,29 +460,51 @@ const Home = () => {
                       <h2 style={{ paddingTop: '10px' }}>CSHARE</h2>
                       <h4>Utility Token</h4>
                     </Grid>
-                    <Grid item xs={9} style={{ padding: '10px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'stretch' }}>
+                    <Grid
+                      item
+                      xs={9}
+                      style={{
+                        padding: '10px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'stretch',
+                      }}
+                    >
                       <Grid style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <h3>Market Cap:</h3>
-                        <h3>
-                          ${(tShareCirculatingSupply * tSharePriceInDollars).toFixed(2)}
-                        </h3>
+                        <h3>${(tShareCirculatingSupply * tSharePriceInDollars).toFixed(2)}</h3>
                       </Grid>
                       <Grid style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <h3>Circulating Supply:</h3>
-                        <h3 >{tShareCirculatingSupply}</h3>
+                        <h3>{tShareCirculatingSupply}</h3>
                       </Grid>
 
                       <Grid style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <h3>Total Supply:</h3>
-                        <h3 >{tShareTotalSupply}</h3>
+                        <h3>{tShareTotalSupply}</h3>
                       </Grid>
 
-                      <Grid style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', marginTop: '15px' }}>
-                        <Grid xs={12} sm={6} style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end' }}>
+                      <Grid
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          flexWrap: 'wrap',
+                          marginTop: '15px',
+                        }}
+                      >
+                        <Grid
+                          xs={12}
+                          sm={6}
+                          style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end' }}
+                        >
                           <h2 style={{ fontSize: '40px' }}>${tSharePriceInDollars ? tSharePriceInDollars : '-.--'}</h2>
                         </Grid>
-                        <Grid xs={12} sm={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end' }}>
-
+                        <Grid
+                          xs={12}
+                          sm={6}
+                          style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end' }}
+                        >
                           <Button
                             color="primary"
                             variant="contained"
@@ -464,14 +525,13 @@ const Home = () => {
                           </Button>
                         </Grid>
                       </Grid>
-
                     </Grid>
                   </Grid>
                 </CardContent>
               </Card>
             </Grid>
 
-{/*         <Grid item xs={12}>
+            {/*         <Grid item xs={12}>
               <Card>
                 <CardContent style={{ position: 'relative', backgroundColor: 'white' }}>
                   <Grid container style={{ display: 'flex', padding: '15px' }}>
@@ -525,11 +585,9 @@ const Home = () => {
             </Grid> */}
           </Grid>
 
-
           <Grid item style={{ margin: '20px' }} sm={4} xs={12}>
             <Card xs={12}>
               <CardContent style={{ backgroundColor: 'white' }}>
-
                 <div
                   style={{
                     display: 'flex',
@@ -538,7 +596,6 @@ const Home = () => {
                     flexDirection: 'column',
                     height: '100%',
                     justifyContent: 'space-evenly',
-
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '15px' }}>
@@ -546,11 +603,18 @@ const Home = () => {
                   </div>
                   <div style={{ display: 'flex', marginTop: '10px' }}>
                     <div style={{ width: '40%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-
                       <TokenSymbol symbol="CREAM-AVAX-LP" style={{ backgroundColor: 'transparent !important' }} />
                       <h4>CREAM-AVAX LP</h4>
                     </div>
-                    <div style={{ width: '60%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <div
+                      style={{
+                        width: '60%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}
+                    >
                       <div
                         style={{
                           display: 'flex',
@@ -561,7 +625,6 @@ const Home = () => {
                       >
                         <h4>Staked Amount:</h4>
                         <h4>{`≈ $${stakedInDollarsCreamAvax}`}</h4>
-
                       </div>
                       <div
                         style={{
@@ -573,7 +636,6 @@ const Home = () => {
                       >
                         <h4>Rewards Earned:</h4>
                         <h4>{`≈ $${earnedInDollarsCreamAvax}`}</h4>
-
                       </div>
                       <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
                         <Button color="primary" onClick={onPresentTombZap} variant="contained">
@@ -587,7 +649,15 @@ const Home = () => {
                       <TokenSymbol symbol="CSHARE-AVAX-LP" style={{ backgroundColor: 'transparent !important' }} />
                       <h4>CSHARE-AVAX LP</h4>
                     </div>
-                    <div style={{ width: '60%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <div
+                      style={{
+                        width: '60%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}
+                    >
                       <div
                         style={{
                           display: 'flex',
@@ -598,7 +668,6 @@ const Home = () => {
                       >
                         <h4>Staked Amount:</h4>
                         <h4>{`≈ $${stakedInDollarsCshareAvax}`}</h4>
-
                       </div>
                       <div
                         style={{
@@ -610,7 +679,6 @@ const Home = () => {
                       >
                         <h4>Rewards Earned:</h4>
                         <h4>{`≈ $${earnedInDollarsCshareAvax}`}</h4>
-
                       </div>
                       <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
                         <Button color="primary" onClick={onPresentTshareZap} variant="contained">
@@ -620,11 +688,19 @@ const Home = () => {
                     </div>
                   </div>
                   <div style={{ display: 'flex', marginTop: '20px' }}>
-                    <div style={{ width: '40%',  display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <div style={{ width: '40%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                       <TokenSymbol symbol="TOMB" style={{ backgroundColor: 'transparent !important' }} />
                       <h4>CREAM</h4>
                     </div>
-                    <div style={{ width: '60%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <div
+                      style={{
+                        width: '60%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}
+                    >
                       <div
                         style={{
                           display: 'flex',
@@ -634,7 +710,7 @@ const Home = () => {
                         }}
                       >
                         <h4>Staked Amount:</h4>
-                        <h4>{`≈ $${stakedInDollarsCshareCream}`}</h4>
+                        <h4>{`≈ $${stakedInDollarsCream}`}</h4>
                       </div>
                       <div
                         style={{
@@ -645,7 +721,7 @@ const Home = () => {
                         }}
                       >
                         <h4>Rewards Earned:</h4>
-                        <h4>{`≈ $${earnedInDollarsCshareCream}`}</h4>
+                        <h4>{`≈ $${earnedInDollarsCream}`}</h4>
                       </div>
                     </div>
                   </div>
@@ -813,39 +889,37 @@ const Home = () => {
             </Card>
           </Grid>*/}
       </Grid>
-    </Page >
+    </Page>
   );
 };
 const StyledValue = styled.div`
   //color: ${(props) => props.theme.color.grey[300]};
-        font-size: 30px;
-        font-weight: 700;
-        `;
+  font-size: 30px;
+  font-weight: 700;
+`;
 
 const StyledBalance = styled.div`
-        align-items: center;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin-left: 2.5%;
-        margin-right: 2.5%;
-        `;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+`;
 
 const Balances = styled.div`
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-left: 2.5%;
-        margin-right: 2.5%;
-        `;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+`;
 
 const StyledBalanceWrapper = styled.div`
-        align-items: center;
-        display: flex;
-        flex-direction: row;
-        margin: 1%;
-        `;
-
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin: 1%;
+`;
 
 export default Home;
-
