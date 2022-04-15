@@ -8,6 +8,7 @@ import tShareLogoPNG from '../../assets/img/NEWSHARE.png';
 import tBondLogo from '../../assets/img/cbond.png';
 import mimLogo from '../../assets/img/mim.png';
 import wavax from '../../assets/img/wavax.png';
+import nodes from '../../assets/img/nodes.png';
 import creamCshare from '../../assets/img/creamcshare.png';
 import creamAvax from '../../assets/img/cream-wavax.png';
 import cshareAvax from '../../assets/img/cshare-avax.png';
@@ -25,6 +26,7 @@ const logosBySymbol: { [title: string]: string } = {
   CBOND: tBondLogo,
   CSHARE: tShareLogoPNG,
   MIM: mimLogo,
+  NODE: nodes,
   'CREAM-AVAX-LP': creamAvax,
   'CREAM-CSHARE-LP': creamCshare,
   'CSHARE-AVAX-LP': cshareAvax,

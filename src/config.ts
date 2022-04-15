@@ -46,20 +46,20 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
   finished: will disable the pool on the UI if set to true
   sort: the order of the pool
   */
-/*   CreamCshareRewardPool: {
-    name: 'Earn CREAM by staking CSHARE',
-    poolId: 0,
-    sectionInUI: 0,
-    contract: 'CreamCshare2RewardPool',
-    depositTokenName: 'CSHARE',
-    earnTokenName: 'CREAM',
-    finished: false,
-    multiplier: '1000x',
-    site: 'https://icecreamfinance.app',
-    buyLink: 'https://traderjoexyz.com/trade?outputCurrency=0x155f794b56353533E0AfBF76e1B1FC57DFAd5Bd7#/',
-    sort: 0,
-    closedForStaking: false,
-  }, */
+  MasterNode: {
+      name: 'Generate CREAM with Nodes',
+      poolId: 0,
+      sectionInUI: 3,
+      contract: 'CreamMimRewardPool',
+      depositTokenName: 'CREAM',
+      earnTokenName: 'CREAM',
+      finished: false,
+      multiplier: 'NODE',
+      site: 'https://icecreamfinance.app',
+      buyLink: 'https://traderjoexyz.com/trade?outputCurrency=0x155f794b56353533E0AfBF76e1B1FC57DFAd5Bd7#/',
+      sort: 2,
+      closedForStaking: false,
+  },
 
   CreamMimRewardPool: {
     name: 'Earn CREAM with MIM',
@@ -164,21 +164,6 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     closedForStaking: false,
   },
 
- 
-  //Tomb3SHARESFTMRebates: {
-  // name: 'Bond 3SHARES-WFTM LP, earn 3OMB',
-  // poolId: 4,
-  // sectionInUI: 3,
-  //  contract: 'TombFtmRewardPool',
-  //  depositTokenName: '3SHARES-WFTM LP',
-  //  earnTokenName: '3OMB',
-  //  finished: false,
-  //  multiplier: '6000x',
-  //  buyLink: '',
-  //   site: '',
-  //   sort: 2,
-  //   closedForStaking: false,
-  // },
 };
 
 export default configurations['production'];

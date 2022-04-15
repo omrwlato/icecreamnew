@@ -39,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
     'backdrop-filter': 'blur(10px)',
     // borderBottom: `1px solid ${theme.palette.divider}`,
     padding: '0 10px',
-    marginBottom: '3rem',
     position: 'sticky',
   },
   drawer: {
@@ -67,17 +66,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '15px',
     margin: theme.spacing(10, 1, 1, 2),
     textDecoration: 'none',
-    '&:hover': {
-      color: '#571EB1',
-    },
+
   },
   brandLink: {
     textDecoration: 'none',
     color: '#000',
     alignItems:'left',
-    '&:hover': {
-      textDecoration: 'none',
-    },
   },
 }));
 
@@ -128,17 +122,17 @@ const Nav = () => {
               <a href="/" target="_blank" className={classes.link}>
                 Vaults
               </a> */}
-              {/* <Link color="textPrimary" to="/sbs" className={classes.link}>
+{/*                <Link color="textPrimary" to="/sbs" className={classes.link}>
                 SBS
-              </Link>
-              <Link color="textPrimary" to="/liquidity" className={classes.link}>
-                Liquidity
-              </Link>
-              <Link color="textPrimary" to="/regulations" className={classes.link}>
-                Regulations
               </Link> */}
+{/*               <Link color="textPrimary" to="/regulations" className={classes.link}>
+                Regulations
+              </Link>  */}
               <a href="https://yieldwolf.finance/avalanche/icecreamfinance" target="_blank" className='nav-link'>
                 Vaults
+              </a>
+              <a href="https://SundaeFinance.app" target="_blank" className='nav-link'>
+                Sundae
               </a>
 {/*               <a href="" target="_blank" className='nav-link'>
                 Social Club
@@ -198,9 +192,9 @@ const Nav = () => {
                 <ListItemLink primary="Farm" to="/farms" />
                 <ListItemLink primary="Boardroom" to="/boardroom" />
 {/*                 <ListItemLink primary="Bonds" to="/bonds" /> */}
-{/*                 <ListItemLink primary="Dao" to="/rebates" /> */}
+                 {/* <ListItemLink primary="Nodes" to="/nodes" />  */}
                 <ListItem button component="a" href="https://yieldwolf.finance/avalanche/icecreamfinance">
-                  <ListItemText disableTypography style={{ color: '#FFFFFF' }}>
+                  <ListItemText disableTypography style={{ color: '#000' }}>
                     Vaults
                   </ListItemText>
                 </ListItem>
@@ -210,8 +204,14 @@ const Nav = () => {
                   </ListItemText>
                 </ListItem> */}
                 <ListItem button component="a" href="https://icecreamfinancial.gitbook.io/icecream-finance/">
-                  <ListItemText disableTypography style={{ color: '#FFFFFF' }}>
+                  <ListItemText disableTypography style={{ color: '#000' }}>
                     Docs
+                  </ListItemText>
+                </ListItem>
+
+                <ListItem button component="a" href="https://sundaefinance.app">
+                  <ListItemText disableTypography style={{ color: '#000' }}>
+                    Sundae
                   </ListItemText>
                 </ListItem>
 {/*                 <ListItem button component="a" href="https://icecreamfinance.app">
