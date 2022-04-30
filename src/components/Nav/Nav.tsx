@@ -128,7 +128,7 @@ const Nav = () => {
 {/*               <Link color="textPrimary" to="/regulations" className={classes.link}>
                 Regulations
               </Link>  */}
-              <a href="https://yieldwolf.finance/avalanche/icecreamfinance" target="_blank" className='nav-link'>
+              <a href="https://froyo.farm/#/avax" target="_blank" className='nav-link'>
                 Vaults
               </a>
               <a href="https://SundaeFinance.app" target="_blank" className='nav-link'>
@@ -193,7 +193,7 @@ const Nav = () => {
                 <ListItemLink primary="Boardroom" to="/boardroom" />
 {/*                 <ListItemLink primary="Bonds" to="/bonds" /> */}
                  {/* <ListItemLink primary="Nodes" to="/nodes" />  */}
-                <ListItem button component="a" href="https://yieldwolf.finance/avalanche/icecreamfinance">
+                <ListItem button component="a" href="https://froyo.farm/#/avax">
                   <ListItemText disableTypography style={{ color: '#000' }}>
                     Vaults
                   </ListItemText>
