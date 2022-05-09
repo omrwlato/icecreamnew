@@ -9,7 +9,7 @@ import { Alert } from '@material-ui/lab';
 
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
-import CemeteryCard from './CemeteryCard';
+import CemeteryCard from './FarmCard';
 import { createGlobalStyle } from 'styled-components';
 
 import useBanks from '../../hooks/useBanks';

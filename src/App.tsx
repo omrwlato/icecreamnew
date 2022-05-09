@@ -19,10 +19,10 @@ import { RefreshContextProvider } from './contexts/RefreshContext';
 import Particles from 'react-tsparticles'; //'react-particles-js';
 
 const Home = lazy(() => import('./views/Home'));
-const Farms = lazy(() => import('./views/Cemetery'));
-const Boardroom = lazy(() => import('./views/Masonry'));
+const Farms = lazy(() => import('./views/Farms'));
+const Boardroom = lazy(() => import('./views/Boardroom'));
 const Rebates = lazy(() => import('./views/Rebates'));
-const Bonds = lazy(() => import('./views/Pit'));
+const Bonds = lazy(() => import('./views/Bonds'));
 const Treasury = lazy(() => import('./views/Treasury'));
 // const SBS = lazy(() => import('./views/Sbs'));
 // const Liquidity = lazy(() => import('./views/Liquidity'));
